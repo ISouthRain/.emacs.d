@@ -1,0 +1,5 @@
+;;;; -*- mode: lisp-data -*-
+(
+ (:id "sha1:835a538a180c5a7e1c19b4310f91840ce9ccf81a" :fingerprints ("sha1:4b:f8:21:8a:f2:c7:c9:35:50:5c:3f:3c:a8:18:1a:79:21:a4:c4:b5") :host "193.53.127.42:465" :conditions (:no-host-match :verify-cert))
+ (:id "sha1:4a829ef6c55adeea4eacd10a12ff26b336ebd6ad" :fingerprints ("sha1:18:31:51:b7:8e:08:41:35:af:78:2d:70:db:9e:fc:74:7b:8d:5d:88") :host "193.53.127.42:993" :conditions (:self-signed :no-host-match :unknown-ca :invalid :verify-cert))
+)

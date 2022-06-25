@@ -1,0 +1,3206 @@
+* 区分配置
+#+BEGIN_SRC emacs-lisp
+
+;; ;; 不同用户使用不同的配置
+;; (when (string= system-name "Jack")
+;; )
+
+;; ;; 区分 tui 还是 gui
+;; (when (string= "w32" window-system) ;; w32 ns pc x nil
+;; ;; (message "这是GUI方法")
+;; )
+
+;; ;; 上面方法可能不太好用
+;; (if (display-graphic-p)
+;;     ;; GUI 代码放置，多行代码的话用 (progn) 包一下
+;;     (progn (message "这是GUI方法1")
+;;            (message "这是GUI方法2")
+;; 	   )
+;;     ;; TUI 代码放置
+;;     (message "这是TUI 1")
+;;     (message "这是TUI 2")
+;;     )
+
+;; 不同系统的配置
+(when (string= "windows-nt" system-type)
+  (setq url-proxy-services '(
+  ("http" . "127.0.0.1:7890")
+  ("https" . "127.0.0.1:7890")
+  ("socks5" . "127.0.0.1:7891")))
+)
+
+(when (string= "gnu/linux" system-type)
+  (setq url-proxy-services '(
+  ("http" . "127.0.0.1:7890")
+  ("https" . "127.0.0.1:7890")
+  ("socks5" . "127.0.0.1:7891")))
+)
+
+;; (when (string= "darwin" system-type)
+;;   (setq url-proxy-services '(
+;;   ("http" . "127.0.0.1:7890")
+;;   ("https" . "127.0.0.1:7890")
+;;   ("socks5" . "127.0.0.1:7890")))
+;; )
+
+;; 设置编码
+(setq default-buffer-file-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+#+END_SRC
+
+* Emacs Version --27.2
+* 依赖
+** org-roam 依赖 pkg install clang sqlite3(理论上只安装clang即可)
+** all-the-icons 字体，请在系统上安装以支持图标(~/.emacs.d/font)
+** nov 阅读书 unip (libxml2 没安装过)
+* Home
+** 基本设置
+#+BEGIN_SRC emacs-lisp
+;; 设置Emacs标题
+(setq frame-title-format '("Happy Emacs - %b")
+      icon-title-format frame-title-format)
+;; 显示电池
+(display-battery-mode 1)
+;;显示行号
+;; (global-linum-mode 1)
+;; 相对行号
+;; (linum-relative-global-mode t)
+;;高亮当前行
+(global-hl-line-mode 1)
+;;关闭启动画面
+(setq inhibit-startup-message t)
+;;自动换行
+;;(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+(setq toggle-truncate-lines t)
+
+;;显示时间
+(display-time-mode 1) ;; 常显
+(setq display-time-24hr-format t) ;;格式
+(setq display-time-day-and-date t) ;;显示时间、星期、日期
+
+
+;; 关闭启动帮助画面
+(setq inhibit-splash-screen 1)
+
+;; 关闭备份文件
+(setq make-backup-files nil)
+
+;; 自动加载外部修改的文件
+(global-auto-revert-mode 1)
+
+;; 关闭自动保存文件
+(setq auto-save-default t)
+;; 关闭警告声
+(setq ring-bell-function 'ignore)
+
+;; 简化yes和no
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;;隐藏菜单栏工具栏滚动条
+(menu-bar-mode 0)
+(when (string= "windows-nt" system-type)
+(tool-bar-mode 0)
+;; 滚动条
+(scroll-bar-mode 0)
+)
+(when (string= "darwin" system-type)
+(tool-bar-mode 1)
+(menu-bar-mode 1)
+)
+
+(when (string= "windows-nt" system-type)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 129 :width normal)))))
+)
+(when (string= "darwin" system-type)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 195 :width normal)))))
+)
+#+END_SRC
+
+** 插件
+*** use-package and straight
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 包开始
+(package-initialize)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
+(require 'package)
+(add-to-list 'package-archives
+			 '("melpa" . "https://melpa.org/packages/")
+			 '("melpa-stable" . "https://stable.melpa.org/packages/")
+)
+(when (not (package-installed-p 'use-package))
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+ ;; This is only needed once, near the top of the file
+(eval-when-compile
+	;; Following line is not needed if use-package.el is in ~/.emacs.d
+	;;(add-to-list 'load-path "~/.emacs.d/plugins/use-package")
+(require 'use-package))
+(require 'use-package-ensure)
+;; 自动下载，不需要 :straight t
+(setq use-package-always-ensure t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 添加 straight 与 use-package 同时通用
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+;; ;; 禁止编译
+(setq straight-disable-compile t)
+(setq straight-disable-native-compile t)
+(straight-use-package 'use-package)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; Install straight.el
+;; (defvar bootstrap-version)
+;; (let ((bootstrap-file
+;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+;;       (bootstrap-version 5))
+;;   (unless (file-exists-p bootstrap-file)
+;;     (with-current-buffer
+;;         (url-retrieve-synchronously
+;;          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+;;          'silent 'inhibit-cookies)
+;;       (goto-char (point-max))
+;;       (eval-print-last-sexp)))
+;;   (load bootstrap-file nil 'nomessage))
+
+;; ;; Install use-package
+;; (straight-use-package 'use-package)
+;;
+;; ;; Configure use-package to use straight.el by default
+;; (use-package straight
+;;              :custom (straight-use-package-by-default t))
+;; ;; (eval-when-compile
+;; ;;     (require 'use-package))
+;; ;; 禁止编译
+;; (setq straight-disable-compile t)
+;; (setq straight-disable-native-compile t)
+#+END_SRC
+*** 中文乱码设置
+#+BEGIN_SRC elisp 
+(use-package init-Chinese
+:straight nil
+:defer 1
+:load-path "~/.emacs.d/lisp"
+)
+#+END_SRC
+
+*** 中文日历
+#+BEGIN_SRC elisp 
+(use-package cal-china-x
+:straight nil
+:defer 1
+:load-path "~/.emacs.d/lisp"
+)
+#+END_SRC
+
+*** meow 猫态编辑
+#+BEGIN_SRC elisp 
+;; (use-package meow
+;; :straight t
+;; :config
+;; (meow-global-mode 1)
+;; (defun meow-setup ()
+;;   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+;;   (meow-motion-overwrite-define-key
+;;    '("j" . meow-next)
+;;    '("k" . meow-prev)
+;;    '("<escape>" . ignore))
+;;   (meow-leader-define-key
+;;    ;; SPC j/k will run the original command in MOTION state.
+;;    '("j" . "H-j")
+;;    '("k" . "H-k")
+;;    ;; Use SPC (0-9) for digit arguments.
+;;    '("1" . meow-digit-argument)
+;;    '("2" . meow-digit-argument)
+;;    '("3" . meow-digit-argument)
+;;    '("4" . meow-digit-argument)
+;;    '("5" . meow-digit-argument)
+;;    '("6" . meow-digit-argument)
+;;    '("7" . meow-digit-argument)
+;;    '("8" . meow-digit-argument)
+;;    '("9" . meow-digit-argument)
+;;    '("0" . meow-digit-argument)
+;;    '("/" . meow-keypad-describe-key)
+;;    '("?" . meow-cheatsheet))
+;;   (meow-normal-define-key
+;;    '("0" . meow-expand-0)
+;;    '("9" . meow-expand-9)
+;;    '("8" . meow-expand-8)
+;;    '("7" . meow-expand-7)
+;;    '("6" . meow-expand-6)
+;;    '("5" . meow-expand-5)
+;;    '("4" . meow-expand-4)
+;;    '("3" . meow-expand-3)
+;;    '("2" . meow-expand-2)
+;;    '("1" . meow-expand-1)
+;;    '("-" . negative-argument)
+;;    '(";" . meow-reverse)
+;;    '("," . meow-inner-of-thing)
+;;    '("." . meow-bounds-of-thing)
+;;    '("[" . meow-beginning-of-thing)
+;;    '("]" . meow-end-of-thing)
+;;    '("a" . meow-append)
+;;    '("A" . meow-open-below)
+;;    '("b" . meow-back-word)
+;;    '("B" . meow-back-symbol)
+;;    '("c" . meow-change)
+;;    '("d" . meow-delete)
+;;    '("D" . meow-backward-delete)
+;;    '("e" . meow-next-word)
+;;    '("E" . meow-next-symbol)
+;;    '("f" . meow-find)
+;;    '("F" . avy-goto-char)
+;;    '("g" . meow-cancel-selection)
+;;    '("G" . meow-grab)
+;;    '("h" . meow-left)
+;;    '("H" . meow-left-expand)
+;;    '("i" . meow-insert)
+;;    '("I" . meow-open-above)
+;;    '("j" . meow-next)
+;;    '("J" . meow-next-expand)
+;;    '("k" . meow-prev)
+;;    '("K" . meow-prev-expand)
+;;    '("l" . meow-right)
+;;    '("L" . meow-right-expand)
+;;    '("m" . meow-join)
+;;    '("n" . meow-search)
+;;    '("o" . meow-block)
+;;    '("O" . meow-to-block)
+;;    '("p" . meow-yank)
+;;    '("q" . meow-quit)
+;;    '("Q" . goto-line-preview)
+;;    '("r" . meow-replace)
+;;    '("R" . meow-swap-grab)
+;;    '("s" . meow-kill)
+;;    '("t" . meow-till)
+;;    '("u" . meow-undo)
+;;    '("U" . meow-undo-in-selection)
+;;    '("v" . meow-visit)
+;;    '("w" . meow-mark-word)
+;;    '("W" . meow-mark-symbol)
+;;    '("x" . meow-line)
+;;    '("X" . goto-line-preview)
+;;    '("y" . meow-save)
+;;    '("Y" . meow-sync-grab)
+;;    '("z" . meow-pop-selection)
+;;    '("'" . repeat)
+;;    '("<escape>" . ignore))
+;; (meow-define-keys
+;;  ;; state
+;;  'normal
+;;  ;; bind to a command
+;;  )
+;; (define-key meow-normal-state-keymap (kbd "C-w j") 'windmove-down)
+;; (define-key meow-normal-state-keymap (kbd "C-w k") 'windmove-up)
+;; (define-key meow-normal-state-keymap (kbd "C-w h") 'windmove-left)
+;; (define-key meow-normal-state-keymap (kbd "C-w l") 'windmove-right)
+;; (define-key meow-normal-state-keymap (kbd "C-w s") 'split-window-below)
+;; (define-key meow-normal-state-keymap (kbd "C-w v") 'split-window-right)
+;;
+;;    )
+;; (meow-setup)
+;; ;; 在这两个模式显示数字跳跃
+;; (setq meow-expand-exclude-mode-list '(
+;;     (markdown-mode)
+;;     (org-mode)
+;; ))
+;; ;; 数字显示停留时间
+;; (setq meow-expand-hint-remove-delay 3)
+;; ;; 使用系统剪贴板
+;; (setq meow-use-clipboard t)
+;;
+;; )
+#+END_SRC
+*** eaf
+#+BEGIN_SRC elisp
+(if (display-graphic-p)
+    ;; GUI 代码放置，多行代码的话用 (progn) 包一下
+(progn
+(defun eaf-start ()
+(interactive)
+  ;; Windows only configuration.
+(add-to-list 'load-path "~/.emacs.d/plugins/site-lisp/emacs-application-framework/")
+(require 'eaf)
+(require 'eaf-browser)
+(require 'eaf-music-player)
+
+(setq eaf-browser-enable-adblocker t)
+(setq eaf-proxy-type "socks5")
+(setq eaf-proxy-host "127.0.0.1")
+(when (string= "windows-nt" system-type)
+(setq eaf-proxy-port "7890")
+)
+(when (string= "gnu/linux" system-type)
+(setq eaf-proxy-port "7891")
+)
+(when (string= "darwin" system-type)
+(setq eaf-proxy-port "7890")
+)
+)
+)
+)
+#+END_SRC
+
+*** helm
+#+BEGIN_SRC emacs-lisp
+(use-package helm
+  :straight t
+  :defer 1
+  :config
+  (require 'helm)
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files))
+  )
+#+END_SRC
+
+*** indent-guide 指导线
+#+BEGIN_SRC elisp 
+;; indent-guide 指导线
+(use-package indent-guide
+:defer 3
+:straight nil
+:load-path "~/.emacs.d/lisp/plugins"
+:config
+(require 'indent-guide)
+(indent-guide-global-mode)
+;; (set-face-background 'indent-guide-face "dimgray")
+(setq indent-guide-delay 0.1)
+;; (setq indent-guide-char ":")
+(setq indent-guide-recursive t)
+)
+#+END_SRC
+
+*** monokai or dracula 主题 
+#+BEGIN_SRC emacs-lisp
+;;(use-package dracula-theme
+;;:load-path "~/.emacs.d/lisp"
+;;:config
+;;(load-theme 'dracula t)
+;;)
+(use-package monokai-theme
+:straight nil
+:load-path "~/.emacs.d/lisp"
+:config
+(load-theme 'monokai t)
+;; (setq day-theme 'leuven)
+;; (setq dark-theme 'monokai)
+;; (defun synchronize-theme ()
+;;     (setq hour
+;;         (string-to-number
+;;             (substring (current-time-string) 11 13)))
+;;     (if (member hour (number-sequence 6 18))
+;;         (setq now day-theme)
+;;         (setq now dark-theme))
+;;     (load-theme now)
+;; )
+;; (run-with-timer 0 3600 'synchronize-theme)
+)
+;; (use-package zenburn-theme
+;; :straight nil
+;; :load-path "~/.emacs.d/lisp"
+;; :config
+;; (load-theme 'zenburn t)
+;; ;; use variable-pitch fonts for some headings and titles
+;; (setq zenburn-use-variable-pitch t)
+
+;; ;; scale headings in org-mode
+;; (setq zenburn-scale-org-headlines t)
+
+;; ;; scale headings in outline-mode
+;; (setq zenburn-scale-outline-headlines t)
+;; )
+#+END_SRC
+
+*** doom-modeline
+#+BEGIN_SRC elisp 
+(use-package doom-modeline
+:straight t
+:defer 1
+;; :init (doom-modeline-mode 1)
+:config
+(doom-modeline-mode 1)
+
+;; If non-nil, cause imenu to see `doom-modeline' declarations.
+;; This is done by adjusting `lisp-imenu-generic-expression' to
+;; include support for finding `doom-modeline-def-*' forms.
+;; Must be set before loading doom-modeline.
+(setq doom-modeline-support-imenu t)
+
+;; How tall the mode-line should be. It's only respected in GUI.
+;; If the actual char height is larger, it respects the actual height.
+(setq doom-modeline-height 15)
+
+;; How wide the mode-line bar should be. It's only respected in GUI.
+(setq doom-modeline-bar-width 4)
+
+;; Whether to use hud instead of default bar. It's only respected in GUI.
+(setq doom-modeline-hud nil)
+
+;; The limit of the window width.
+;; If `window-width' is smaller than the limit, some information won't be
+;; displayed. It can be an integer or a float number. `nil' means no limit."
+(setq doom-modeline-window-width-limit 0.25)
+
+;; How to detect the project root.
+;; nil means to use `default-directory'.
+;; The project management packages have some issues on detecting project root.
+;; e.g. `projectile' doesn't handle symlink folders well, while `project' is unable
+;; to hanle sub-projects.
+;; You can specify one if you encounter the issue.
+(setq doom-modeline-project-detection 'auto)
+
+;; Determines the style used by `doom-modeline-buffer-file-name'.
+;;
+;; Given ~/Projects/FOSS/emacs/lisp/comint.el
+;;   auto => emacs/lisp/comint.el (in a project) or comint.el
+;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
+;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
+;;   truncate-with-project => emacs/l/comint.el
+;;   truncate-except-project => ~/P/F/emacs/l/comint.el
+;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
+;;   truncate-all => ~/P/F/e/l/comint.el
+;;   truncate-nil => ~/Projects/FOSS/emacs/lisp/comint.el
+;;   relative-from-project => emacs/lisp/comint.el
+;;   relative-to-project => lisp/comint.el
+;;   file-name => comint.el
+;;   buffer-name => comint.el<2> (uniquify buffer name)
+;;
+;; If you are experiencing the laggy issue, especially while editing remote files
+;; with tramp, please try `file-name' style.
+;; Please refer to https://github.com/bbatsov/projectile/issues/657.
+(setq doom-modeline-buffer-file-name-style 'auto)
+
+;; Whether display icons in the mode-line.
+;; While using the server mode in GUI, should set the value explicitly.
+(setq doom-modeline-icon (display-graphic-p))
+
+;; Whether display the icon for `major-mode'. It respects `doom-modeline-icon'.
+(setq doom-modeline-major-mode-icon t)
+
+;; Whether display the colorful icon for `major-mode'.
+;; It respects `all-the-icons-color-icons'.
+(setq doom-modeline-major-mode-color-icon t)
+
+;; Whether display the icon for the buffer state. It respects `doom-modeline-icon'.
+(setq doom-modeline-buffer-state-icon t)
+
+;; Whether display the modification icon for the buffer.
+;; It respects `doom-modeline-icon' and `doom-modeline-buffer-state-icon'.
+(setq doom-modeline-buffer-modification-icon t)
+
+;; Whether to use unicode as a fallback (instead of ASCII) when not using icons.
+(setq doom-modeline-unicode-fallback nil)
+
+;; Whether display the buffer name.
+(setq doom-modeline-buffer-name t)
+
+;; Whether display the minor modes in the mode-line.
+(setq doom-modeline-minor-modes nil)
+
+;; If non-nil, a word count will be added to the selection-info modeline segment.
+(setq doom-modeline-enable-word-count nil)
+
+;; Major modes in which to display word count continuously.
+;; Also applies to any derived modes. Respects `doom-modeline-enable-word-count'.
+;; If it brings the sluggish issue, disable `doom-modeline-enable-word-count' or
+;; remove the modes from `doom-modeline-continuous-word-count-modes'.
+(setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
+
+;; Whether display the buffer encoding.
+(setq doom-modeline-buffer-encoding t)
+
+;; Whether display the indentation information.
+(setq doom-modeline-indent-info nil)
+
+;; If non-nil, only display one number for checker information if applicable.
+(setq doom-modeline-checker-simple-format t)
+
+;; The maximum number displayed for notifications.
+(setq doom-modeline-number-limit 99)
+
+;; The maximum displayed length of the branch name of version control.
+(setq doom-modeline-vcs-max-length 12)
+
+;; Whether display the workspace name. Non-nil to display in the mode-line.
+(setq doom-modeline-workspace-name t)
+
+;; Whether display the perspective name. Non-nil to display in the mode-line.
+(setq doom-modeline-persp-name t)
+
+;; If non nil the default perspective name is displayed in the mode-line.
+(setq doom-modeline-display-default-persp-name nil)
+
+;; If non nil the perspective name is displayed alongside a folder icon.
+(setq doom-modeline-persp-icon t)
+
+;; Whether display the `lsp' state. Non-nil to display in the mode-line.
+(setq doom-modeline-lsp t)
+
+;; Whether display the GitHub notifications. It requires `ghub' package.
+(setq doom-modeline-github nil)
+
+;; The interval of checking GitHub.
+(setq doom-modeline-github-interval (* 30 60))
+
+;; Whether display the modal state icon.
+;; Including `evil', `overwrite', `god', `ryo' and `xah-fly-keys', etc.
+(setq doom-modeline-modal-icon t)
+
+;; Whether display the mu4e notifications. It requires `mu4e-alert' package.
+(setq doom-modeline-mu4e nil)
+;; also enable the start of mu4e-alert
+;; (mu4e-alert-enable-mode-line-display)
+
+;; Whether display the gnus notifications.
+(setq doom-modeline-gnus t)
+
+;; Whether gnus should automatically be updated and how often (set to 0 or smaller than 0 to disable)
+(setq doom-modeline-gnus-timer 2)
+
+;; Wheter groups should be excludede when gnus automatically being updated.
+(setq doom-modeline-gnus-excluded-groups '("dummy.group"))
+
+;; Whether display the IRC notifications. It requires `circe' or `erc' package.
+(setq doom-modeline-irc t)
+
+;; Function to stylize the irc buffer names.
+(setq doom-modeline-irc-stylize 'identity)
+
+;; Whether display the environment version.
+(setq doom-modeline-env-version t)
+;; Or for individual languages
+(setq doom-modeline-env-enable-python t)
+(setq doom-modeline-env-enable-ruby t)
+(setq doom-modeline-env-enable-perl t)
+(setq doom-modeline-env-enable-go t)
+(setq doom-modeline-env-enable-elixir t)
+(setq doom-modeline-env-enable-rust t)
+
+;; Change the executables to use for the language version string
+(setq doom-modeline-env-python-executable "python") ; or `python-shell-interpreter'
+(setq doom-modeline-env-ruby-executable "ruby")
+(setq doom-modeline-env-perl-executable "perl")
+(setq doom-modeline-env-go-executable "go")
+(setq doom-modeline-env-elixir-executable "iex")
+(setq doom-modeline-env-rust-executable "rustc")
+
+;; What to display as the version while a new one is being loaded
+(setq doom-modeline-env-load-string "...")
+
+;; Hooks that run before/after the modeline version string is updated
+(setq doom-modeline-before-update-env-hook nil)
+(setq doom-modeline-after-update-env-hook nil)
+)
+#+END_SRC
+
+*** awesome-tray modeline
+#+BEGIN_SRC elisp
+;; (use-package awesome-tray
+;; :defer 3
+;; :straight nil
+;; :load-path "~/.emacs.d/lisp"
+;; :config
+;; (awesome-tray-mode 1)
+;; ;; 高度
+;; (setq awesome-tray-mode-line-height 0.3)
+;; ;; 启用那些显示
+;; (setq awesome-tray-active-modules
+;; '("evil" "mode-name" "input-method" "file-path" "buffer-name" "circe" "location" "clock" "git" "battery" "buffer-read-only" "date")
+;; )
+;; ;; input-method 模式图标
+;; (setq awesome-tray-input-method-zh-style "ㄓ")
+;; ;; 状态栏更新时间
+;; (setq awesome-tray-refresh-idle-delay 0.1)
+;; )
+#+END_SRC 
+
+*** Evil-mode and evil-escape
+#+BEGIN_SRC emacs-lisp
+(use-package evil-escape
+:straight t
+:defer 0.5
+:config
+(setq-default evil-escape-key-sequence "jk")
+(setq-default evil-escape-delay 0.2)
+:hook (text-mode . evil-escape-mode)
+)
+(evil-escape-mode 1)
+(use-package evil
+  :straight t
+  :defer 0.6
+  :config
+  (require 'evil)
+  (evil-mode 1)
+  ;; (setq
+  ;;   evil-normal-state-tag (propertize " <N> " 'face '((:background "#808000" :foreground "#efefef")))
+  ;;   evil-emacs-state-tag (propertize " <E> " 'face '((:background "green" :foreground "black"))))
+  ;;   evil-visual-state-tag (propertize " <V> " 'face '((:background "#00ffff" :foreground "#efefef")))
+  )
+#+END_SRC
+
+*** evil-nerd-commenter 注释
+#+BEGIN_SRC emacs-lisp
+(use-package evil-nerd-commenter
+:straight t
+:defer 2)
+#+END_SRC
+
+*** dashboard 启动界面 依赖字体 all-the-icons 请在系统上安装
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+:straight t) ;; GUI 支持 懒加载
+(use-package dashboard
+    :straight t
+    :diminish dashboard-mode
+    :config
+    ;; 依赖最近文件
+    (recentf-mode 1)
+    ;; (add-hook 'dashboard-mode-hook '(lambda () (evil-insert 1)))
+    (setq recentf-max-menu-items 20)
+    (setq recentf-max-saved-items 20)
+    ;; 标题
+    (setq dashboard-banner-logo-title "Wecome to Emacs")
+    ;; Logo 图标 路径
+    (if (display-graphic-p)
+    ;; GUI 代码放置，多行代码的话用 (progn) 包一下
+        (setq dashboard-startup-banner "~/.emacs.d/logo.png")
+    ;; TUI 代码放置
+        (setq dashboard-startup-banner "~/.emacs.d/logo.txt"))
+    ;; 导航目录
+    (setq dashboard-items '(
+                            ;; (agenda . 5)
+                            (recents  . 15)
+                            (bookmarks . 10)
+                            ;;(projects . 5)
+                            ;;(registers . 5)
+                            ))
+    ;; 使用图标
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    ;; 图标更换
+    (dashboard-modify-heading-icons '((recents . "file-text")
+                                  (bookmarks . "book")))
+    ;; 显示被加载的包的信息和初始化时间:
+    (setq dashboard-set-init-info t)
+    ;; 此外，消息可以这样定制:
+    ;; (setq dashboard-init-info "This is an init message!")
+    ;; 最下面的仪表盘
+    (setq dashboard-footer-messages '("Freedom and Peace🙌"))
+    (setq dashboard-footer-icon (all-the-icons-octicon "dashboard"
+                                                   :height 1.1
+                                                   :v-adjust -0.05
+                                                   :face 'font-lock-keyword-face))
+    ;; 在横幅下面显示导航器:
+    (setq dashboard-set-navigator t)
+    ;; Format: "(icon title help action face prefix suffix)"
+    (setq dashboard-navigator-buttons
+      `(;; line1
+        ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+         "Homepage"
+         "Browse homepage"
+         (lambda (&rest _) (browse-url "https://github.com/ISouthRain")))
+        ("★🍴" "Start" "Show stars" (lambda (&rest _) (my-config-start)) warning)
+        ("?" "" "?/h" #'show-help nil "<" ">"))
+         ;; line 2
+        ((,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
+          "Linkedin"
+          ""
+          (lambda (&rest _) (browse-url "homepage")))
+         ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))))
+    (dashboard-setup-startup-hook)
+
+    (defun open-dashboard ()
+      "Open the *dashboard* buffer and jump to the first widget."
+      (interactive)
+      ;; Check if need to recover layout
+      (if (> (length (window-list-1))
+             ;; exclude `treemacs' window
+             (if (and (fboundp 'treemacs-current-visibility)
+                      (eq (treemacs-current-visibility) 'visible))
+                 2
+               1))
+          (setq dashboard-recover-layout-p t))
+
+      (delete-other-windows)
+
+      ;; Refresh dashboard buffer
+      (when (get-buffer dashboard-buffer-name)
+        (kill-buffer dashboard-buffer-name))
+      (dashboard-insert-startupify-lists)
+      (switch-to-buffer dashboard-buffer-name)
+
+      ;; Jump to the first section
+      (dashboard-goto-recent-files)
+      (evil-insert 1))
+
+    (defun dashboard-goto-recent-files ()
+      "Go to recent files."
+      (interactive)
+      (let ((func (local-key-binding "r")))
+        (and func (funcall func))))
+)
+
+(global-set-key (kbd "<f2>") 'open-dashboard)
+#+END_SRC
+
+*** rainbow-delimiters 彩虹括号 
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-delimiters
+:straight t
+:hook (prog-mode . rainbow-delimiters-mode)
+)
+;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+#+END_SRC
+
+*** autopair 括号补全
+#+BEGIN_SRC elisp
+(use-package autopair
+:defer 1
+:straight nil
+:load-path "~/.emacs.d/lisp"
+:config
+(autopair-global-mode)
+)
+#+END_SRC 
+*** general 键绑定
+#+BEGIN_SRC emacs-lisp
+(use-package general
+  :straight t
+  :defer 2
+  :config
+  (require 'general)
+  ;; (general-create-definer my-leader-def
+  ;; ;; :prefix my-leader
+  ;; :prefix "SPC")
+  ;; (general-create-definer my-emacs-def
+  ;; :prefix "C-c")
+  )
+#+END_SRC
+
+*** which-key
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+:straight t
+:defer 2
+:config
+(require 'which-key)
+(which-key-mode)
+(which-key-setup-side-window-bottom)
+(which-key-enable-god-mode-support)
+)
+#+END_SRC
+
+*** company 补全
+#+BEGIN_SRC emacs-lisp
+(use-package company
+:straight t
+:defer 3
+:hook (after-init . global-company-mode)
+:config
+  :bind (
+         :map company-mode-map
+         ("<backtab>" . company-yasnippet)
+         :map company-active-map
+         ("C-p" . company-select-previous)
+         ("C-n" . company-select-next)
+         ("<tab>" . company-complete-common-or-cycle)
+         ("<backtab>" . my-company-yasnippet)
+         :map company-search-map
+         ("C-p" . company-select-previous)
+         ("C-n" . company-select-next))
+  :init
+  (setq company-tooltip-align-annotations t
+        company-tooltip-limit 12
+        company-idle-delay 0
+        company-echo-delay (if (display-graphic-p) nil 0)
+        company-minimum-prefix-length 1
+        company-icon-margin 3
+        company-require-match nil
+        company-dabbrev-ignore-case nil
+        company-dabbrev-downcase nil
+        company-global-modes '(not erc-mode message-mode help-mode
+                                   gud-mode eshell-mode shell-mode)
+        company-backends '((company-capf :with company-yasnippet)
+                           (company-dabbrev-code company-keywords company-files)
+                           company-dabbrev))
+)
+  ;; Better sorting
+(use-package prescient
+  :straight t
+  :defer 3
+  :commands prescient-persist-mode
+  :init (prescient-persist-mode 1))
+(use-package company-prescient
+  :straight t
+  :defer 3
+  :init (company-prescient-mode 1))
+
+  ;; Icons and quickhelp
+;; (use-package company-box
+;;   :diminish
+;;   :defines company-box-icons-all-the-icons
+;;   :hook (company-mode . company-box-mode)
+;;   :init (setq company-box-enable-icon centaur-icon
+;;               company-box-backends-colors nil
+;;               company-box-doc-delay 0.1
+;;               company-box-scrollbar 'right))
+
+#+END_SRC
+
+*** go-translate 翻译
+#+BEGIN_SRC emacs-lisp
+(use-package go-translate
+:straight t
+:defer 3
+:config
+(require 'go-translate)
+;; 配置多个翻译语言对
+(setq gts-translate-list '(("en" "zh") ("fr" "zh")))
+;; 设置为 t 光标自动跳转到buffer
+(setq gts-buffer-follow-p t)
+;; 配置默认的 translator
+;; 这些配置将被 gts-do-translate 命令使用
+(setq gts-default-translator
+      (gts-translator
+
+       :picker ; 用于拾取初始文本、from、to，只能配置一个
+
+       (gts-noprompt-picker) ;; 成功案例
+       ;;(gts-noprompt-picker :texter (gts-whole-buffer-texter))
+       ;;(gts-prompt-picker)
+       ;;(gts-prompt-picker :single t)
+       ;;(gts-prompt-picker :texter (gts-current-or-selection-texter) :single t)
+
+       :engines ; 翻译引擎，可以配置多个。另外可以传入不同的 Parser 从而使用不同样式的输出
+
+       (list
+        ;;(gts-bing-cn-engine)
+        ;;(gts-google-engine)
+        (gts-google-rpc-engine) ;; 成功案例
+        ;;(gts-deepl-engine :auth-key [YOUR_AUTH_KEY] :pro nil)
+        ;;(gts-google-engine :parser (gts-google-summary-parser))
+        ;;(gts-google-engine :parser (gts-google-parser))
+        ;;(gts-google-rpc-engine :parser (gts-google-rpc-summary-parser))
+        ;;(gts-google-rpc-engine :parser (gts-google-rpc-parser))
+	;;(gts-google-rpc-engine :parser (gts-google-rpc-summary-parser))
+        )
+
+       :render ; 渲染器，只能一个，用于输出结果到指定目标。如果使用 childframe 版本的，需自行安装 posframe
+
+       (gts-buffer-render) ;; 成功案例
+       ;; (gts-posframe-pop-render)
+       ;; (gts-posframe-pop-render :backcolor "#333333" :forecolor "#ffffff")
+       ;; (gts-posframe-pin-render)
+       ;;(gts-posframe-pin-render :position (cons 1200 20))
+       ;; (gts-posframe-pin-render :width 80 :height 25 :position (cons 1000 20) :forecolor "#ffffff" :backcolor "#111111")
+       ;;(gts-kill-ring-render)
+       ;;(your-render)
+       ))
+
+
+(defun gts-do-translate-my ()
+(interactive)
+(if (display-graphic-p)
+    (if (posframe-workable-p)
+        (setq gts-default-translator
+              (gts-translator
+               :picker ; 用于拾取初始文本、from、to，只能配置一个
+               (gts-noprompt-picker) ;; 成功案例
+               :engines ; 翻译引擎，可以配置多个。另外可以传入不同的 Parser 从而使用不同样式的输出
+               (list
+                (gts-google-rpc-engine) ;; 成功案例
+                 )
+               :render ; 渲染器，只能一个，用于输出结果到指定目标。如果使用 childframe 版本的，需自行安装 posframe
+               ;; (gts-buffer-render) ;; 成功案例
+               (gts-posframe-pop-render)
+               ;;(gts-kill-ring-render)
+               ;;(your-render)
+               )))
+    (setq gts-default-translator
+          (gts-translator
+           :picker ; 用于拾取初始文本、from、to，只能配置一个
+           (gts-noprompt-picker) ;; 成功案例
+           :engines ; 翻译引擎，可以配置多个。另外可以传入不同的 Parser 从而使用不同样式的输出
+           (list
+            (gts-google-rpc-engine) ;; 成功案例
+             )
+           :render ; 渲染器，只能一个，用于输出结果到指定目标。如果使用 childframe 版本的，需自行安装 posframe
+           (gts-buffer-render) ;; 成功案例
+           ;; (gts-posframe-pop-render)
+           ;;(gts-kill-ring-render)
+           ;;(your-render)
+	   ))
+)
+(gts-do-translate)
+)
+)
+
+#+END_SRC
+
+*** sdcv 翻译
+#+BEGIN_SRC elisp
+
+(use-package sdcv
+:defer 3
+:straight nil
+:load-path "~/.emacs.d/lisp"
+:config
+;; 翻译后是否说话
+(setq sdcv-say-word-p nil)
+(setq sdcv-dictionary-data-dir "/data/data/com.termux/files/home/.stardict/dic")
+(setq sdcv-dictionary-simple-list    ;setup dictionary list for simple search
+      '(
+        "懒虫简明英汉词典"
+        "懒虫简明汉英词典"
+	"计算机词汇"
+	))
+(setq sdcv-dictionary-complete-list     ;setup dictionary list for complete search
+      '(
+        "懒虫简明英汉词典"
+	"懒虫简明汉英词典"
+	"牛津高阶英汉双解"
+	))
+  (defun sdcv-search-pointer-my ()
+  (interactive)
+  (if (display-graphic-p)
+      (if (posframe-workable-p)
+	  (sdcv-search-pointer+))
+      (sdcv-search-pointer)
+      )
+ )
+)
+
+;; 输入中文后自动翻译
+(use-package insert-translated-name
+:defer 3
+:straight nil
+:load-path "~/.emacs.d/lisp"
+:config
+)
+
+;; 对英文单词编写进行提示
+(use-package company-english-helper
+:straight nil
+:defer 6
+:load-path "~/.emacs.d/lisp"
+)
+#+END_SRC
+*** neotree 文件浏览器
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+:straight t
+:defer 3)
+#+END_SRC
+
+*** goto-line-preview 提前显示要到达的行号
+#+BEGIN_SRC emacs-lisp
+(use-package goto-line-preview
+:straight t
+:defer 3)
+#+END_SRC
+
+*** 表情符号 emojify
+#+BEGIN_SRC elisp 
+(use-package emojify
+  :straight t
+  :defer 5
+  :hook (after-init . global-emojify-mode))
+#+END_SRC
+
+*** centaur-tabs 标签栏
+#+BEGIN_SRC elisp 
+;; (use-package centaur-tabs
+;;   :straight t
+;;   :defer 1
+;;   :demand
+;;   :config
+;;   (centaur-tabs-mode t)
+;;   (centaur-tabs-headline-match)
+;; (setq centaur-tabs-style "bar")
+;; ;; 更改标签高度
+;; (setq centaur-tabs-height 32)
+
+;; ;; 标签图标
+;; (setq centaur-tabs-set-icons t)
+
+;; ;; 使图标变成纯色(与标签文本的颜色相同)
+;; (setq centaur-tabs-plain-icons t)
+
+;; ;; 使未选定标签的图标变成灰色:
+;; (setq centaur-tabs-gray-out-icons 'buffer)
+
+;; ;; 在左侧栏显示彩色标签
+;; (setq centaur-tabs-set-bar 'left)
+
+;; ;;上面的红线
+;; (setq centaur-tabs-set-bar 'over)
+;; (setq centaur-tabs-close-button "x")
+
+;; ;; 编辑状态下使用更改符号
+;; (setq centaur-tabs-set-modified-marker t)
+;; (setq centaur-tabs-modified-marker "*")
+
+;; ;; 为了定制缓冲区分组的方式，可以修改标签缓冲区组功能，如下所示:
+;;     (defun centaur-tabs-buffer-groups ()
+;;       "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+;;     Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+;;     All buffer name start with * will group to \"Emacs\".
+;;     Other buffer group by `centaur-tabs-get-group-name' with project name."
+;;       (list
+;; 	(cond
+;; 	 ((or (string-equal "*" (substring (buffer-name) 0 1))
+;; 	      (memq major-mode '(magit-process-mode
+;; 				 magit-status-mode
+;; 				 magit-diff-mode
+;; 				 magit-log-mode
+;; 				 magit-file-mode
+;; 				 magit-blob-mode
+;; 				 magit-blame-mode
+;; 				 )))
+;; 	  "Emacs")
+;; 	 ((derived-mode-p 'prog-mode)
+;; 	  "Editing")
+;; 	 ((derived-mode-p 'dired-mode)
+;; 	  "Dired")
+;; 	 ((memq major-mode '(helpful-mode
+;; 			     help-mode))
+;; 	  "Help")
+;; 	 ((memq major-mode '(org-mode
+;; 			     org-agenda-clockreport-mode
+;; 			     org-src-mode
+;; 			     org-agenda-mode
+;; 			     org-beamer-mode
+;; 			     org-indent-mode
+;; 			     org-bullets-mode
+;; 			     org-cdlatex-mode
+;; 			     org-agenda-log-mode
+;; 			     diary-mode))
+;; 	  "OrgMode")
+;; 	 (t
+;; 	  (centaur-tabs-get-group-name (current-buffer))))))
+
+;; ;; 如果你想让你的选项卡显示缓冲组的名称，而不是缓冲名称，你可以在你的配置中放入以下内容
+;; (setq centaur-tabs--buffer-show-groups nil)
+
+;; ;; 要启用自动缓冲区重新排序功能，请在配置中使用以下功能:
+;; (centaur-tabs-enable-buffer-reordering)
+;; (setq centaur-tabs-adjust-buffer-order t)
+;; (setq centaur-tabs-adjust-buffer-order 'left)
+
+;; ;; 你可以根据抛射体的项目对标签进行分组。只需在你的配置中使用以下功能:
+;; (centaur-tabs-group-by-projectile-project)
+;; (centaur-tabs-group-buffer-groups)
+;;   :bind
+;;   ("C-<prior>" . centaur-tabs-backward)
+;;   ("C-<next>" . centaur-tabs-forward)
+;; )
+
+#+END_SRC
+
+*** winum 窗口导航
+#+BEGIN_SRC emacs-lisp
+(use-package winum
+  :straight nil
+  :defer 2
+  :load-path "~/.emacs.d/lisp"
+  :config
+  (winum-mode)
+)
+#+END_SRC 
+
+*** awesome-tab 标签栏
+#+BEGIN_SRC emacs-lisp
+(use-package awesome-tab
+  :straight nil
+  :defer 2
+  :load-path "~/.emacs.d/lisp"
+  :config
+  (awesome-tab-mode t)
+;; 设置标签栏长度
+(setq awesome-tab-label-fixed-length 14)
+;; 高度
+(setq awesome-tab-height 150)
+;; 按使用索引排行
+;; (setq awesome-tab-show-tab-index t)
+;; 如果使用 helm
+(awesome-tab-build-helm-source)
+;; 隐藏那些buffer
+(defun awesome-tab-hide-tab (x)
+  (let ((name (format "%s" x)))
+    (or
+     (string-prefix-p "*epc" name)
+     (string-prefix-p "*helm" name)
+     (string-prefix-p "*bm-bookmarks*" name)
+     (string-prefix-p "*Compile-Log*" name)
+     (string-prefix-p "*lsp" name)
+     (and (string-prefix-p "magit" name)
+               (not (file-name-extension name)))
+     )))
+
+;; buffer 群组归类
+(defun awesome-tab-buffer-groups ()
+  "`awesome-tab-buffer-groups' control buffers' group rules.
+
+Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `awesome-tab-get-group-name' with project name."
+  (list
+   (cond
+    ((or (string-equal "*" (substring (buffer-name) 0 1))
+         (memq major-mode '(magit-process-mode
+                            magit-status-mode
+                            magit-diff-mode
+                            magit-log-mode
+                            magit-file-mode
+                            magit-blob-mode
+                            magit-blame-mode
+                            )))
+     "Emacs")
+    ((derived-mode-p 'eshell-mode)
+     "EShell")
+    ((derived-mode-p 'emacs-lisp-mode)
+     "Elisp")
+    ((derived-mode-p 'dired-mode)
+     "Dired")
+    ((memq major-mode '(org-mode org-agenda-mode diary-mode))
+     "OrgMode")
+    (t
+     (awesome-tab-get-group-name (current-buffer))))))
+)
+
+#+END_SRC
+
+*** undo-fu 撤销功能
+#+BEGIN_SRC elisp 
+(use-package undo-fu
+:defer 1
+:straight nil
+:load-path "~/.emacs.d/lisp"
+:init
+(setq evil-undo-system 'undo-fu)
+)
+
+#+END_SRC
+*** avy 单词跳跃
+#+BEGIN_SRC elisp 
+(use-package avy
+:straight t
+:defer 2
+)
+#+END_SRC
+
+*** Markdown-mode
+#+BEGIN_SRC elisp 
+(defun my-config-markdown-mode ()
+(interactive)
+(org-babel-load-file
+ (expand-file-name "my-config/my-config-markdown-mode.org"
+                   user-emacs-directory))
+(hydra-vim-autocmd-markdown-mode/body)
+)
+#+END_SRC
+
+*** Ibuffer 查看
+#+BEGIN_SRC elisp 
+;; ;; buffer 查看
+;; (use-package all-the-icons-ibuffer
+;;   :defer 1
+;;   :straight nil
+;;   :load-path "~/.emacs.d/lisp"
+;;   :config
+;;   (all-the-icons-ibuffer-mode 1)
+;; (when (string= "windows-nt" system-type)
+;;   ;; Windows only configuration.
+;;   ;; 是否显示图标.
+;;   (setq all-the-icons-ibuffer-icon t)
+;;   ;; 是否显示彩色图标
+;;   (setq all-the-icons-ibuffer-color-icon t)
+;; )
+;; (when (string= "darwin" system-type)
+;;   ;; Windows only configuration.
+;;   ;; 是否显示图标.
+;;   (setq all-the-icons-ibuffer-icon t)
+;;   ;; 是否显示彩色图标
+;;   (setq all-the-icons-ibuffer-color-icon t)
+;; )
+;; (when (string= "gnu/linux" system-type)
+;;   ;; Windows only configuration.
+;;   ;; 是否显示图标.
+;;   (setq all-the-icons-ibuffer-icon nil)
+;;   ;; 是否显示彩色图标
+;;   ;; (setq all-the-icons-ibuffer-color-icon t)
+;; )
+;;   ;; ibuffer中默认的图标大小
+;;   (setq all-the-icons-ibuffer-icon-size 1.0)
+;;   ;; ibuffer中图标的默认垂直调整
+;;   (setq all-the-icons-ibuffer-icon-v-adjust 0.0)
+;;   ;; 在ibuffer中使用人类可读的文件大小
+;;   (setq  all-the-icons-ibuffer-human-readable-size t)
+;;   ;;呈现缓慢
+;;   ;;如果你在同时呈现多个图标时遇到了性能下降，
+;;   ;;您可以尝试设置以下变量
+;;   (setq inhibit-compacting-font-caches t)
+;;   )
+#+END_SRC
+*** Pyim 中文输入法 还没有配置好
+#+BEGIN_SRC elisp 
+(defun my-config-pyim()
+(interactive)
+(org-babel-load-file
+ (expand-file-name "my-config/my-config-pyim.org"
+                   user-emacs-directory))
+(toggle-input-method)
+)
+#+END_SRC
+*** ivy counsel 类似 helm 的包
+#+BEGIN_SRC elisp 
+;; 为 counsel-M-x 提供历史搜索
+(use-package smex
+:straight t
+:defer 1)
+
+(use-package counsel
+:defer 1
+:straight t
+:config
+(ivy-mode)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+;; enable this if you want `swiper' to use it
+;; (setq search-default-mode #'char-fold-to-regexp)
+)
+;; 去掉^前缀
+;; delete M-x ^
+(with-eval-after-load 'counsel
+  (setq ivy-initial-inputs-alist nil))
+;; 调整 counsel 搜索的方式: 忽略单词顺序
+(setq ivy-re-builders-alist
+'((counsel-rg . ivy--regex-plus)
+ (swiper . ivy--regex-plus)
+ (swiper-isearch . ivy--regex-plus)
+ (t . ivy--regex-ignore-order)))
+#+END_SRC
+*** popper 管理各种弹窗(未配置好)
+#+BEGIN_SRC elisp 
+(use-package popper
+  :defer 2
+  :straight t ; or :straight t
+  :bind (("C-`"   . popper-toggle-latest)
+         ("M-`"   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))                ; For echo area hints
+
+#+END_SRC
+*** bm 文件 标记 导航
+#+BEGIN_SRC elisp 
+(use-package bm
+:straight t
+;; :defer 2
+:init
+;; 加载时恢复（甚至在您需要 bm 之前）
+(setq-default bm-buffer-persistence t)
+:config
+;; 在哪里存储持久文件 
+(setq bm-repository-file "~/.emacs.d/bm-repository")
+;; save bookmarks
+(setq-default bm-buffer-persistence t)
+;; 启动时从文件加载存储库
+(add-hook 'after-init-hook 'bm-repository-load)
+;; Saving Boomarks
+(add-hook 'kill-buffer-hook #'bm-buffer-save)
+;; 退出时将存储库保存到文件。
+;; 杀死 Emacs 时不会调用 kill-buffer-hook，所以我们
+;; 必须先保存所有书签。
+(add-hook 'kill-emacs-hook #'(lambda nil
+    (bm-buffer-save-all)
+    (bm-repository-save)))
+
+;; 不需要使用 `after-save-hook' 来实现持久性，
+;; 但它使存储库中的书签数据与文件更加同步
+;; 状态。
+(add-hook 'after-save-hook #'bm-buffer-save)
+;; 恢复书签 
+(add-hook 'find-file-hooks   #'bm-buffer-restore)
+(add-hook 'after-revert-hook #'bm-buffer-restore)
+(add-hook 'vc-before-checkin-hook #'bm-buffer-save)
+)
+#+END_SRC
+*** buffer-move 将buffer移动到其他窗口
+#+BEGIN_SRC elisp 
+(use-package buffer-move
+:straight nil
+:load-path "~/.emacs.d/lisp"
+:defer 3
+)
+#+END_SRC
+
+*** zoom 自动调整窗口大小
+#+BEGIN_SRC elisp 
+(use-package zoom
+:straight t
+:defer 3
+:config
+(custom-set-variables
+ '(zoom-mode t))
+(custom-set-variables
+ '(zoom-size '(0.618 . 0.618)))
+(defun size-callback ()
+  (cond ((> (frame-pixel-width) 1280) '(90 . 0.75))
+        (t                            '(0.5 . 0.5))))
+
+(custom-set-variables
+ '(zoom-size 'size-callback))
+
+)
+#+END_SRC
+*** pangu-spacing 调整中英文混版的文字,中英文写在一起时不好看
+#+BEGIN_SRC elisp 
+(use-package pangu-spacing
+:defer 5
+:straight nil
+:load-path "~/.emacs.d/lisp"
+)
+#+END_SRC
+*** yasnippet 补全
+#+BEGIN_SRC elisp 
+(use-package yasnippet
+:defer 2
+:straight nil
+:load-path "~/.emacs.d/lisp"
+:hook (prog-mode . yas-minor-mode)
+:config
+(yas-global-mode 1)
+(yas-reload-all)
+;; (add-hook 'prog-mode-hook #'yas-minor-mode)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"                 ;; personal snippets
+        ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+        ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+        ))
+)
+#+END_SRC 
+*** workgroups2 保存当前编辑的缓存区，下次直接打开，光标位置也会保持
+#+BEGIN_SRC elisp 
+;; 保存当前编辑的缓存区，下次直接打开，光标位置也会保持
+;; 命令使用 wg-****
+(use-package workgroups2
+:straight t
+:defer 4
+:config
+(workgroups-mode 1)
+(setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+;; ;; 支持的buffer
+;; (with-eval-after-load 'workgroups2
+;;   ;; provide major mode, package to require, and functions
+;;   (wg-support 'ivy-occur-grep-mode 'ivy
+;;               `((serialize . ,(lambda (_buffer)
+;;                                 (list (base64-encode-string (buffer-string) t))))
+;;                 (deserialize . ,(lambda (buffer _vars)
+;;                                   (switch-to-buffer (wg-buf-name buffer))
+;;                                   (insert (base64-decode-string (nth 0 _vars)))
+;;                                   ;; easier than `ivy-occur-grep-mode' to set up
+;;                                   (grep-mode)
+;;                                   ;; need return current buffer at the end of function
+                                  ;; (current-buffer))))))
+)
+
+
+#+END_SRC
+*** olivetti 页面居中
+#+BEGIN_SRC elisp
+
+(use-package olivetti
+:defer 1
+:straight nil
+:load-path "~/.emacs.d/lisp")
+(use-package writeroom-mode
+:defer 1
+:straight nil
+:load-path "~/.emacs.d/lisp")
+
+#+END_SRC
+
+*** web-mode
+#+BEGIN_SRC elisp
+(use-package web-mode
+:straight t
+:config
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+)
+
+#+END_SRC
+*** linum-relative 相对行号
+#+BEGIN_SRC elisp
+(use-package linum-relative
+:defer 3
+:straight nil
+:load-path "~/.emacs.d/lisp"
+)
+#+END_SRC
+*** lsp-bridge
+#+BEGIN_SRC elisp
+;; (use-package corfu
+;;   :defer 2
+;;   ;; TAB-and-Go customizations
+;;   :custom
+;;   (corfu-cycle t)             ;; Enable cycling for `corfu-next/previous'
+;;   (corfu-preselect-first nil) ;; Disable candidate preselection
+
+;;   ;; Use TAB for cycling, default is `corfu-complete'.
+;;   :bind
+;;   (:map corfu-map
+;;         ("TAB" . corfu-next)
+;;         ([tab] . corfu-next)
+;;         ("S-TAB" . corfu-previous)
+;;           ([backtab] . corfu-previous))
+
+;;      ;; :hook ((porg-mode . corfu-mode)
+;;      ;;        ;; ()
+;;      ;;        (org-mode . corfu-mode))
+
+;;     :init
+;;     (global-corfu-mode)
+;;   :config
+;;   (add-to-list 'load-path "~/.emacs.d/plugins/lsp-bridge")
+;;   (require 'lsp-bridge)
+;;   (require 'lsp-bridge-icon)        ;; show icons for completion items, optional
+;;   (require 'lsp-bridge-jdtls)       ;; provide Java third-party library jump and -data directory support, optional
+;;   (require 'corfu)
+;;   (require 'corfu-info)
+;;   (require 'corfu-history)
+;;   (require 'lsp-bridge-orderless)   ;; make lsp-bridge support fuzzy match, optional
+;;   (corfu-history-mode t)
+;;   (global-lsp-bridge-mode)
+;;   (when (> (frame-pixel-width) 3000) (custom-set-faces '(corfu-default ((t (:height 1.3))))))  ;; adjust default font height when running in HiDPI screen.
+
+
+;;   )
+#+END_SRC
+*** lsp-mode
+#+BEGIN_SRC elisp
+
+(use-package lsp-mode
+    :defer 3
+    :straight t
+    :hook (python-mode . lsp-deferred)
+    :commands (lsp lsp-deferred))
+(use-package lsp-pyright
+  :defer 3
+  :straight t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
+;; 代码折叠
+(use-package origami
+:straight t
+:defer 6)
+
+
+#+END_SRC
+*** 保持编辑状态
+#+BEGIN_SRC elisp
+;; (require 'init-benchmarking)
+;; (require 'init-sessions)
+#+END_SRC
+*** Elfeed
+#+BEGIN_SRC elisp
+(defun elfeed-start-my ()
+(interactive)
+(use-package elfeed
+:straight t
+:hook (evil-insert-state . elfeed-search-mode)
+:bind (:map elfeed-search-mode-map
+            ("q" . elfeed-quit-my))
+:init (setq url-queue-timeout 30
+            elfeed-db-directory (locate-user-emacs-file ".elfeed")
+	    ;; elfeed-show-entry-switch #'pop-to-buffer
+	    ;; elfeed-show-entry-delete #'delete-window
+      )
+:config
+(push elfeed-db-directory recentf-exclude))
+(use-package elfeed-org
+:straight t
+:config
+(elfeed-org)
+(setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
+)
+(defun elfeed-my ()
+  "Wrapper to load the elfeed db from disk before opening"
+  (interactive)
+  (elfeed-db-load)
+  (elfeed)
+  (elfeed-search-update--force))
+(defun elfeed-quit-my ()
+  "Wrapper to save the elfeed db to disk before burying buffer"
+  (interactive)
+  (elfeed-db-save)
+  (quit-window))
+
+(elfeed-my)
+)
+#+END_SRC
+*** Gnus
+#+BEGIN_SRC elisp
+  (use-package init-gnus
+  :defer 2
+  :straight nil
+  :load-path "~/.emacs.d/lisp"
+  )
+#+END_SRC
+*** Mu4e
+#+BEGIN_SRC elisp
+(when (string= "gnu/linux" system-type)
+  (add-to-list 'load-path "/data/data/com.termux/files/usr/share/emacs/site-lisp/mu4e")
+  (require 'mu4e)
+  (setq mu4e-maildir (expand-file-name "~/Maildir/Gmail"))
+  ;; (setq mu4e-drafts-folder "/[Gmail].草稿")
+  ;; (setq mu4e-sent-folder "/[Gmail].已发邮件")
+  ;; (setq mu4e-trash-folder "/[Gmail].已删除邮件")
+  (setq mu4e-drafts-folder "/[Gmail].Drafts")
+  (setq mu4e-sent-folder "/[Gmail].Sent Mail")
+  (setq mu4e-trash-folder "/[Gmail].Bin")
+
+  ;; ;; (setq message-signature-file "~/.emacs.d/.signature") ; put your signature in this file
+  ;; ;; get mail
+  (setq mu4e-get-mail-command "mu index"
+        mu4e-html2text-command "w3m -T text/html"
+        mu4e-update-interval 120
+        mu4e-headers-auto-update t
+        mu4e-compose-signature-auto-include nil)
+
+  ;; (setq mu4e-maildir-shortcuts
+  ;;       '( ("/INBOX" . ?i)
+  ;;          ("/[Gmail].已发邮件" . ?s)
+  ;;          ("/[Gmail].已删除邮件" . ?t)
+  ;;          ("/[Gmail].草稿" . ?d)))
+(setq mu4e-maildir-shortcuts
+        '( ("/INBOX" . ?i)
+           ("/[Gmail].Sent Mail" . ?s)
+           ("/[Gmail].Bin" . ?t)
+           ("/[Gmail].Drafts" . ?d)
+	   ("/[Gmail].Starred" . ?t)))
+
+
+  ;; show images
+  (setq mu4e-show-images t)
+
+;; use imagemagick, if available
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
+
+;; general emacs mail settings; used when composing e-mail
+;; the non-mu4e-* stuff is inherited from emacs/message-mode
+(setq mu4e-reply-to-address "isouthrain@gmail.com"
+      user-mail-address "isouthrain@gmail.com"
+      user-full-name "ISouthRain")
+
+;; don't save message to Sent Messages, IMAP takes care of this
+(setq mu4e-sent-messages-behavior 'delete)
+)
+#+END_SRC
+** Org-mode 插件
+*** org-superstar-mode
+#+BEGIN_SRC emacs-lisp
+;; (use-package org-superstar
+;; :straight t
+;; :defer 5
+;; :config
+;; (require 'org-superstar)
+;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+;; ;;这通常是默认值，但请记住它必须为零
+;; (setq org-hide-leading-stars nil)
+;; ;;这条线是必要的
+;; (setq org-superstar-leading-bullet ?\s)
+;; ;;如果你使用 Org Indent 你还需要添加这个，否则以上在启用缩进时无效
+;; (setq org-indent-mode-turns-on-hiding-stars nil)
+;; ;;想要标题完全消失
+;; ;; (setq org-superstar-remove-leading-stars t)
+;; ;;您可以用适合当前TODO关键字的专业项目符号替换标准标题项目符号！
+;; ;; (setq org-superstar-special-todo-items t)
+;; ;;快速普通列表项
+;; ;; (defun my-auto-lightweight-mode ()
+;; ;;   "Start Org Superstar differently depending on the number of lists items."
+;; ;;   (let ((list-items
+;; ;;          (count-matches "^[ \t]*?\\([+-]\\|[ \t]\\*\\)"
+;; ;;                         (point-min) (point-max))))
+;; ;;     (unless (< list-items 100)
+;; ;;       (org-superstar-toggle-lightweight-lists)))
+;; ;;   (org-superstar))
+
+;; ;; (add-hook 'org-mode-hook #'my-auto-lightweight-mode)
+;; )
+
+#+END_SRC
+
+*** org-download
+#+BEGIN_SRC emacs-lisp
+(defun my-config-org-download()
+(interactive)
+(org-babel-load-file
+ (expand-file-name "my-config/my-config-org-download.org"
+                   user-emacs-directory))
+;; (org-mode-restart)
+(hydra-org-download/body)
+)
+
+#+END_SRC
+
+*** org-roam
+#+BEGIN_SRC emacs-lisp
+(defun org-roam-windows-run ()
+;; (interactive)
+(setq org-roam-v2-ack t)
+(use-package org-roam
+  :defer 3
+  :straight t
+  :custom
+ (org-roam-directory (file-truename "F:\\MyFile\\Org"))
+  :config
+  ;; (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  ;;搜索
+(setq org-roam-node-display-template "${title}")
+
+;;补全
+(setq org-roam-completion-everywhere t)
+
+;;一个也可以设置org-roam-db-node-include-function。例如，ATTACH要从 Org-roam 数据库中排除所有带有标签的标题，可以设置：
+(setq org-roam-db-node-include-function 
+      (lambda () 
+        (not (member "ATTACH" (org-get-tags)))))
+
+;; 默认情况下，Org-roam 是急切的缓存：每次修改和保存 Org-roam 文件时，它都会更新相应文件的数据库。这使数据库保持最新，在使用交互式命令时引起最少的意外。但是，根据您的 Org 文件的大小，数据库更新可能是一个缓慢的操作。您可以通过设置org-roam-db-update-on-save为来禁用数据库的自动更新nil
+(setq org-roam-db-update-on-save t)
+
+;; 在缓存构建过程中，Org-roam 会生成大量内存中的数据结构（例如 Org 文件的 AST），这些数据结构在使用后会被丢弃。这些结构会定期进行垃圾回收（请参阅(elisp)info:elisp#Garbage Collection）。Org-roam 提供了org-roam-db-gc-threshold在这些内存密集型操作期间临时更改要触发 GC 的阈值的选项。为了减少垃圾收集进程的数量，可以设置 org-roam-db-gc-threshold一个较高的值（例如most-positive-fixnum）：
+(setq org-roam-db-gc-threshold most-positive-fixnum)
+
+(setq org-roam-capture-templates
+      '(("b" "博客" plain
+         "%?"
+         :if-new (file+head "博客/${slug}.org"
+                            "#+title: ${title}\n")
+         :immediate-finish t
+         :unnarrowed t)
+        ("g" "GTD" plain "%?"
+         :if-new
+         (file+head "GTD/${title}.org" "#+title: ${title}\n")
+         :immediate-finish t
+         :unnarrowed t)
+        ("a" "article" plain "%?"
+         :if-new
+         (file+head "articles/${title}.org" "#+title: ${title}\n#+filetags: :article:\n")
+         :immediate-finish t
+         :unnarrowed t)))
+
+;; 创建左边显示子目录分类
+(cl-defmethod org-roam-node-type ((node org-roam-node))
+  "Return the TYPE of NODE."
+  (condition-case nil
+      (file-name-nondirectory
+       (directory-file-name
+        (file-name-directory
+         (file-relative-name (org-roam-node-file node) org-roam-directory))))
+    (error "")))
+
+(setq org-roam-node-display-template
+      (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+(org-roam-db-autosync-mode)
+(setq org-roam-database-connector 'sqlite)
+))
+
+
+(defun org-roam-linux-run ()
+;; (interactive)
+(setq org-roam-v2-ack t)
+(use-package org-roam
+  :defer 3
+  :straight t
+  :custom
+  (org-roam-directory (file-truename "~/MyFile/Org"))
+  :config
+  ;; (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol)
+  ;;搜索
+(setq org-roam-node-display-template "${title}")
+
+;;补全
+(setq org-roam-completion-everywhere t)
+
+;;一个也可以设置org-roam-db-node-include-function。例如，ATTACH要从 Org-roam 数据库中排除所有带有标签的标题，可以设置：
+(setq org-roam-db-node-include-function 
+      (lambda () 
+        (not (member "ATTACH" (org-get-tags)))))
+
+;; 默认情况下，Org-roam 是急切的缓存：每次修改和保存 Org-roam 文件时，它都会更新相应文件的数据库。这使数据库保持最新，在使用交互式命令时引起最少的意外。但是，根据您的 Org 文件的大小，数据库更新可能是一个缓慢的操作。您可以通过设置org-roam-db-update-on-save为来禁用数据库的自动更新nil
+(setq org-roam-db-update-on-save t)
+
+;; 在缓存构建过程中，Org-roam 会生成大量内存中的数据结构（例如 Org 文件的 AST），这些数据结构在使用后会被丢弃。这些结构会定期进行垃圾回收（请参阅(elisp)info:elisp#Garbage Collection）。Org-roam 提供了org-roam-db-gc-threshold在这些内存密集型操作期间临时更改要触发 GC 的阈值的选项。为了减少垃圾收集进程的数量，可以设置 org-roam-db-gc-threshold一个较高的值（例如most-positive-fixnum）：
+(setq org-roam-db-gc-threshold most-positive-fixnum)
+(setq org-roam-capture-templates
+'(
+("d" "default" plain "%?"
+  :target (file+head "${title}.org"
+                     "#+title: ${title}\n")
+  :unnarrowed t)
+  )
+)
+;; 创建左边显示子目录分类
+(cl-defmethod org-roam-node-type ((node org-roam-node))
+  "Return the TYPE of NODE."
+  (condition-case nil
+      (file-name-nondirectory
+       (directory-file-name
+        (file-name-directory
+         (file-relative-name (org-roam-node-file node) org-roam-directory))))
+    (error "")))
+
+(setq org-roam-node-display-template
+      (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+
+(add-to-list 'load-path "~/.emacs.d/plugins/emacsql-sqlite3/")
+(require 'emacsql-sqlite3)
+(setq org-roam-database-connector 'sqlite3)
+  )
+
+)
+
+#+END_SRC
+
+*** org-roam-ui
+#+BEGIN_SRC emacs-lisp
+(defun org-roam-ui-run ()
+;; (interactive)
+(use-package websocket
+:straight t)
+(use-package simple-httpd
+:straight t)
+(use-package org-roam-ui
+:straight t
+:config
+(setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t)
+
+)
+)
+
+(defun org-roam-windows-start ()
+(interactive)
+(org-roam-windows-run)
+(org-roam-ui-run)
+)
+(defun org-roam-linux-start ()
+(interactive)
+(org-roam-linux-run)
+(org-roam-ui-run)
+)
+
+#+END_SRC
+
+*** org-wiki 的链接 会被 org-bras 捣乱， 在 TUI 终端正常
+#+BEGIN_SRC emacs-lisp
+(defun my-config-org-wiki()
+(interactive)
+(org-babel-load-file
+ (expand-file-name "my-config/my-config-org-wiki.org"
+                   user-emacs-directory))
+;; (org-mode-restart)
+(use-package org-download
+:straight t
+:config
+;; (require 'org-download)
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-donload-enable)
+(setq org-download-heading-lvl nil)
+;; 文件目录
+;;(setq-default org-download-image-dir "Attachment")
+(defun my-org-download--dir-1 ()
+    (or org-download-image-dir (concat "./Attachment/" (file-name-nondirectory (file-name-sans-extension (buffer-file-name))) )))
+
+  (advice-add #'org-download--dir-1 :override #'my-org-download--dir-1)
+)
+(use-package ox-hugo
+  :straight t   ;Auto-install the package from Melpa
+  ;; :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+  :after ox)
+(hydra-org-wiki/body)
+)
+#+END_SRC
+
+*** org-brain
+#+BEGIN_SRC emacs-lisp
+;; (use-package org-brain
+;;   :defer 3
+;;   :straight nil
+;;   :load-path "~/.emacs.d/lisp"
+;;   :init
+;; (when (string= "windows-nt" system-type)
+;;   (setq org-brain-path "F:\\MyFile\\Org"))
+;; (when (string= "gnu/linux" system-type)
+;;   (setq org-brain-path "~/MyFile/Org"))
+;; (when (string= "darwin" system-type)
+;;   (setq org-brain-path "~/Desktop/MyFile/Org"))
+;;   ;; For Evil users
+;;   (with-eval-after-load 'evil
+;;     (evil-set-initial-state 'org-brain-visualize-mode 'emacs))
+;;   :config
+;;   (setq org-id-track-globally t)
+;; (when (string= "windows-nt" system-type)
+;;   (setq org-id-locations-file "F:\\MyFile\\Org\\.org-id-locations"))
+;; (when (string= "gnu/linux" system-type)
+;;   (setq org-id-locations-file "~/MyFile/Org/.org-id-locations"))
+;; (when (string= "darwin" system-type)
+;;   (setq org-id-locations-file "~/MyFile/Org/Desktop/.org-id-locations"))
+;;   (add-hook 'before-save-hook #'org-brain-straight-ids-in-buffer)
+;;   (setq org-brain-visualize-default-choices 'all)
+;;   (setq org-brain-title-max-length 12)
+;;   (setq org-brain-include-file-entries t
+;;         org-brain-file-entries-use-title t
+;; 	)
+;; ;; 默认文件
+;;   ;; (setq my/default-org-brain-file "index")
+;;   ;; (setq org-brain-default-file-parent my/default-org-brain-file)
+;; )
+;; ;; Allows you to edit entries directly from org-brain-visualize
+;; (use-package polymode
+;;   :straight t
+;;   :defer 3
+;;   :config
+;;   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode))
+#+END_SRC
+
+*** org-cliplink
+    #+BEGIN_SRC emacs-lisp
+(use-package org-cliplink
+:straight t
+:defer 2
+:config
+(defun custom-org-cliplink ()
+  (interactive)
+  (org-cliplink-insert-transformed-title
+   (org-cliplink-clipboard-content)     ;take the URL from the CLIPBOARD
+   (lambda (url title)
+     (let* ((parsed-url (url-generic-parse-url url)) ;parse the url
+            (clean-title
+             (cond
+              ;; if the host is github.com, cleanup the title
+              ((string= (url-host parsed-url) "github.com")
+               (replace-regexp-in-string "GitHub - .*: \\(.*\\)" "\\1" title))
+              ;; otherwise keep the original title
+              (t title))))
+       ;; forward the title to the default org-cliplink transformer
+       (org-cliplink-org-mode-link-transformer url clean-title)))))
+)
+
+    #+END_SRC
+
+*** org-bars 标题改良
+#+BEGIN_SRC emacs-lisp
+
+;; (use-package org-bars
+;; :load-path "~/.emacs.d/lisp"
+;; :hook (org-mode . org-bars-mode)
+;; :config
+;; ;; 显示标题号
+;; (setq org-startup-numerated nil)
+;; ;; 改良标题缩进问题
+;; (setq org-indent-indentation-per-level nil)
+;; )
+;; ;; 设置org标题1-8级的字体大小和颜色，颜色摘抄自monokai-mode标题的字体大小和正文一致，设成1.0， 如果希望标题字体大一点可以设成1.2。;希望org
+;; ;; 设置标题字体大小
+;; (custom-set-faces
+
+;;   '(org-level-1 ((t (:inherit outline-1 :height 1.1)))) 
+;;   '(org-level-2 ((t (:inherit outline-2 :height 1.1)))) 
+;;   '(org-level-3 ((t (:inherit outline-3 :height 1.1)))) 
+;;   '(org-level-4 ((t (:inherit outline-4 :height 1.1)))) 
+;;   '(org-level-5 ((t (:inherit outline-5 :height 1.1)))) 
+;;   '(org-level-6 ((t (:inherit outline-6 :height 1.1)))) 
+;;   '(org-level-7 ((t (:inherit outline-7 :height 1.1)))) 
+;;   '(org-level-8 ((t (:inherit outline-8 :height 1.1)))) 
+;;   '(org-level-9 ((t (:inherit outline-9 :height 1.1))))
+;;   '(org-level-10 ((t (:inherit outline-10 :height 1.1))))
+;;   '(org-level-11 ((t (:inherit outline-11 :height 1.1))))
+;;   '(org-level-12 ((t (:inherit outline-12 :height 1.1))))
+;;   '(org-level-13 ((t (:inherit outline-13 :height 1.1))))
+;;   '(org-level-14 ((t (:inherit outline-14 :height 1.1))))
+;;   '(org-level-15 ((t (:inherit outline-15 :height 1.1))))
+
+;;  ) ;; end custom-set-faces
+#+END_SRC
+*** Org-appear 自动展开链接显示
+#+BEGIN_SRC emacs-lisp
+(use-package org-appear
+:straight nil
+:defer 2
+:load-path "~/.emacs.d/lisp"
+:hook (org-mode . org-appear-mode)
+:config
+;; 链接自动展开, 以及光标停留多少秒才展开
+(setq org-appear-autolinks t)
+(setq org-appear-delay 1)
+
+(setq org-appear-autosubmarkers t)
+(setq org-appear-autoentities t)
+)
+#+END_SRC
+
+*** org-modern 美化org-mode 所有的语法
+#+BEGIN_SRC elisp 
+;; (use-package org-modern
+;; :straight nil
+;; :load-path "~/.emacs.d/lisp"
+;; :config
+;; (add-hook 'org-mode-hook #'org-modern-mode)
+;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+;; )
+#+END_SRC
+*** cnfonts 中英文对齐
+#+BEGIN_SRC elisp 
+;; Org-mode 中英文字体对齐
+(use-package cnfonts
+:straight t
+:defer 2
+:config
+(setq cnfonts-profiles
+    '("program" "org-mode" "read-book"))
+
+;; 有些用户希望将 profile 配置文件做为自己的 Emacs 配置，在不同的计算机上同步和管理，我建议这些用户将`cnfonts-use-system-type'设置为 t, 这样，相同名称的 profile 在不同的操作系统下，保存的位置也不同，可以避免 profile 冲突。
+;; (setq cnfonts-use-system-type t)
+
+;; 让 cnfonts 在 Emacs 启动时自动生效。
+;; (cnfonts-mode 1)
+
+;; 许多用户使用 org-mode 时，习惯让不同的标题，使用的字体大小也不同，这个特性需要用户设置：
+;; (setq cnfonts-use-face-font-rescale t)
+(when (string= "windows-nt" system-type)
+(defun cnfonts-set-font-and-mode-myself ()
+  (interactive)
+  (cnfonts-mode)
+  (cnfonts-set-font)
+)
+(cnfonts-set-font-and-mode-myself)
+)
+)
+
+#+END_SRC
+*** org-html-themify 根据当前主题导出为 html
+#+BEGIN_SRC elisp 
+;; (use-package org-html-themify
+  ;; :straight
+  ;; (org-html-themify
+  ;;  :type git
+  ;;  :host github
+  ;;  :repo "DogLooksGood/org-html-themify"
+  ;;  :files ("*.el" "*.js" "*.css"))
+  ;; :hook (org-mode . org-html-themify-mode)
+  ;; :custom
+  ;; (org-html-themify-themes
+  ;;  '((dark . monokai)
+;;      (light . zenburn))))
+
+
+#+END_SRC
+** org-mode 设置
+#+BEGIN_SRC emacs-lisp
+;;Windows系统日历乱码
+(setq system-time-locale "C")
+(format-time-string "%Y-%m-%d %a")
+;;自动换行
+(add-hook 'org-mode-hook 'toggle-truncate-lines)
+;;默认笔记路径
+(when (string= "gnu/linux" system-type)
+(setq org-default-notes-file "~/MyFile/Org/Note.org")
+)
+(when (string= "darwin" system-type)
+(setq org-default-notes-file "~/Desktop/MyFile/Org/Note.org")
+)
+(when (string= "windows-nt" system-type)
+(setq org-default-notes-file "F:\\MyFile\\Org\\Note.org")
+)
+;;设置打开某类文件为org模式
+;;(add-to-list 'auto-mode-alist '("\\.txt\\" . org-mode))
+
+;; 当它们处于某种DONE状态时，不要在议程中显示计划的项目。
+(setq org-agenda-skip-scheduled-if-done t)
+;; 记录任务状态变化,可能会记录对任务状态的更改，尤其是对于重复例程。如果是这样，请将它们记录在抽屉中，而不是笔记的内容。
+(setq org-log-state-notes-into-drawer t )
+;; 打开 org 文件 默认将 列表折叠
+(setq org-cycle-include-plain-lists 'integrate)
+;; 隐藏语法符号 例如: *粗体* , * 符号会被隐藏
+(setq-default org-hide-emphasis-markers t)
+   #+END_SRC
+*** 代码块设置
+#+BEGIN_SRC emacs-lisp
+;;代码块高亮
+(setq org-src-fontify-natively t)
+;;不自动tab
+(setq org-src-tab-acts-natively nil)
+;;语言需要
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
+#+END_SRC
+
+*** 字体样式颜色设置
+#+BEGIN_SRC elisp 
+(defface my-org-emphasis-bold
+  '((default :inherit bold)
+    (((class color) (min-colors 88) (background light))
+     :foreground "#a60000")
+    (((class color) (min-colors 88) (background dark))
+     :foreground "#ff8059"))
+  "My bold emphasis for Org.")
+
+(defface my-org-emphasis-italic
+  '((default :inherit italic)
+    (((class color) (min-colors 88) (background light))
+     :foreground "#005e00")
+    (((class color) (min-colors 88) (background dark))
+     :foreground "#44BCAB"))
+  "My italic emphasis for Org.")
+
+(defface my-org-emphasis-underline
+  '((default :inherit underline)
+    (((class color) (min-colors 88) (background light))
+     :foreground "#813e00")
+    (((class color) (min-colors 88) (background dark))
+     :foreground "#d0bc00"))
+  "My underline emphasis for Org.")
+
+(defface my-org-emphasis-strike-through
+  '((((class color) (min-colors 88) (background light))
+     :strike-through "#972500" :foreground "#505050")
+    (((class color) (min-colors 88) (background dark))
+     :strike-through "#ef8b50" :foreground "#a8a8a8"))
+  "My strike-through emphasis for Org.")
+
+(setq org-emphasis-alist
+      '(("*" my-org-emphasis-bold)
+        ("/" my-org-emphasis-italic)
+        ("_" my-org-emphasis-underline)
+        ("=" org-verbatim verbatim)
+        ("~" org-code verbatim)
+        ("+" (my-org-emphasis-strike-through :strike-through t))))
+#+END_SRC
+*** 日程文件位置
+#+BEGIN_SRC emacs-lisp
+(when (string= "gnu/linux" system-type)
+(setq org-agenda-files (list
+       		             "~/MyFile/Org/GTD"
+			     ))
+)
+(when (string= "darwin" system-type)
+(setq org-agenda-files (list
+       		             "~/Desktop/MyFile/Org/GTD"
+			     ))
+)
+(when (string= "windows-nt" system-type)
+(setq org-agenda-files (list
+       		             "F:\\MyFile\\Org\\GTD"
+			     ))
+)
+#+END_SRC
+
+*** 设置 TODO 颜色及状态
+#+BEGIN_SRC emacs-lisp
+;; ;;TODO选项
+;; (setq org-todo-keywords
+;;       '((sequence "TODO(t!)"  "DOING(d!)" "|" "DONE(D!)")))
+
+;; ;; 设置任务样式
+;; (setq org-todo-keyword-faces
+;;    '(("TODO" .   (:foreground "red" :weight bold))
+;;     ("DOING" .      (:foreground "orange" :weight bold))
+;;     ("DONE" .      (:foreground "green" :weight bold))
+;;     ))
+
+;; 设置任务流程(这是我的配置)
+(setq org-todo-keywords
+      '((sequence "未开始(p!)" "进行中(t!)" "阻塞中(s!)" "|" "已完成(d!)" "已取消(x!)")))
+
+;; 设置任务样式
+(setq org-todo-keyword-faces
+   '(("未开始" .   (:foreground "red" :weight bold))
+    ("阻塞中" .   (:foreground "red" :weight bold))
+    ("进行中" .      (:foreground "orange" :weight bold))
+    ("已完成" .      (:foreground "green" :weight bold))
+    ("已取消" .     (:background "gray" :foreground "#72DBB8"))
+))
+#+END_SRC
+
+*** org-capture 模板
+#+BEGIN_SRC emacs-lisp
+;;capture模板
+;; (server-start)
+(require 'org-protocol)
+
+(use-package s
+:straight t)
+(add-to-list 'load-path "~/.emacs.d/plugins/org-protocol-capture-html/")
+(require 'org-protocol-capture-html)
+;; (setq org-protocol-default-template-key "w")
+(when (string= "gnu/linux" system-type)
+(setq org-capture-templates
+      '(
+	;;TODO
+	("t" "Todo" entry (file+headline "~/MyFile/Org/GTD/Todo.org" "2022年5月")
+         "* 未开始 %^{想做什么？}\n  :时间: %^T\n  %?\n  %i\n")
+	 
+	;;日志
+        ("j" "Journal" entry (file+datetree "~/MyFile/Org/Journal.org")
+         "* %^{记些什么} %?\n  %i\n")
+	 
+	 ;;日程安排
+	("a" "日程安排" entry (file+headline "~/MyFile/Org/GTD/Agenda.org" "2022年5月")
+	 "* %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n")
+	 
+	 ;;笔记
+        ;; ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "2022年4月")
+        ("n" "笔记" plain (file "~/MyFile/Org/Note.org")
+	 "** %^{主标题}\n  :内容: %^{内容} \n  :时间: %T%?")
+	 
+	 ;;消费
+	("zd" "账单" plain (file+function "~/MyFile/Org/消费.org" find-month-tree)
+         " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|水果|宵夜|购物|交通出行|其它} | %^{金额} |" :kill-buffer t :immediate-finish t)
+	 
+	 ;;英语单词
+        ("e" "英语单词" entry (file+datetree "~/MyFile/Org/单词.org")
+         "*  %^{英语单词} ----> %^{中文翻译}\n")
+
+	 ;;Org-protocol网页收集
+	 ("w" "网页收集" entry (file "~/MyFile/Org/网页收集.org")
+	 "* [[%:link][%:description]] \n %U \n %:initial \n")
+	("b" "Bookmarks" plain (file+headline "~/MyFile/Org/Bookmarks.org" "新加书签")
+	 "+ %?" :kill-buffer t)
+	))
+)
+
+(when (string= "darwin" system-type)
+(setq org-capture-templates
+      '(
+	;;TODO
+	("t" "Todi" entry (file+headline "~/Desktop/MyFile/Org/GTD/Todo.org" "2022年5月")
+         "* 未开始 %^{想做什么？}\n  :时间: %^T\n  %?\n  %i\n")
+	 
+	;;日志
+        ("j" "Journal" entry (file+datetree "~/Desktop/MyFile/Org/Journal.org")
+         "* %^{记些什么} %?\n  %i\n")
+	 
+	 ;;日程安排
+	("a" "日程安排" entry (file+headline "~/Desktop/MyFile/Org/GTD/Agenda.org" "2022年5月")
+	 "* %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n")
+	 
+	 ;;笔记
+        ("n" "笔记" entry (file+headline "~/Desktop/MyFile/Org/Note.org" "2022年4月")
+	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
+	 
+	 ;;消费
+	("zd" "账单" plain (file+function "~/Desktop/MyFile/Org/消费.org" find-month-tree)
+         " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|水果|宵夜|购物|交通出行|其它} | %^{金额} |" :kill-buffer t :immediate-finish t)
+	 
+	 ;;英语单词
+        ("e" "英语单词" entry (file+datetree "~/Desktop/MyFile/Org/单词.org")
+         "*  %^{英语单词} ----> %^{中文翻译}\n")
+
+	 ;;Org-protocol网页收集
+	 ("w" "网页收集" entry (file "~/Desktop/MyFile/Org/网页收集.org")
+	 "* [[%:link][%:description]] \n %U \n %:initial \n")
+	("b" "Bookmarks" plain (file+headline "~/Desktop/MyFile/Org/Bookmarks.org" "新加书签")
+	 "+ %?" :kill-buffer t :immediate-finish t)
+	))
+)
+
+;;Windows
+(when (string= "windows-nt" system-type)
+(setq org-capture-templates
+      '(
+	;;TODO
+	("t" "Todo" entry (file+headline "F:\\MyFile\\Org\\GTD\\Todo.org" "2022年5月")
+         "* TODO %^{想做什么？}\n  :时间: %^T\n  %?\n  %i\n")
+	 
+	;;日志
+        ("j" "Journal" entry (file+datetree "F:\\MyFile\\Org\\Journal.org")
+         "* %^{记些什么} %?\n  %i\n")
+	 
+	 ;;日程安排
+	("a" "日程安排" entry (file+headline "F:\\MyFile\\Org\\GTD\\Agenda.org" "2022年5月")
+	 "* %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n")
+	 
+	 ;;笔记
+        ("n" "笔记" entry (file+headline "F:\\MyFile\\Org\\Note.org" "2022年5月")
+	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
+
+	("y" "语录" entry (file+headline "F:\\Hugo\\content\\Quotation.zh-cn.md" "2022")
+	 "> %^{语录}  ")
+
+	 ;;消费
+	("zd" "账单" plain (file+function "F:\\MyFile\\Org\\消费.org" find-month-tree)
+         " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|水果|宵夜|购物|交通出行|其它} | %^{金额} |" :kill-buffer t :immediate-finish t)
+	 
+	 ;;英语单词
+        ("e" "英语单词" entry (file+datetree "F:\\MyFile\\Org\\单词.org")
+         "*  %^{英语单词} ----> %^{中文翻译}\n")
+
+	 ;;Org-protocol网页收集
+	 ("w" "网页收集" entry (file "F:\\MyFile\\Org\\网页收集.org")
+	 "* [[%:link][%:description]] \n %U \n %:initial \n")
+
+	("b" "Bookmarks" plain (file+headline "F:\\MyFile\\Org\\Bookmarks.org" "新加书签")
+	 "+ %?" :kill-buffer t)
+	))
+)
+
+;; (org-capture nil "zd")
+(defun org-capture-Bookmarks ()
+(interactive) ; 如果不需要定义成命令，这句可以不要。
+;; (org-capture nil "b")
+;; (org-cliplink)
+;; (org-capture-finalize)
+;; (org-capture nil "b")
+(org-capture)
+(when (string= "windows-nt" system-type)
+(find-file "F:\\MyFile\\Org\\Bookmarks.org"))
+(when (string= "gnu/linux" system-type)
+(find-file "~/MyFile/Org/Bookmarks.org"))
+(when (string= "darwin" system-type)
+(find-file "~/Desktop/MyFile/Org/Bookmarks.org"))
+(org-html-export-to-html)
+(kill-buffer (buffer-name))
+)
+;;创建org-capture 按键夹,必须创建才能用多按键
+(add-to-list 'org-capture-templates '("z" "账单"));;与上面的账单相对应
+;; (add-to-list 'org-capture-templates '("w" "网页收集"));;
+
+
+;;用 org-capture 记录账单
+(defun get-year-and-month ()
+  (list (format-time-string "%Y年") (format-time-string "%m月")))
+
+
+(defun find-month-tree ()
+  (let* ((path (get-year-and-month))
+         (level 1)
+         end)
+    (unless (derived-mode-p 'org-mode)
+      (error "Target buffer \"%s\" should be in Org mode" (current-buffer)))
+    (goto-char (point-min))             ;移动到 buffer 的开始位置
+    ;; 先定位表示年份的 headline，再定位表示月份的 headline
+    (dolist (heading path)
+      (let ((re (format org-complex-heading-regexp-format
+                        (regexp-quote heading)))
+            (cnt 0))
+        (if (re-search-forward re end t)
+            (goto-char (point-at-bol))  ;如果找到了 headline 就移动到对应的位置
+          (progn                        ;否则就新建一个 headline
+            (or (bolp) (insert "\n"))
+            (if (/= (point) (point-min)) (org-end-of-subtree t t))
+            (insert (make-string level ?*) " " heading "\n"))))
+      (setq level (1+ level))
+      (setq end (save-excursion (org-end-of-subtree t t))))
+    (org-end-of-subtree)))
+
+    #+END_SRC
+
+*** 通知
+#+BEGIN_SRC emacs-lisp
+;; ;; 让Emacs通知
+;; (require 'appt)
+;; ;; 每小时同步一次appt,并且现在就开始同步
+;; (run-at-time nil 3600 'org-agenda-to-appt)
+;; ;; 更新agenda时，同步appt
+;; (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
+;; ;; 激活提醒
+;; (appt-activate 1)
+;; ;; 提前半小时提醒
+;; (setq appt-message-warning-time 1)
+;; (setq appt-audible t)
+;; ;;提醒间隔
+;; (setq appt-display-interval 30)
+;; (require 'notifications)
+;; (defun appt-disp-window-and-notification (min-to-appt current-time appt-msg)
+;;   (let ((title (format "%s分钟内有新的任务" min-to-appt)))
+;;     (notifications-notify :timeout (* appt-display-interval 60000) ;一直持续到下一次提醒
+;;                           :title title
+;;                           :body appt-msg
+;;                           )
+;;     (appt-disp-window min-to-appt current-time appt-msg))) ;同时也调用原有的提醒函数
+;; (setq appt-display-format 'window) ;; 只有这样才能使用自定义的通知函数
+;; (setq appt-disp-window-function #'appt-disp-window-and-notification)
+
+#+END_SRC
+
+*** 图片设置
+#+BEGIN_SRC emacs-lisp
+;;打开Org文件自动显示图片
+(setq org-startup-with-inline-images t)
+;;图片显示1/3尺寸
+(setq org-image-actual-width (/ (display-pixel-width) 3))
+;;图片显示 300 高度，如果图片小于 300，会被拉伸。
+(setq org-image-actual-width '(500))
+    #+END_SRC
+*** 导出 Html 高亮代码
+#+BEGIN_SRC emacs-lisp
+(use-package htmlize
+:straight t
+:defer 2)
+#+END_SRC
+
+** 自定义函数
+#+BEGIN_SRC elisp 
+(defun lxr (names)
+  (interactive "s查找联系人，请输入条件：")
+  (call-process-shell-command "lxr" nil t t "-s" names)
+  )
+(defun RunPython ()
+  (interactive) ; 如果不需要定义成命令，这句可以不要。
+  (shell-command (format "python %s.py" (file-name-base (buffer-file-name))))
+)
+;; 自己的配置文件
+(defun myconfig ()
+  (interactive) ; 如果不需要定义成命令，这句可以不要。
+(when (string= "windows-nt" system-type)
+  (find-file "C:\\Users\\Jack\\AppData\\Roaming\\.emacs.d\\settings.org"))
+(when (string= "gnu/linux" system-type)
+  (find-file "~/.emacs.d/settings.org"))
+  (when (string= "darwin" system-type)
+  (find-file "~/.emacs.d/settings.org"))
+(goto-line 56)
+(org-cycle)
+)
+
+;; org-roam-db-sync
+(defun org-roam-db-sync-myself ()
+  (interactive) ; 如果不需要定义成命令，这句可以不要。
+(when (string= "gnu/linux" system-type)
+  (shell-command "rm ~/.emacs.d/org-roam.db")
+)
+(when (string= "darwin" system-type)
+  (shell-command "rm ~/.emacs.d/org-roam.db")
+)
+(when (string= "windows-nt" system-type)
+  (shell-command "del C:\\Users\\Jack\\AppData\\Roaming\\.emacs.d\\org-roam.db")
+)
+  (org-roam-db-sync)
+(evil-goto-line)
+(org-global-cycle)
+)
+
+;; Markdown-mode 开始
+(defun markdown-mode-start-myself ()
+  (interactive) ; 如果不需要定义成命令，这句可以不要。
+(my-config-markdown-mode)
+(when (string= "gnu/linux" system-type)
+  (find-file "~/Ubuntu/ubuntu-fs/root/Hugo/content/posts/Home.md"))
+(when (string= "darwin" system-type)
+  (find-file "~/Desktop/Hugo/content/posts/Home.md"))
+(when (string= "windows-nt" system-type)
+  (find-file "F:\\Hugo\\content\\posts\\Home.md"))
+(hydra-vim-autocmd-markdown-mode/nil)
+)
+#+END_SRC
+
+** 按键映射
+*** evil
+#+BEGIN_SRC elisp 
+(define-key evil-normal-state-map (kbd ";") 'evil-ex)
+(define-key evil-motion-state-map (kbd ";") 'evil-ex)
+;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+(define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+(define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo)
+;; (define-key evil-normal-state-map "q" 'hydra-evil-exit/body)
+
+#+END_SRC
+
+*** 系统 及 org-mode cycle
+#+BEGIN_SRC elisp 
+(general-define-key
+ :states 'normal
+ :keymaps 'org-mode-map
+ "TAB" 'org-cycle
+ )
+#+END_SRC
+
+*** markdown-mode
+#+BEGIN_SRC elisp 
+(general-define-key
+ ;; :states 'insert
+ :states 'normal
+ :keymaps 'markdown-mode-map
+ "TAB" 'markdown-cycle
+ )
+
+#+END_SRC
+
+*** goto-line-preview
+#+BEGIN_SRC elisp 
+(general-define-key
+"M-g g" 'goto-line-preview
+)
+#+END_SRC
+*** ivy counsel 类似 helm 的包
+#+BEGIN_SRC elisp 
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+#+END_SRC
+** Termux 按键所需
+#+BEGIN_SRC elisp 
+(when (string= "gnu/linux" system-type)
+(defun org-download-image-myself-jpg ()
+  (interactive) ; 如果不需要定义成命令，这句可以不要。
+  (org-babel-load-file
+  (expand-file-name "my-config/my-config-org-download.org"
+                   user-emacs-directory))
+  (shell-command "mv ~/MyFile/Org/*.jpg ~/MyFile/Org/1.jpg")
+  (org-download-image "~/MyFile/Org/1.jpg")
+  (shell-command "rm ~/MyFile/Org/1.jpg")
+)
+
+(defun org-download-image-myself-png ()
+  (interactive) ; 如果不需要定义成命令，这句可以不要。
+  (org-babel-load-file
+  (expand-file-name "my-config/my-config-org-download.org"
+                   user-emacs-directory))
+  (shell-command "mv ~/MyFile/Org/*.png ~/MyFile/Org/1.png")
+  (org-download-image "~/MyFile/Org/1.png")
+  (shell-command "rm ~/MyFile/Org/1.png")
+)
+)
+#+END_SRC
+** key-chord 模拟 vim 的 autocmd 有待研究
+#+BEGIN_SRC elisp 
+(use-package key-chord
+:straight nil
+:defer 1
+:load-path "~/.emacs.d/lisp"
+:config
+(key-chord-mode 1)
+(defun my-vim-autocmd-find ()
+  (interactive)
+  ;; (evil-normal-state)
+  ;;(search-forward STRING &optional BOUND NOERROR COUNT)
+  (search-forward "<++>" nil t)
+  ;;(evil-backward-char &optional COUNT CROSSLINES NOERROR)
+  ;; (evil-backward-char)
+  ;;(delete-backward-char N &optional KILLFLAG)
+  (delete-backward-char 4)
+  )
+(key-chord-define evil-insert-state-map ";f" 'my-vim-autocmd-find)
+;; (key-chord-define evil-insert-state-map " f" 'my-vim-autocmd-find)
+(key-chord-define evil-insert-state-map "ff" 'my-vim-autocmd-find)
+
+(key-chord-define evil-insert-state-map "mm" 'my-config-markdown-mode)
+;; (key-chord-define evil-insert-state-map " m" 'my-config-markdown-mode)
+
+(key-chord-define evil-insert-state-map ";o" 'my-config-org-syntax)
+;; (key-chord-define evil-insert-state-map " o" 'my-config-org-syntax)
+(key-chord-define evil-insert-state-map "oo" 'my-config-org-syntax)
+
+(key-chord-define evil-insert-state-map ";;" 'my-config-pyim)
+
+(key-chord-define evil-normal-state-map "b," 'next-buffer)
+(key-chord-define evil-normal-state-map "b." 'previous-buffer)
+
+(key-chord-define evil-normal-state-map "qq" 'evil-quit)
+
+;; (key-chord-define meow-insert-state-keymap ";f" 'my-vim-autocmd-find)
+;; (key-chord-define meow-insert-state-keymap ";f" 'my-vim-autocmd-find)
+;; (key-chord-define meow-insert-state-keymap "jk" 'meow-insert-exit)
+
+)
+
+
+(defun my-config-org-syntax ()
+(interactive)
+(org-babel-load-file
+ (expand-file-name "my-config/my-config-org-syntax.org"
+                   user-emacs-directory))
+(hydra-my-config-org-syntax/body)
+)
+#+END_SRC
+** hydra
+#+BEGIN_SRC emacs-lisp
+(use-package hydra
+:straight t
+;; :defer 2
+:config
+(general-define-key
+ ;; :keymaps 'meow-normal-state-keymap
+ :states 'visual
+ "SPC" 'hydra-my-keymaps/body
+)
+(general-define-key
+  ;; :keymaps 'dashboard-mode-map
+ :states 'normal
+  "SPC" 'hydra-my-keymaps/body
+)
+
+(general-define-key
+ :states 'motion
+ "SPC" 'hydra-my-keymaps/body
+)
+
+
+
+(defhydra hydra-my-keymaps (:color pink
+                            :hint nil
+                            :foreign-keys warn ;; 不要使用hydra以外的键
+			    )
+"
+_nc_: 注释插件      _fy_: 翻译插件       _nn_: 文件浏览器
+_SPC_: 单词跳跃     _ib_: Ibuffer        _xf_: counsel-find
+_oc_: Org-capture   _od_: Org-download   _b_: 跳转buffer
+_ow_: org-wiki      _oa_: Org-Agenda     _mdf_: Markdown File
+_pya_: 添加拼音词   _pyd_: 删除拼音词    _mde_: Markdown Edit
+_xk_: kill buffer   _eww_: eww           _mm_: 标记
+_mb_: 移动buffer到其他窗口             _or_: org roam
+_ol_: 居中模式      _wg_: 工作区        _we_: LSP
+"
+  ;; ("bb" hydra-centaur-tabs/body :exit t) ;; centaur-tabs
+  ;; ("bb" hydra-to-buffer/body :exit t) ;; centaur-tabs
+  ("b" hydra-awesome-tab/body :exit t) ;; awesome-tab
+  ("mm" hydra-bm/body :exit t)
+  ("fy" hydra-go-translate/body :exit t)
+  ("ib" hydra-ibuffer/body :exit t)
+  ("nc" hydra-evil-nerd-commenter/body :exit t)
+  ("nn" hydra-neotree/body :exit t)
+  ("SPC" avy-goto-char :exit t) ;; 单词跳跃
+  ("xf" counsel-find-file :exit t) ;; Helm find file
+  ("oc" org-capture :exit t)  ;; org capture 捕获
+  ("od" my-config-org-download :exit t) ;; Org-download
+  ("ow" my-config-org-wiki :exit t)
+  ("oa" org-agenda :exit t)
+  ("ob" org-brain-visualize :exit t)
+  ("or" hydra-org-roam/body :exit t)
+  ("pya" pyim-create-word-from-selection :exit t)
+  ("pyd" pyim-delete-word :exit t) 
+  ("mb" hydra-buffer-move/body :exit t)
+  ("mdf" markdown-mode-start-myself :exit t) ;; Markdown 启动文件
+  ("mde" my-config-markdown-mode :exit t) ;; Markdown 快速输入
+  ("ol" hydra-olivetti-mode/body :exit t)
+  ;; ("mw" hydra-evil-window/body :exit t)
+  ("xk" (kill-buffer (buffer-name)) :exit t) ;; 杀死当前buffer
+  ("eww" hydra-eww/body :exit t)
+  ("wg" hydra-workgroups2/body :exit t)
+  ("we" hydra-lsp-mode/body :exit t)
+  ;; (""  :exit t)
+  ;; (""  :exit t)
+  ;; (""  :exit t)
+  ;; (""  :exit t)
+  ;; (""  :exit t)
+  ;; (""  :exit t)
+  ;; (""  :exit t)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+
+;; ;; =============================================
+;; ;; hydra 模板
+;; (defhydra hydra- (:color pink
+;;                   :hint nil
+;;                   :foreign-keys warn ;; 不要使用hydra以外的键
+;; 				     )
+;; "
+;; "
+;;   (""  "" :exit nil)
+;;   ("q" nil "cancel")
+;;   ("<escape>" nil "cancel")
+;; )
+;; ;; =============================================
+
+
+;;=============================================
+;; hydra 模板
+;; LSP
+(defhydra hydra-lsp-mode (:color pink
+                  :hint nil
+                  :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_rn_: Rename
+_ft_: Allows  _ff_: Fold
+"
+  ("rn" lsp-rename :exit t)
+  ("ft" origami-toggle-all-nodes :exit t)
+  ("ff" origami-recursively-toggle-node :exit t)
+  ;; (""  :exit t)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;=============================================
+
+
+
+;;=============================================
+;; workgroups2 保存当前编辑的缓存区，下次直接打开，光标位置也会保持
+(defhydra hydra-workgroups2 (:color pink
+                  :hint nil
+                  :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_c_: Create  _o_: Open  _k_: Kill
+_r_: Restore
+"
+  ("c" wg-create-workgroup :exit t)
+  ("o" wg-open-workgroup :exit t)
+  ("k" wg-kill-workgroup :exit t)
+  ("r" wg-restore-frames :exit t)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;; =============================================
+
+
+
+;;=============================================
+;; olivetti-mode 居中模式
+(defhydra hydra-olivetti-mode (:color pink
+                  :hint nil
+                  :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_m_: 开/关   _s_: size 
+_h_: 减小    _l_: 增大
+"
+  ("l" olivetti-expand :exit nil)
+  ("h" olivetti-shrink :exit nil)
+  ("m" olivetti-mode :exit nil)
+  ("s" olivetti-set-width :exit nil)
+  ;; (""  "" :exit nil)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;=============================================
+
+
+
+
+;;=============================================
+;; org-roam
+(defhydra hydra-org-roam (:color pink
+                          :hint nil
+                          :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_f_: node find  _i_: node insert
+_c_: capture    _b_: buffer toggle
+_u_: ui         _s_: node sync
+_g_: id create  _t_: add tags
+_ws_: Win start _ls_: Linux start
+"
+  ("f" org-roam-node-find :exit t)
+  ("i" org-roam-node-insert :exit t)
+  ("c" org-roam-capture :exit t)
+  ("b" org-roam-buffer-toggle :exit t)
+  ("u" org-roam-ui-mode :exit t)
+  ("s" org-roam-db-sync-myself :exit t)
+  ("g" org-id-get-create :exit t)
+  ("t" org-roam-tag-add :exit t)
+  ("ws" org-roam-windows-start :exit t)
+  ("ls" org-roam-linux-start :exit t)
+  ;; (""  :exit t)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;=============================================
+
+
+
+
+;;=============================================
+;; awesome-tab
+(defhydra hydra-awesome-tab (:hint nil
+                             :color pink
+                             :foreign-keys warn
+)
+  "
+ ^^^^Fast Move             ^^^^Tab                  
+-^^^^--------------------+-^^^^---------------------
+   ^_k_^   prev group    | _C-a_^^     select first 
+ _h_   _l_  switch tab   | _C-e_^^     select last  
+   ^_j_^   next group    | _C-j_^^     ace jump     
+ ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current 
+ _R_  remove window    | _C-w_ evil-window
+ _s_  split window     | _v_ vsplit window
+-^^^^--------------------+-^^^^---------------------
+
+  ^^Search            ^^Misc
++-^^----------------+-^^---------------------------
+| _b_ search buffer | _K_   kill buffer
+| _g_ search group  | _C-S-k_ kill others in group
+| ^^                | ^^
++-^^----------------+-^^---------------------------
+"
+  ("h" awesome-tab-backward-tab)
+  ("j" awesome-tab-forward-group)
+  ("k" awesome-tab-backward-group)
+  ("l" awesome-tab-forward-tab)
+  ("0" winum-select-window-by-number)
+  ("1" winum-select-window-1)
+  ("2" winum-select-window-2)
+  ("3" winum-select-window-3)
+  ("4" winum-select-window-4)
+  ("5" winum-select-window-5)
+  ("6" winum-select-window-6)
+  ("7" winum-select-window-7)
+  ("8" winum-select-window-8)
+  ("9" winum-select-window-9)
+  ("C-w" hydra-evil-window/body :exit t)
+  ("R" evil-window-delete :exit nil)
+  ("C-a" awesome-tab-select-beg-tab)
+  ("C-e" awesome-tab-select-end-tab)
+  ("C-j" awesome-tab-ace-jump)
+  ("C-h" awesome-tab-move-current-tab-to-left)
+  ("C-l" awesome-tab-move-current-tab-to-right)
+  ("b" ivy-switch-buffer :exit t)
+  ("g" awesome-tab-counsel-switch-group)
+  ("s" split-window-below)
+  ("v" split-window-right)
+  ("K" kill-current-buffer)
+  ("C-S-k" awesome-tab-kill-other-buffers-in-current-group)
+  ("q" nil "quit")
+  ("<escape>" nil "quit"))
+;;=============================================
+
+;;=============================================
+;; to-buffer
+(defhydra hydra-to-buffer (:color pink
+                              :hint nil
+                              :foreign-keys nil ;; 不要使用hydra以外的键
+				     )
+"
+_j_: 下一个   _k_: 上一个
+"
+  ("j" next-buffer :exit nil)
+  ("k" previous-buffer :exit nil)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;=============================================
+
+
+
+;;=============================================
+;; evil-exit
+(defhydra hydra-evil-exit (:color pink
+                              :hint nil
+                              :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+  ("q" evil-quit "当前" :exit t)
+  ("w" evil-save-and-quit "全部" :exit t)
+  ("a" evil-record-macro "录制" :exit t)
+  ("x" hydra-evil-exit/nil "取消" :exit t)
+  ;; (""  "" :exit nil)
+  ;; ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;=============================================
+
+
+;;=============================================
+;; evil-window 模板
+(general-define-key
+  ;; :keymaps 'dashboard-mode-map
+ :states 'normal
+  "C-w" 'hydra-evil-window/body
+)
+(defhydra hydra-evil-window (:color pink
+                              :hint nil
+                              :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_s_: 平行分割      _v_: 垂直分割
+_j_: 向下          _k_: 向上 
+_h_: 向右          _l_: 向左
+_d_: 删除当前窗口
+"
+  ("s" evil-window-split :exit nil)
+  ("v" evil-window-vsplit :exit nil)
+  ("j" evil-window-down :exit nil)
+  ("k" evil-window-up :exit nil)
+  ("l" evil-window-right :exit nil)
+  ("h" evil-window-left :exit nil)
+  ("d" evil-window-delete :exit nil)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;=============================================
+
+
+
+;;=============================================
+;; buffer-move 模板
+(defhydra hydra-buffer-move (:color pink
+                              :hint nil
+                              :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_j_: 向下移动   _k_: 向下移动
+_h_: 向左移动   _l_: 向右移动
+"
+  ("j" buf-move-down :exit nil)
+  ("k" buf-move-up :exit nil)
+  ("l" buf-move-right :exit nil)
+  ("h" buf-move-left :exit nil)
+  ;; (""  "" :exit nil)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;; =============================================
+
+
+;;=============================================
+;; bm 插件
+(defhydra hydra-bm (:color pink
+                              :hint nil
+                              :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_j_: 下一个  _k_: 上一个        _m_: 标记
+_s_: 查看当前文件的标记       _v_: 查看所有文件的标记     
+_r_: 重载当前文件的标记
+"
+  ("j" bm-next  :exit nil)
+  ("k" bm-previous  :exit nil)
+  ("m" bm-toggle  :exit t)
+  ("s" bm-show  :exit t)
+  ("v" bm-show-all  :exit t)
+  ("r" bm-buffer-restore  :exit nil)
+;;   (""  "" :exit nil)
+;;   (""  "" :exit nil)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;=============================================
+
+
+
+
+;; eww 浏览器
+(defhydra hydra-eww (:color pink
+                     :hint nil
+                              ;; :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_l_: 后退          _r_: 前进             _g_: 重载
+_w_: Copy url      _d_: Download         _H_: 历史
+_b_: 添加书签      _B_: 显示书签列表     _q_: 退出浏览器
+_G_: 重新输入链接  _&_: 用外部浏览器打开
+_v_: 源码模式      _C_: 显示 Cookie
+_o_: eww           _n_: 向下滑动         _p_: 向上滑动
+_j_: 下5行         _k_: 上5行
+"
+  ("l" eww-back-url :exit nil)
+  ("r" eww-forward-url :exit nil)
+  ("g" eww-reload :exit nil)
+  ("w" eww-copy-page-url :exit nil)
+  ("d" eww-download :exit nil)
+  ("H" eww-list-histories :exit nil)
+  ("b" eww-add-bookmark :exit nil)
+  ("B" eww-list-bookmarks :exit nil)
+  ("&" eww-browse-with-external-browser :exit nil)
+  ("v" eww-view-source :exit nil)
+  ("C" url-cookie-list :exit nil)
+  ("G" eww-open-url :exit nil)
+  ("o" eww :exit nil)
+  ("n" (evil-scroll-page-down 1) :exit nil)
+  ("p" (evil-scroll-page-up 1) :exit nil)
+  ("q" quit-window :exit nil)
+  ("k" (evil-previous-line 5) :exit nil)
+  ("j" (evil-next-line 5) :exit nil)
+  ;; (""  :exit nil)
+  ;; ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+
+;;=============================================
+;; centaur-tabs
+(defhydra hydra-centaur-tabs (:color pink
+                              :hint nil
+                              :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+  ("j" centaur-tabs-forward "下一个" :exit nil)
+  ("k" centaur-tabs-backward "上一个" :exit nil)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+
+
+;; ;;=============================================
+;; ;; Ibuffer
+;; (defhydra hydra-ibuffer (:color pink
+;;                          :hint nil
+;;                          :foreign-keys warn ;; 不要使用hydra以外的键
+;; 			 )
+;; "
+;; _b_: Ibuffer       _t_: Jump buffer      _T_: toggle-marks
+;; _j_: 下一行        _k_: 上一行           _u_: unmark
+;; _RET_: 打开buffer  _g_: 更新buffer状态
+;; _d_: 删除标记      _m_: 标记             _SPC_: 跳转
+;; _D_: 删除buffer    _S_: do-save
+;; "
+;;   ("b" ibuffer :exit nil)
+;;   ("t" ibuffer-jump-to-buffer :exit t)
+;;   ("j" ibuffer-forward-line :exit nil)
+;;   ("k" ibuffer-backward-line :exit nil)
+;;   ("d" ibuffer-mark-for-delete :exit nil)
+;;   ("RET" ibuffer-visit-buffer :exit t)
+;;   ("o" ibuffer-visit-buffer :exit t)
+;;   ("g" ibuffer-update :exit nil)
+;;   ("m" ibuffer-mark-forward :exit nil)
+;;   ("D" ibuffer-do-delete :exit nil)
+;;   ("S" ibuffer-do-delete :exit nil)
+;;   ("T" ibuffer-toggle-marks :exit nil)
+;;   ("u" ibuffer-unmark-forward :exit nil)
+;;   ("SPC" avy-goto-char :exit nil)
+;;   ;; (""  :exit t)
+;;   ;; (""  :exit t)
+;;   ;; (""  :exit t)
+;;   ("q" nil "cancel")
+;;   ("<escape>" nil "cancel")
+;; )
+;;===============================================
+;;====== neotree 文件浏览器
+(defhydra hydra-neotree (:color pink
+                         :hint nil
+                         :foreign-keys warn ;; 不要使用hydra以外的键
+			 )
+"
+_j_: 下一行           _k_: 上一行           _o_: 打开
+_n_: 打开文件浏览器   _x_: 关闭             _r_: 刷新
+_a_: 窗口             _h_: 查看隐藏文件     _u_: 上级目录
+_md_: 删除            _mc_: 复制            _O_: 递归打开目录
+_ma_: 创建新          _cd_: 改变根目录
+_SPC_: 跳跃           _f_: 向下滚动         _b_: 向上滚动
+"
+  ("j" neotree-next-line)
+  ("k" neotree-previous-line)
+  ("o" neotree-enter)
+  ("RET" neotree-enter)
+  ("n" neotree-toggle)
+  ("x" neotree-hide :exit t)
+  ("r" neotree-refresh)
+  ("a" neotree-stretch-toggle)
+  ("u" neotree-select-up-node)
+  ("h" neotree-hidden-file-toggle)
+  ("O" neotree-open-dir-recursive)
+  ("md" neotree-delete-node)
+  ("mc" neotree-copy-node)
+  ("mr" neotree-remane-node)
+  ("ma" neotree-create-node)
+  ("cd" neotree-change-root)
+  ("SPC" avy-goto-char)
+  ("f" evil-scroll-page-down)
+  ("b" evil-scroll-page-up)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;==============================
+(use-package beginner-translate
+:straight nil
+:defer 3
+:load-path "~/.emacs.d/lisp"
+)
+;; 翻译插件 go-translate
+(defhydra hydra-go-translate (:color pink
+                              :hint nil
+                              :foreign-keys warn ;; 不要使用hydra以外的键
+			      )
+  ("y" gts-do-translate-my "翻译")
+  ("x" delete-window "关闭翻译窗口":exit t)
+  ("t" beginner-translate-main "状态栏翻译":exit t)
+  ("s" sdcv-search-pointer-my "sdcv翻译" :exit t)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+;;==============================
+;;======= 注释插件 evil-nerd-commenter
+(defhydra hydra-evil-nerd-commenter (:color pink
+                                     :hint nil
+                                     :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_i_: 注释or取消注释   _l_: 快速注释or取消
+_p_: 段落注释         _c_: 复制并注释
+"
+  ("i" evilnc-comment-or-uncomment-lines :exit t)
+  ("l" evilnc-quick-comment-or-uncomment-to-the-line :exit t)
+  ("c" evilnc-copy-and-comment-lines :exit t)
+  ("p" evilnc-comment-or-uncomment-paragraphs :exit t)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
+
+
+
+
+
+
+
+
+
+);; 包结尾
+#+END_SRC
+
+** pretty-hydra
+#+BEGIN_SRC emacs-lisp
+(use-package pretty-hydra
+  :defer 2
+  :straight t
+  :bind ("<f6>" . toggles-hydra/body)
+  :init
+  (pretty-hydra-define toggles-hydra (:title "Toggles" :color amaranth :quit-key "q" :foreign-keys warn)
+
+    ("基础"
+     (("es" evil-escape-mode "evil-escape" :toggle t)
+      ("ln" global-linum-mode "行号" :toggle t)
+      ("lr" linum-relative-mode "相对行号" :toggle t)
+      ("em" emojify-mode "表情符号" :toggle t)
+      ;; ("pj" pyim-convert-string-at-point "pyim金手指" :toggle t :exit t)
+      ;; ("py" my-config-pyim "pyim" :toggle t :exit t)
+      ;; ("pi" pyim-isearch-mode "拼音搜索文字" :toggle t :exit t)
+      ("oj" org-download-image-myself-jpg "Termux-jpg" :toggle t :exit t)
+      ("op" org-download-image-myself-png "Termuex-png" :toggle t :exit t)
+      ;; ("cnd" cnfonts-set-font "Org字体对齐" :toggle t :exit t)
+      ;; ("cnm" cnfonts-set-font-and-mode-myself "Org字体对齐" :toggle t :exit t)
+      ;; ("cnm" cnfonts-mode "Org字体对齐模式" :toggle t :exit t)
+      ("cnp" pangu-spacing-mode "中英文混版, 美化" :toggle t :exit t)
+      ("<escape>" nil "cancel")
+      ("q" nil "cancel")
+      )
+      )
+      )
+)
+
+
+
+
+#+END_SRC
+
+** Test
+#+BEGIN_SRC emacs-lisp
+  ;;;; 检查启动时间
+  ;; Use a hook so the message doesn't get clobbered by other messages.
+    ;; (add-hook 'emacs-startup-hook
+    ;;     (lambda ()
+    ;; 	  (message "Emacs ready in %s with %d garbage collections."
+    ;; 	      (format "%.2f seconds"
+    ;; 		  (float-time
+    ;; 		      (time-subtract after-init-time before-init-time)))
+    ;; 	  gcs-done)))
+
+
+
+  ;; ;; ;; 加密
+  ;; ;; (require 'org-crypt)
+  ;; ;; ;; 防止 crypt 标签使用继承，这样加密数据中就没有加密数据。
+  ;; ;; (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+  ;; ;; ;; 设置 GPG 密钥以用于加密
+  ;; ;; (setq org-crypt-key "821280F4")
+  ;; ;; ;; 保存前加密所有条目。
+  ;; ;; (org-crypt-use-before-save-magic)
+  ;; ;; ;; 在解密条目之前禁用当前缓冲区的自动保存模式。
+  ;; ;; (setq org-crypt-disable-auto-save t)
+  ;; ;; ;; 将 crypt 设置为 Org 文件中可用的默认标签。
+  ;; ;; (setq org-tag-alist '(("crypt" . ?c)))
+
+  ;; ;; 多光标同时编辑文本, 还没有弄明白
+  ;; (use-package multiple-cursors
+  ;; :straight t
+  ;; :defer 2
+  ;; :config
+  ;; )
+
+
+  ;; ;; (use-package english-teacher
+  ;; ;;   :load-path "~/.emacs.d/plugins/english-teacher.el"
+  ;; ;;   :hook ((Info-mode
+  ;; ;;           elfeed-show-mode
+  ;; ;;           eww-mode
+  ;; ;;           Man-mode
+  ;; ;;           Woman-Mode) . english-teacher-follow-mode)
+  ;; ;;   :config
+  ;; ;;   (setq english-teacher-show-result-function 'english-teacher-eldoc-show-result-function)
+  ;; ;;   (setq english-teacher-backend 'google) ; 'youdao bing google baidu
+  ;; ;;   )
+  ;; (use-package translate-mode
+  ;; :defer 2
+  ;; :load-path "~/.emacs.d/lisp"
+  ;; )
+  ;; ;; (add-hook 'dashboard-mode-hook '(lambda () (evil-insert 1)))
+  ;; (use-package cnhl
+  ;; :load-path "~/.emacs.d/cnhl"
+  ;; )
+
+  ;; 退出 Emacs 提醒
+  ;; (setq confirm-kill-emacs 'y-or-n-p)
+  ;; (use-package vterm-toggle
+  ;; :defer 2
+  ;; :straight nil
+  ;; :load-path "~/.emacs.d/lisp"
+  ;; )
+  ;; (use-package chinese-yasdcv
+  ;; ;; :defer 5
+  ;; :config
+  ;; (setq yasdcv-sdcv-dicts
+  ;;   '(
+  ;;     ("lanconghy"  "懒虫简明汉英词典" nil t)
+  ;;     ("lancongyh"  "懒虫简明英汉词典" nil t)
+  ;;   ))
+  ;; )
+
+
+
+#+END_SRC

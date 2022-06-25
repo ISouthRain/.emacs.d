@@ -1,0 +1,28 @@
+# key: hugo
+# name: hugo
+# --
+---
+# 标题
+title: "$1"
+# 创建时间
+date: `(format-time-string "%Y-%m-%d")`
+# 最后更新的时间
+lastmod: `(format-time-string "%Y-%m-%d")`
+# tags
+tags: ["${3:Tags1 Tags2}"]
+# 收录于/分类
+categories: ["${4:分类1 分类2}"]
+# 是否为草稿
+draft: false
+# 目录
+toc: true
+# 置顶文章？
+# weight: 1
+# 网页描述
+description: "${2:这文章是用来Gnus的}"
+# 网页关键词
+# keywords:
+# - Emacs
+# [Home](Home.md)
+---
+

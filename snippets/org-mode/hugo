@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: hugo
+# key: hugo
+# --
+#+TITLE: $1
+#+OPTIONS: author:nil
+#+HUGO_BASE_DIR: ~/Ubuntu/ubuntu-fs/root/Hugo
+#+HUGO_SECTION: posts/
+#+HUGO_CATEGORIES: ${2:分类1 分类2}
+#+HUGO_TAGS: ${3:Tags1 Tags2}
+#+hugo_front_matter_format: yaml
+#+DATE: `(format-time-string "%Y-%m-%d")`
+#+HUGO_CUSTOM_FRONT_MATTER: :toc true
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_DRAFT: false
+#+HUGO_WEIGHT: 1
+#+SETUPFILE: ~/.emacs.d/org-html-theme-list/org-joshua/style.setup
+
+$0

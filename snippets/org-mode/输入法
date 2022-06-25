@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: 输入法
+# key: ;
+# --
+`(toggle-input-method)`

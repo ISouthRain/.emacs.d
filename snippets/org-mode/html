@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: html
+# key: html
+# --
+${2:$$(yas-choose-value '("#+SETUPFILE: ~/.emacs.d/org-html-theme-list/org-joshua/style.setup" "#+SETUPFILE: ~/.emacs.d/org-html-theme-list/org/style.setup" "#+SETUPFILE: ~/.emacs.d/org-html-theme-list/org-bigblow/theme.setup" "#+SETUPFILE: ~/.emacs.d/org-html-theme-list/org-iv/theme.setup" "#+SETUPFILE: ~/.emacs.d/org-html-theme-list/org-readthedocs/theme.setup" "#+SETUPFILE: ~/.emacs.d/org-html-theme-list/org-note/style.setup"))}$0
