@@ -61,8 +61,9 @@
 (setq mml-default-directory "~/.emacs.d/Gnus/.gnus/")                            ;附件的存储位置
 
 ;; Set personal information and password
+(setq epg-gpg-program "gpg2")
 (require 'auth-source);; probably not necessary
-(setq auth-sources '("~/.emacs.d/Gnus/.authinfo"))
+(setq auth-sources '("~/.emacs.d/.authinfo.gpg"))
 (setq user-mail-address "isouthrain@gmail.com"
       user-full-name "ISouthRain")
 

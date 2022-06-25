@@ -81,6 +81,7 @@
 ;; bongo emms
 ;; (require 'init-player)
 ;; EAF
-(require 'init-eaf)
+;; (require 'init-eaf)
+
 (load-file custom-file)
 );; Cache Max End, Also the end of the package.
