@@ -1,3 +1,4 @@
+network-security.data
 .stfolder/
 auto-save-list/
 elpa/
@@ -16,4 +17,3 @@ bookmarks
 org-roam.db
 recentf
 smex-items
-network-security.data
