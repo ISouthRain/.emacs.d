@@ -1,4 +1,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org 标题加密， 只需添加 :crypt:
+(use-package org-crypt
+  :defer 4
+  :ensure nil
+  :config
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance '("crypt"))
+;; GPG ID, 解密一个文件可以知道这个ID
+(setq org-crypt-key "0EF4E70FDD97880B") 
+(setq auto-save-default nil)
+ )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ox-hugo 导出 hugo
 (use-package ox-hugo
   :ensure t
@@ -58,7 +70,7 @@
   :config
   (setq deft-recursive t)
   (setq deft-use-filename-as-title t)
-  (setq deft-extensions '("txt" "tex" "org"))
+  (setq deft-extensions '("txt" "tex" "org" "gpg"))
   (when freedom/is-windows
   (setq deft-directory "F:\\MyFile\\Org"))
   (when freedom/is-darwin
@@ -124,13 +136,18 @@
       (concat "${type:15} ${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 (org-roam-db-autosync-mode)
 (setq org-roam-database-connector 'sqlite)
+;; (setq org-roam-capture-templates '(
+;;                                    ("d" "default" plain
+;;                                     "%?"
+;;                                     :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+;;                                                        "#+title: ${title}\n"
+;;                                     :unnarrowed t) )))
 (setq org-roam-capture-templates '(
                                    ("d" "default" plain
                                     "%?"
-                                    :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                                                       "#+title: ${title}\n"
-                                    :unnarrowed t) )))
-
+                                    :target (file+head "${slug}.org.gpg"
+                                                       "#+title: ${title}\n")
+                                    :unnarrowed t)))
 
 ;;=============================================
 ;; org-roam

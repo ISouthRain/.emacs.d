@@ -82,6 +82,6 @@
 ;; (require 'init-player)
 ;; EAF
 ;; (require 'init-eaf)
-
+(require 'init-epg)
 (load-file custom-file)
 );; Cache Max End, Also the end of the package.

@@ -1,0 +1,36 @@
+(defun freedom/encrypt-open-file ()
+  (interactive)
+  ;; (shell-command (format "gpg -e -r Epiphany %s.%s" (file-name-base (buffer-file-name))))
+  (when freedom/is-windows
+  (shell-command (format "del %s.gpg" (buffer-name)))
+    )
+  (when (not freedom/is-windows)
+  (shell-command (format "rm %s" (buffer-name)))
+    )
+  (shell-command (format "gpg -e -r Epiphany %s" (buffer-name)))
+  (find-file (format "%s.gpg" (buffer-name)))
+  )
+
+(defun freedom/encrypt-delete-file ()
+  (interactive)
+  ;; (shell-command (format "gpg -e -r Epiphany %s.%s" (file-name-base (buffer-file-name))))
+  (when freedom/is-windows
+  (shell-command (format "del %s.gpg" (buffer-name)))
+    )
+  (when (not freedom/is-windows)
+  (shell-command (format "rm %s" (buffer-name)))
+    )
+  (shell-command (format "gpg -e -r Epiphany %s" (buffer-name)))
+  (find-file (format "%s.gpg" (buffer-name)))
+  (shell-command (format "del %s" (buffer-name)))
+  )
+
+
+(defun freedom/decrypt-output-file ()
+  (interactive)
+  ;; (shell-command (format "gpg -o %s" (file-name-base (buffer-file-name))) + (format "-d %s" (buffer-name)))
+  (shell-command "del %s" (buffer-name))
+  (shell-command (format "gpg -o %s -d %s" (file-name-base (buffer-file-name)) (buffer-name)))
+  )
+
+(provide 'init-epg)
