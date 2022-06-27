@@ -1,2 +1,7 @@
 * Introduce
   Keep simple and stupid !
+* Support OS
+  *Windows*
+  *Linux*
+  *MacOSX*
+  *Termux*
