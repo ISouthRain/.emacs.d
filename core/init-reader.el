@@ -3,7 +3,7 @@
 (use-package elfeed
 :ensure t
 :bind (:map elfeed-search-mode-map
-            ("q" . elfeed-quit-my))
+            ("q" . freedom/elfeed-quit))
 :init (setq url-queue-timeout 30
             elfeed-db-directory (expand-file-name "emacs/.elfeed" user-emacs-directory)
 	    ;; elfeed-show-entry-switch #'pop-to-buffer
@@ -21,13 +21,13 @@
 (elfeed-org)
 ;;(setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
 (setq rmh-elfeed-org-files (list (expand-file-name "elfeed.org" user-emacs-directory)))
-(defun elfeed-my ()
+(defun freedom/elfeed ()
   "Wrapper to load the elfeed db from disk before opening"
   (interactive)
   (elfeed-db-load)
   (elfeed)
   (elfeed-search-update--force))
-(defun elfeed-quit-my ()
+(defun freedom/elfeed-quit ()
   "Wrapper to save the elfeed db to disk before burying buffer"
   (interactive)
   (elfeed-db-save)

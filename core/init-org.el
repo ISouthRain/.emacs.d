@@ -9,7 +9,14 @@
 ;; GPG ID, 解密一个文件可以知道这个ID
 (setq org-crypt-key "0EF4E70FDD97880B") 
 (setq auto-save-default nil)
- )
+;; 解决 ^M 解密问题
+(defun freedom/org-decrypt-entry ()
+  "Replace DOS eolns CR LF with Unix eolns CR"
+  (interactive)
+  (goto-char (point-min))
+    (while (search-forward "\r" nil t) (replace-match ""))
+  (org-decrypt-entry))
+)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ox-hugo 导出 hugo
 (use-package ox-hugo
