@@ -18,3 +18,4 @@ org-roam.db
 recentf
 smex-items
 *.asc
+eln-cache/
