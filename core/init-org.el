@@ -635,8 +635,8 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 
 	 ;;笔记
         ;; ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "2022年6月")
-        ("n" "笔记" plain (file "~/MyFile/Org/Note.org")
-	 "** %^{主标题}\n  :内容: %^{内容} \n  :时间: %T%?" :kill-buffer t :immediate-finish t)
+        ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "Note")
+	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
 	 
 	 ;;消费
 	("zd" "账单" plain (file+function "~/MyFile/Org/Bill.org" find-month-tree)
@@ -671,7 +671,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 "*** [#%^{优先级}] %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n" :kill-buffer t :immediate-finish t)
 	 
 	 ;;笔记
-        ("n" "笔记" entry (file+headline "~/Desktop/MyFile/Org/Note.org" "2022年6月")
+        ("n" "笔记" entry (file+headline "~/Desktop/MyFile/Org/Note.org" "Note")
 	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
 	 
 	 ;;消费
@@ -708,7 +708,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 "*** [#%^{优先级}] %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n" :kill-buffer t :immediate-finish t)
 	 
 	 ;;笔记
-        ("n" "笔记" entry (file+headline "F:\\MyFile\\Org\\Note.org" "2022年6月")
+        ("n" "笔记" entry (file+headline "F:\\MyFile\\Org\\Note.org" "Note")
 	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
 
 	("y" "语录" entry (file+headline "F:\\Hugo\\content\\Quotation.zh-cn.md" "2022")
