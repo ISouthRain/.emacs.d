@@ -635,7 +635,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 
 	 ;;笔记
         ;; ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "2022年6月")
-        ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "Note")
+        ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "Note.org")
 	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
 	 
 	 ;;消费
