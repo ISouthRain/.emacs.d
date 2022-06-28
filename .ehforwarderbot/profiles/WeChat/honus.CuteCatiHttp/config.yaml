@@ -1,5 +1,0 @@
-api_url: "http://117.50.180.210:8090"               #可爱猫运行所在ip + port
-self_url: "http://193.53.128.42:18888"             #efb从端运行所在ip + port
-receive_self_msg: False                         #接收自己发送的消息，只通知消息类型，默认为False
-robot_wxid: "wxid_8j6pxsjdngno22"                                 #配置可爱猫时获取的 robot_wxid
-# access_token: ""                               #配置可爱猫时获取的 Authorization
