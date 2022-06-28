@@ -1,7 +1,9 @@
 * Introduce
+  🎉Freedom and Peace🎉  
   Keep simple and stupid !
-* Support OS
-  *Windows*
-  *Linux*
-  *MacOSX*
-  *Termux*
+* Feature
+** Support OS
+  *Windows*  
+  *Linux*  
+  *MacOSX*  
+  *Termux*  
