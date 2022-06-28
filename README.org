@@ -1,9 +1,13 @@
 * Introduce
-  🎉Freedom and Peace🎉  
+  🎉Freedom and Peace🎉
+  
   Keep simple and stupid !
 * Feature
 ** Support OS
-  *Windows*  
-  *Linux*  
-  *MacOSX*  
+  *Windows*
+  
+  *Linux*
+  
+  *MacOSX*
+  
   *Termux*  
