@@ -88,6 +88,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-roam
+(when (executable-find "gcc")
 (use-package org-roam
   :defer 3
   :ensure t
@@ -183,6 +184,7 @@ _d_: deft
   ("<escape>" nil "cancel")
 )
 ;;=============================================
+);; use-package
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -649,8 +651,8 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ;;Org-protocol网页收集
 	 ("w" "网页收集" entry (file "~/MyFile/Org/WebCollection.org")
 	 "* [[%:link][%:description]] \n %U \n %:initial \n")
-	("b" "Bookmarks" plain (file+headline "~/MyFile/Org/Bookmarks.org" "新加书签")
-	 "+ %?" :kill-buffer t)
+	("b" "Bookmarks" plain (file+headline "~/MyFile/Org/Bookmarks.org" "NewBookmarks")
+	 "* %?" :kill-buffer t)
 	))
 )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -685,8 +687,8 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ;;Org-protocol网页收集
 	 ("w" "网页收集" entry (file "~/Desktop/MyFile/Org/WebCollection.org")
 	 "* [[%:link][%:description]] \n %U \n %:initial \n")
-	("b" "Bookmarks" plain (file+headline "~/Desktop/MyFile/Org/Bookmarks.org" "新加书签")
-	 "+ %?" :kill-buffer t :immediate-finish t)
+	("b" "Bookmarks" plain (file+headline "~/Desktop/MyFile/Org/Bookmarks.org" "NewBookmarks")
+	 "* %?" :kill-buffer t :immediate-finish t)
 	))
 )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -726,8 +728,8 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ("w" "网页收集" entry (file "F:\\MyFile\\Org\\WebCollection.org")
 	 "* [[%:link][%:description]] \n %U \n %:initial \n" :kill-buffer t :immediate-finish t)
 
-	("b" "Bookmarks" plain (file+headline "F:\\MyFile\\Org\\Bookmarks.org" "新加书签")
-	 "+ %?" :kill-buffer t)
+	("b" "Bookmarks" plain (file+headline "F:\\MyFile\\Org\\Bookmarks.org" "NewBookmarks")
+	 "* %?" :kill-buffer t)
 	))
 )
 
