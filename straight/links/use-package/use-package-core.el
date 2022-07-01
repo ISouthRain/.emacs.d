@@ -1,0 +1,1 @@
+c:/Users/Jack/AppData/Roaming/.emacs.d/straight/repos/use-package/use-package-core.el

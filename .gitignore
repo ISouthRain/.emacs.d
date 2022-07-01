@@ -1,11 +1,10 @@
 network-security.data
 .stfolder/
 auto-save-list/
-elpa/
 emacs/
+elpa/
 emojis/
 .authinfo
-straight/
 url/
 var/
 .mbsyncrc

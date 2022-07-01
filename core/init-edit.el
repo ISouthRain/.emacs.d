@@ -25,7 +25,7 @@
 ;; yasnippet 补全
 (use-package yasnippet
 :defer 2
-:straight nil
+:ensure nil
 :load-path "~/.emacs.d/core/plugins"
 :hook (prog-mode . yas-minor-mode)
 :config
@@ -131,7 +131,7 @@ _r_: Restore
 ;; linum-relative 相对行号
 (use-package linum-relative
 :defer 3
-:straight nil
+:ensure nil
 :load-path "~/.emacs.d/core/plugins"
 )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
