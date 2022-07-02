@@ -47,6 +47,13 @@
 
 ;;隐藏菜单栏工具栏滚动条
 (menu-bar-mode 0)
+(when freedom/is-linux
+  (when (not freedom/is-termux)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+(tooltip-mode 0) 
+(message "Hello Iam , 外交健康将我爱你们 ")
+    ))
 (when (string= "windows-nt" system-type)
 (tool-bar-mode 0)
 ;; 滚动条

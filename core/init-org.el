@@ -7,7 +7,8 @@
 (org-crypt-use-before-save-magic)
 (setq org-tags-exclude-from-inheritance '("crypt"))
 ;; GPG ID, 解密一个文件可以知道这个ID
-(setq org-crypt-key "0EF4E70FDD97880B") 
+;; (setq org-crypt-key "0EF4E70FDD97880B")
+(setq org-crypt-key "885AC4F89BA7A3F8")
 (setq auto-save-default nil)
 ;; 解决 ^M 解密问题
 (defun freedom/org-decrypt-entry ()

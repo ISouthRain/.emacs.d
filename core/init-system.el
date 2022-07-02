@@ -35,5 +35,25 @@
 ;; 关闭 native-comp 错误警告
 ;; Silence compiler warnings as they can be pretty disruptive
 (setq comp-async-report-warnings-errors nil)
+(defun freedom/sudo-this-file ()
+  "Open the current file as root."
+  (interactive)
+  (find-file
+   (freedom--sudo-file-path
+    (or buffer-file-name
+        (when (or (derived-mode-p 'dired-mode)
+                  (derived-mode-p 'wdired-mode))
+          default-directory)))))
+(defun freedom--sudo-file-path (file)
+  (let ((host (or (file-remote-p file 'host) "localhost")))
+    (concat "/" (when (file-remote-p file)
+                  (concat (file-remote-p file 'method) ":"
+                          (if-let (user (file-remote-p file 'user))
+                              (concat user "@" host)
+                            host)
+                          "|"))
+            "sudo:root@" host
+            ":" (or (file-remote-p file 'localname)
+                    file))))
 
 (provide 'init-system)

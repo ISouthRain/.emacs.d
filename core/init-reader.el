@@ -69,8 +69,8 @@
 
 ;; ;; 收取首要邮件来源
 (setq gnus-select-method
-      '(nnimap "Gmail"
-	       (nnimap-address "193.53.127.42")  ; it could also be imap.googlemail.com if that's your server.
+      '(nnimap "QQ"
+	       (nnimap-address "imap.qq.com")  ; it could also be imap.googlemail.com if that's your server.
 	       ;; (nnimap-address "imap.gmail.com")  ; it could also be imap.googlemail.com if that's your server.
 	       ;; (nnimap-address "imap.qq.com")  ; it could also be imap.googlemail.com if that's your server.
 	       (nnimap-server-port "993")
@@ -89,8 +89,7 @@
 ;;                  :subdirs ("cur" "new" "tmp"))))   ;本地邮件子目录划分
 
 ;; 设置邮件发送方法
-(setq smtpmail-smtp-server "193.53.127.42"
-;; (setq smtpmail-smtp-server "smtp.gmail.com"
+(setq smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-stream-type 'ssl
       smtpmail-smtp-service 465
       ;; 发送方法
