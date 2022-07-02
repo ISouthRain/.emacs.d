@@ -652,9 +652,10 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ("w" "网页收集" entry (file "~/MyFile/Org/WebCollection.org")
 	 "* [[%:link][%:description]] \n %U \n %:initial \n")
 	("b" "Bookmarks" plain (file+headline "~/MyFile/Org/Bookmarks.org" "NewBookmarks")
-	 "* %?" :kill-buffer t)
+	 "+ %(message "Jack")" :kill-buffer t)
 	))
 )
+;; https://isouthrain.github.io
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-protocol-capture-html Capture Configuration darwin
 (when (string= "darwin" system-type)

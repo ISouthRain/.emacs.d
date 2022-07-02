@@ -1,0 +1,3 @@
+#+BEGIN_SRC elisp
+pkg install clang sqlite3
+#+END_SRC
