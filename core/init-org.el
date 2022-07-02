@@ -1,4 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org 标题加密， 只需添加 :crypt:
 (use-package org-crypt
   :defer 4
@@ -619,6 +619,10 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 :config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-protocol-capture-html Capture Configuration Linux
+(defun org-web-tools-insert-link-for-clipboard-url ()
+  "Extend =org-web-tools-inster-link-for-url= to take URL from clipboard or kill-ring"
+  (interactive)
+  (org-web-tools--org-link-for-url (org-web-tools--get-first-url)))
 (when (string= "gnu/linux" system-type)
 (setq org-capture-templates
       '(
@@ -651,8 +655,8 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ;;Org-protocol网页收集
 	 ("w" "网页收集" entry (file "~/MyFile/Org/WebCollection.org")
 	 "* [[%:link][%:description]] \n %U \n %:initial \n")
-	("b" "Bookmarks" plain (file+headline "~/MyFile/Org/Bookmarks.org" "NewBookmarks")
-	 "+ %(message "Jack")" :kill-buffer t)
+	("b" "Bookmarks" plain (file+headline "~/MyFile/Org/Bookmarks.org" "New-Bookmarks")
+	 "+  %?" :kill-buffer t)
 	))
 )
 ;; https://isouthrain.github.io
@@ -688,8 +692,8 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ;;Org-protocol网页收集
 	 ("w" "网页收集" entry (file "~/Desktop/MyFile/Org/WebCollection.org")
 	 "* [[%:link][%:description]] \n %U \n %:initial \n")
-	("b" "Bookmarks" plain (file+headline "~/Desktop/MyFile/Org/Bookmarks.org" "NewBookmarks")
-	 "* %?" :kill-buffer t :immediate-finish t)
+	("b" "Bookmarks" plain (file+headline "~/Desktop/MyFile/Org/Bookmarks.org" "New-Bookmarks")
+	 "+  %?" :kill-buffer t)
 	))
 )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -729,8 +733,8 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ("w" "网页收集" entry (file "F:\\MyFile\\Org\\WebCollection.org")
 	 "* [[%:link][%:description]] \n %U \n %:initial \n" :kill-buffer t :immediate-finish t)
 
-	("b" "Bookmarks" plain (file+headline "F:\\MyFile\\Org\\Bookmarks.org" "NewBookmarks")
-	 "* %?" :kill-buffer t)
+	("b" "Bookmarks" plain (file+headline "F:\\MyFile\\Org\\Bookmarks.org" "New-Bookmarks")
+	 "+  %?" :kill-buffer t)
 	))
 )
 

@@ -32,13 +32,13 @@
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; basic
+;;; basic
 (require 'init-custom)
 (require 'init-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Your configuration
-(require 'init-basic)
 (require 'init-system)
+(require 'init-basic)
 (require 'init-calendar)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hl-line paren symbol-overlay highlight-indent-guides rainbow-mode diff-hl hl-todo volatile-highlights pulse

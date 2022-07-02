@@ -50,7 +50,7 @@ _ol_: 居中模式          _wg_: workgroups2     _we_: LSP
   ("nc" hydra-evil-nerd-commenter/body :exit t)
   ("nn" hydra-neotree/body :exit t)
   ("SPC" avy-goto-char :exit t) ;; 单词跳跃
-  ("xf" counsel-find-file :exit t) ;; Helm find file
+  ("xf" find-file :exit t) ;; Helm find file
   ("oc" org-capture :exit t)  ;; org capture 捕获
   ("od" hydra-org-download/body :exit t) ;; Org-download
   ("oa" org-agenda :exit t)
