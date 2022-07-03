@@ -90,7 +90,16 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-roam
-(when (executable-find "clang")
+(when (executable-find "gcc")
+(when freedom/is-linux
+  (setq emacsql-sqlite-executable-path "sqlite/Linux/emacsql-sqlite")
+  (when freedom/is-termux
+    (setq emacsql-sqlite-executable-path "sqlite/Termux/emacsql-sqlite")
+    )
+  )
+(when freedom/is-darwin
+  (setq emacsql-sqlite-executable-path "sqlite/Darwin/emacsql-sqlite")
+  )
 (use-package org-roam
   :defer 3
   :ensure t

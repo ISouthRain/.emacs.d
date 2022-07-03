@@ -1,4 +1,5 @@
 
+
 (use-package bongo
   :ensure t
   :bind ("C-<f9>" . bongo)
@@ -18,11 +19,11 @@
            (mapc 'bongo-insert-file files)))
         (bongo-switch-buffers))
       (bind-key "b" #'bongo-add-dired-files dired-mode-map)))
-      (when sr/is-windows
+      (when freedom/is-windows
         (setq bongo-default-directory "F:\\MyFile\\Music"))
-      (when sr/is-linux
+      (when freedom/is-linux
         (setq bongo-default-directory "~/MyFile/Music/"))
-        (setq bongo-enabled-backends '(mplayer))
+        (setq bongo-enabled-backends '(mplayer mpg123))
 	)
 
   ;; Music Player Daemon

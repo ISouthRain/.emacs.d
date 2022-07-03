@@ -55,5 +55,10 @@
             "sudo:root@" host
             ":" (or (file-remote-p file 'localname)
                     file))))
+(when freedom/is-termux
+(setq url-proxy-services
+        `(("http" . "127.0.0.1:7890")
+          ("https" . "127.0.0.1:7890"))
+          ("socks5" . "127.0.0.1:7891")))
 
 (provide 'init-system)

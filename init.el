@@ -10,30 +10,15 @@
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
 ;; setting basic
 ;; 不同系统的配置
-(when (string= "windows-nt" system-type)
-  (setq url-proxy-services '(
-  ("http" . "127.0.0.1:7890")
-  ("https" . "127.0.0.1:7890")
-  ("socks5" . "127.0.0.1:7890")))
-)
-
-(when (string= "gnu/linux" system-type)
-  (setq url-proxy-services '(
-  ("http" . "172.29.224.1:7890")
-  ("https" . "172.29.224.1:7890")
-  ("socks5" . "172.29.224.1:7891")))
-)
-
-(when (string= "darwin" system-type)
-  (setq url-proxy-services '(
-  ("http" . "127.0.0.1:7890")
-  ("https" . "127.0.0.1:7890")
-  ("socks5" . "127.0.0.1:7890")))
-)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; basic
 (require 'init-custom)
+(when freedom-proxy-enable
+  (setq url-proxy-services
+          `(("http" . ,freedom-proxy)
+            ("https" . ,freedom-proxy)
+            ("socks5" . ,freedom-socks-proxy)))
+)
 (require 'init-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Your configuration
@@ -75,13 +60,14 @@
 ;; elfeed elfeed-org gnus mu4e writeroom-mode olivetti
 (require 'init-reader)
 ;; lsp origami
-(require 'init-lsp)
+;(require 'init-lsp)
 ;; lsp-pyright 
-(require 'init-python)
+;;(require 'init-python)
 ;; bongo emms
 ;; (require 'init-player)
 ;; EAF
 ;; (require 'init-eaf)
+;;  
 (require 'init-epg)
 (load-file custom-file)
 );; Cache Max End, Also the end of the package.
