@@ -5,7 +5,7 @@
 ;; Network proxy
 (setq freedom-proxy-enable t)
 (setq freedom-proxy "127.0.0.1:7890")
-(setq freedom-socks-proxy "127.0.0.1:7890")
+(setq freedom-socks-proxy "127.0.0.1:7891")
 ;;(setq freedom-proxy "172.29.224.1:7890")
 ;;(setq freedom-socks-proxy "172.29.224.1:7890")
 (setq freedom-email-address "isouthrain@qq.com")

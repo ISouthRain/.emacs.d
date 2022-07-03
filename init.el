@@ -60,7 +60,7 @@
 ;; elfeed elfeed-org gnus mu4e writeroom-mode olivetti
 (require 'init-reader)
 ;; lsp origami
-;(require 'init-lsp)
+(require 'init-lsp)
 ;; lsp-pyright 
 ;;(require 'init-python)
 ;; bongo emms
