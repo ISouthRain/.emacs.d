@@ -8,17 +8,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 包开始
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
-;; setting basic
-;; 不同系统的配置
+;; 不同系统的配置代理
+(when (string= "windows-nt" system-type)
+  (setq url-proxy-services '(
+  ("http" . "127.0.0.1:7890")
+  ("https" . "127.0.0.1:7890")
+  ("socks5" . "127.0.0.1:7890")))
+)
+
+(when (string= "gnu/linux" system-type)
+  (setq url-proxy-services '(
+  ("http" . "127.0.0.1:7890")
+  ("https" . "127.0.0.1:7890")
+  ("socks5" . "127.0.0.1:7891")))
+)
+
+(when (string= "darwin" system-type)
+  (setq url-proxy-services '(
+  ("http" . "127.0.0.1:7890")
+  ("https" . "127.0.0.1:7890")
+  ("socks5" . "127.0.0.1:7890")))
+)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; basic
 (require 'init-custom)
-(when freedom-proxy-enable
-  (setq url-proxy-services
-          `(("http" . ,freedom-proxy)
-            ("https" . ,freedom-proxy)
-            ("socks5" . ,freedom-socks-proxy)))
-)
 (require 'init-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Your configuration

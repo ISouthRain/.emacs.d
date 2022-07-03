@@ -84,9 +84,9 @@
 ;;         ))
 
 ;; ;; 邮件源设置
-;; (setq mail-sources                                 ;邮件源设置
-;;       '((maildir :path "~/Maildir/Gmail/"           ;本地邮件存储位置
-;;                  :subdirs ("cur" "new" "tmp"))))   ;本地邮件子目录划分
+ (setq mail-sources                                 ;邮件源设置
+       '((maildir :path "~/Maildir/QQ/"           ;本地邮件存储位置
+                  :subdirs ("cur" "new" "tmp"))))   ;本地邮件子目录划分
 
 ;; 设置邮件发送方法
 (setq smtpmail-smtp-server "smtp.gmail.com"
