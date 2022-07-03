@@ -19,7 +19,7 @@
   :defer 2)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emojify
-(when freedom/is-windows
+(when (not freedom/is-termux)
 (use-package emojify
   :ensure t
   ;; :load-path "~/.emacs.d/core/plugins"
@@ -28,15 +28,7 @@
   (setq emojify-emojis-dir (expand-file-name "emacs/emojis" user-emacs-directory))
   :hook (after-init . global-emojify-mode))
 )
-(when freedom/is-linux
-(use-package emojify
-  :ensure t
-  ;; :load-path "~/.emacs.d/core/plugins"
-  :defer 5
-  :init
-  (setq emojify-emojis-dir (expand-file-name "emacs/emojis" user-emacs-directory))
-  :hook (after-init . global-emojify-mode))
-)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cnfonts Org-mode 中英文字体对齐
 (use-package cnfonts
@@ -47,7 +39,7 @@
 :config
 (setq cnfonts-profiles
     '("program" "org-mode" "read-book"))
-(when (string= "windows-nt" system-type)
+(when (not freedom/is-termux)
 (defun cnfonts-set-font-and-mode-myself ()
   (interactive)
   (cnfonts-mode)

@@ -229,7 +229,7 @@
   (when freedom/is-termux
    (add-to-list 'load-path "/data/data/com.termux/files/usr/share/emacs/site-lisp/mu4e"))
   (require 'mu4e)
-  (setq mu4e-maildir (expand-file-name "~/Maildir/QQ"))
+  (setq mu4e-maildir (expand-file-name "~/.emacs.d/Maildir/QQ"))
   (setq mu4e-change-filenames-when-moving t)
   ;; (setq mu4e-maildir (expand-file-name "~/Maildir/Gmail"))
   ;; (setq mu4e-drafts-folder "/[Gmail].草稿")

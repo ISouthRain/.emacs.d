@@ -1,0 +1,454 @@
+X-QQ-mid: xmimrszb39t1656819809thu5os5hc
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10olkn2088.outbound.protection.outlook.com [40.92.41.88])
+	by newxmmxszb5-0.qq.com (NewMX) with SMTP id 2C5118C4
+	for <isouthrain@qq.com>; Sun, 03 Jul 2022 01:11:05 +0800
+X-BQ-mid: xmmxszb5-0t1656781865t28xv1vfg
+X-BQ-XMAILINFO: N2/jAoEINgTTRaB5hZglze/k5DWuE3anU1ybmDnNidRbADEOkW10DPZlxav4oQ
+	 KNUQ/KBz6cUaRtqeGqu2WCqZ+iwvXeKElmRcWPqB7B6vA56ZS0qbXsnXZ3XQSmN3LIcNBGifp/+r
+	 WM4M+7jYXVv9BBIFhkItTB0qufbvZvdj7GUq25E0avte3ZcL8lR1EgMu9G0lTdVLzyVohxj2HumY
+	 bV67Xf/e3yHoPicmNS/d/D7SrjO10PXaxkP7qoHFYytWQXyCKqZZKAlOAjUXccJocWJn5g33wpYa
+	 yNrdM4i4Bwxo+yDdJZH+lPO5P+LcY0mVz+GK0vdMV4KPZDgJBP5Me4ticBNDaHzyBnex3fvT/Llp
+	 LABlKJJQIYmrpMV3XrUPgXY2RhMFIcTneAgXa1K4dxCXfG4IYr3ZvuxM97lFmg4QU0ubkeCj1fJC
+	 bo6s6RCEOqybA7GmF0IEz6+ZsSPt1IFw/XNXx4B/vQo7v8vvP2il0dlOtqQYRBz7cEvXfXZF90vN
+	 nqx3uI2/xdw9tJ0pLQJZnaQM93YRW+0hv6VAGNPW0v0EYLN9dbqwBUCHl1h+OjbTrjRFhYNvYRA+
+	 PHUlgGYV2J8qaM4BEyjFJN8NTJgGrZB6ogNqvuM+moc9Kt7UWk93++gRWuZAKkQJCfb2PI9ifLCU
+	 hAzgl1y9bxx5EoqE1Wy4QRfjnswS/AOKE1KUtCuwEP/jQkoksjlls9EEsLGfkGRcqRUJstqYM/ZG
+	 919qi9hxlEmqX6a59s6acnFJpoBzfKoJRaH8Lv1k3XMb/BGgWmeD8DcP9yZaB5uRy98ESVq6aCWw
+	 26JkMfoQ/7Ih/PTdAf1VA5G72egAOH9NJn8lHWym+Bcm/1mcX86IsyjQFGornCuXz1VCvXWFwuRx
+	 uOjLzYCAZrFbUd7XNlWYUoIj+A1i7frlqD1tOOCBCS4FP1TveTzAA3wRavYIzEEiir8SzH/y3E+P
+	 ED7BIb2FEKHCfY5Cn3v60qr6ypm9Xa2QbDzbTAdm38JcfPrhvb8B/0G0fF17hAPsllgEM1Rao=
+Sender: <>
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jsr/K+Ko3XpdZKiKU1V1cj1fQflFvas8o58lTw0tn51Qv1N8YvWBoaN7UGoWv2ryijMjJJB3vgR3MAHs3ZDCgGEmaY0OaQpNPN89FhEZVklSwONOB8r63p3fOQWWKRhkxParZk/qGdQ8DQ36C5z8Mry+/BfkaXB7wIMj/8ZQHcQSQYq/qWnAbTUxD0SZ9R9+43UhUwsEUFmc+nInZ3cKoMcDgvbKgIgWm9QZpzXzKGme3Wdb596/kC1SKaXyLrOgW4ATZBZbTvV1XbsfcxmFp41MHFxp56JejAa32jFYTVyD+V9sqsHt/lA+WB2ykb4GTVJARwfqrtJhdnFYlw1/cQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=addVwNjNDv9ohcmIaslAcknMxi9YdENUZQcVnw11Q4A=;
+ b=Bvpsh8Zo8ViQX3A/z+nmwCrJ+kWsBfOuD/xJFbDEjrVB7GDB4oZDhV5bW5Dudj7mw7YcttrVU3icmvUH89jaJ/tBiMfbKr2+KjVhM/R4mFoer68iZT/q6kmnlPNElftI/UNZyFZbiq6sxE8P+ghQ+NvhZNDbK+k02RICtRekQ5FR+aySSB4Iq3AsZ2keVkHck1dxkoxEuo6HcN9QbVhBzMCyn6ORvD4qa6Sxvxp2BstQ8pgHj9r1HhXE4oU5Pzg/wFBA80dulcQoP1f8iBejNdi4wJZUdg7gLAODJrfLbnLBQQ0Gtd+XJEPO75uN8SRQM91j90B1Id7AgDLI+pTAjQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+MIME-Version: 1.0
+From: <postmaster@outlook.com>
+To: <isouthrain@qq.com>
+Date: Sat, 2 Jul 2022 17:11:04 +0000
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="05f89156-1830-4877-8028-f962cee65d4f"
+X-MS-Exchange-Message-Is-Ndr: 
+Content-Language: en-US
+Message-ID: 
+ <c336772d-4641-4d49-a56a-27bd7b63a96b@BL0PR12MB4690.namprd12.prod.outlook.com>
+In-Reply-To: <tencent_1D69198CB9EA3BE8306F2C2FD947B4418A05@qq.com>
+References: <tencent_1D69198CB9EA3BE8306F2C2FD947B4418A05@qq.com>
+Subject: Undeliverable: Test
+Auto-Submitted: auto-replied
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL0PR12MB4690:EE_
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	+5hNr9vNNHDGyGPiPUldcFcuRVCcwn7AkP+TsxdLzW2Ej/bKSJ3nUD8TPL5dgiJvu0OjrPkkGdlMXO7D+Za1EgGMKh8CRcL9Ugi5VlER4yRrrNTtZMAuOuzo+W4C5s7+o08dLN8iJ9KJucKjuJbW6LdMvttdni3KF4AzIrOZLxa/T/NTMJkOJYBaxSJZpMrBuNMViPafDfkCTHyadUDQJalskFdMplQZwNyFV40jnQ38goOxiGuJQrd8ljA3pxnlpRHdLj3ZXBcybY1HJ9Z/36QYRNEhZpxO6hKX/CNFbBTBQ1774fPRLHyivW5ksqQ744Wz0mlMmJOCaJCsbAfk2dS8Sqtyy46VTdzoHNcsvJNXrMfw+HNbngj0I6ZaD+cqsCS58PLhkm7AsR593KxCmZ3vKmSqGPjdgG9ADtmi4jFNiVvBJfQeXVhsfxI24E2h9znwIth2dIVt/H1njqVdZSL9Azstulr8dBkGWCkuAOeg2C1kUfAqZVGNHTJb2BzpbcPO3PAsvnZApmyidjeR66+Wm3ypaDMVZ/HGUt0DzVgUNE6J7dtIP+1qVR/fsP5pfHBFmAKM+cEwi6vL61Rg18pZVP7gyETyKq4GgSJIuhBqga8wwZBvX5vCSBXeKJHjOE2aS9qlwwXLIySsVD0EkR5XnM4p1KxYU8JTaRkitTRecMNtSTbCsRAqtXvrR+WXwP2SqivDHxiNyg+BUD+KjIwK4si2tvdtLetUl3k9Kl5goQoTcj5U0El7jEyqgRML
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	NrnR6zkeTyb4fowfmELQPhUWm5c4XSx+N7RcHFKTCzA1pvspJEb3p4vgdX5yUiFIVZEhURhbZrx3BSq9s+kTZ0Dm+wPp2lxMr5KWg6lQOUWfEqjbavDbNPf26FprO6pt9n72Np6NyItRHBHp5CwXaSsfT0mb06pQAQAbt/bqZbuGNzgoQ3q6cb5kzyQyUUQ9
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2022 17:11:04.5848
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB4690.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-Network-Message-Id: 
+	18f7ac68-0f3a-4581-405c-08da5c4dd8cc
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4690
+
+--05f89156-1830-4877-8028-f962cee65d4f
+Content-Type: multipart/alternative; differences=Content-Type;
+	boundary="396b7741-a2b9-446b-bcf4-1ec64b2e20bc"
+
+--396b7741-a2b9-446b-bcf4-1ec64b2e20bc
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Delivery has failed to these recipients or groups:
+
+874424374@qq.com<mailto:874424374@qq.com>
+
+Your message couldn't be delivered because the recipient's email system was=
+n't able to confirm that your message came from a trusted location.
+
+For Email Administrators
+This error is related to the Sender Policy Framework (SPF). The destination=
+ email system's evaluation of the SPF record for the message resulted in an=
+ error. Please work with your domain registrar to ensure your SPF records a=
+re correctly configured.
+
+
+
+
+
+
+
+
+
+Diagnostic information for administrators:
+
+Generating server: BL0PR12MB4690.namprd12.prod.outlook.com
+
+874424374@qq.com
+Remote Server returned '550 5.7.23 The message was rejected because of Send=
+er Policy Framework violation -> 550 SPF check failed. http://service.mail.=
+qq.com/cgi-bin/help?subtype=3D1&&id=3D20022&&no=3D1001445 [MBPDSnpRZ290fR2i=
+uJEzD69ikF2pyeTonzD5Ahktex/Zy+eayPqG4y7sQO89kmPBvA=3D=3D IP: 104.47.58.106]=
+'
+
+Original message headers:
+
+Received: from IA1PR12MB6139.namprd12.prod.outlook.com (2603:10b6:208:3e9::=
+16)
+ by BL0PR12MB4690.namprd12.prod.outlook.com (2603:10b6:208:8e::22) with
+ Microsoft SMTP Server (version=3DTLS1_2,
+ cipher=3DTLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.15; Sat, 2 J=
+ul
+ 2022 17:11:02 +0000
+Resent-From: <isouthrain@outlook.com>
+Received: from IA1PR12MB6139.namprd12.prod.outlook.com ([::1]) by
+ IA1PR12MB6139.namprd12.prod.outlook.com ([fe80::5c6f:798f:5178:455b%9]) wi=
+th
+ Microsoft SMTP Server id 15.20.5395.018; Sat, 2 Jul 2022 17:11:02 +0000
+Authentication-Results: spf=3Dpass (sender IP is 203.205.221.249)
+ smtp.mailfrom=3Dqq.com; dkim=3Dpass (signature was verified)
+ header.d=3Dqq.com;dmarc=3Dpass action=3Dnone header.from=3Dqq.com;compauth=
+=3Dpass
+ reason=3D100
+Received-SPF: Pass (protection.outlook.com: domain of qq.com designates
+ 203.205.221.249 as permitted sender) receiver=3Dprotection.outlook.com;
+ client-ip=3D203.205.221.249; helo=3Dout203-205-221-249.mail.qq.com; pr=3DC
+X-IncomingTopHeaderMarker: OriginalChecksum:EDF439F2DF9E28A55B564EC2D94DC68=
+FB7944B88C527C3D437BA37751968C5B3;UpperCasedChecksum:458274D73B2F6B58E0E0CF=
+C90CA0548054A7B4DC1CF308820920A715FAF1823D;SizeAsReceived:1932;Count:14
+DKIM-Signature: v=3D1; a=3Drsa-sha256; c=3Drelaxed/relaxed; d=3Dqq.com; s=
+=3Ds201512;
+        t=3D1656781858; bh=3D9mQO8s/NpaWVNN4Qj280zjhzmu1L3v0MtxSWNskylCA=3D=
+;
+        h=3DDate:From:To:Subject;
+        b=3DWb1evIlJwHMITKf1Kc1gd5Ync+ts2Rra3xGONMo/MBOGGOyu0eml8UfB28a5Imf=
+FX
+         XAOKpAxQLgxp8rlD9JENNOLnRIQeqXAGKEnJyNbWBlxDjYfEzvP4t1K4EagOe3mBy+
+         aThCXi7Fm0YWkXHEoy+PlpyeFU4jQKxQvc7tKDaQ=3D
+X-QQ-mid: xmsmtpt1656781795t2glfxlwj
+Message-ID: <tencent_1D69198CB9EA3BE8306F2C2FD947B4418A05@qq.com>
+X-QQ-XMAILINFO: NafziRg7Bx69IQ2827w+FP+zvW+JVba3SVSHFF5pZKqhVhoqCqULnq4l/we=
+1sM
+         ph4+lkHtef7s67qYlV86N992RzLWpNP6S9nmiH/l+AZWanqMfoKClCHX/1FsV+EGiZ=
+h3Nrj0dO7I
+         77rnvUeqb15KYFr6eRPv5Rio91oMGOLr/u1bQD+P3bIpcM6hK7cQYvk0OJbHNyaXmU=
+yII8MLRDrx
+         5Oo8eOxK0XB3Bcm0ip2yBTyoFADjgp8plfmTVrU7zAaCT+6K1i18OnPEwrKQjf6Hy2=
+giCKMm6I39
+         m6dODZEV50d25CzINQIAVcccNxDIRPv3onoy1nPLMP1yLFevtva6V/ug1lVCDsZ6TD=
+00VumsFjS5
+         SfTQYaG+Coi4HPPrlfbVPjSjOp8BqPE8u8fChHxxCcMJeQW97MrIm5s3ovL8UAYXBZ=
+IgBKUaqRG3
+         sO7x0hFuFBA82bhk5zLJWCiZo3BRX6xGcqnzUt9/P2Zl2wZXVsievzu4xoGF0R7SBq=
+0NiEqyxSTf
+         U3zOi8uZdXoewu0uIVxs3j/hgZmGoh88iqOR/mGZNSEpk4ROY4R4jwRpC7uyIb+SXN=
+mIFvRMs6Ku
+         Zhu5h12hX/EsweAt2jgKEblnhF8MwzyJ5DDPy7I6A+r+bUhTbeHTMelqsEv/VYhR7c=
+Pl9efCsSoo
+         +w5XJ8fLsq7Th6NcSQr+o+upn0FF2KHvB+O17JCCfI3ui2UmdEjjvK5sUpfBaxG+7z=
+kvjd878Ck1
+         rr9mHVugSDNUBWo9L1+sdlRndYTXe7hJqVoZuGoX8lyLjP3g80L6zZRE6G1rqfvhZe=
+Gr3UQsbqjG
+         P8g7iUWEgs+kgwc0vwDFSX3aBrwhk3BSNIw9j1EFXvQM2MnQk2b8dux1sxRQz7Eu7E=
+BBNK7VVs63
+         XuENlZ0Y/A
+X-QQ-SPAM: true
+Date: Sat, 02 Jul 2022 17:10:23 +0000
+From: ISouthRain <isouthrain@qq.com>
+To: Myself Outlook <isouthrain@outlook.com>
+Subject: Test
+X-OQ-MSGID: <B39A4CAA-F7F3-4C08-A913-910581C70551@qq.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary=3D----Y8TPWO78NX1XM1AHYXH8X6JY6HY821
+Content-Transfer-Encoding: 7bit
+X-IncomingHeaderCount: 14
+Return-Path: isouthrain@qq.com
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-PublicTrafficType: Email
+X-MS-UserLastLogonTime: 7/2/2022 5:10:12 PM
+X-MS-Office365-Filtering-Correlation-Id: 532324d9-9121-4cff-6bc5-08da5c4dd6=
+89
+X-MS-TrafficTypeDiagnostic:
+        DM6PR12MB4185:EE_|IA1PR12MB6139:EE_|BL0PR12MB4690:EE_
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 203.205.221.249
+X-SID-PRA: ISOUTHRAIN@QQ.COM
+X-SID-Result: PASS
+X-Microsoft-Antispam: BCL:0;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2022 17:11:00.1351
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 532324d9-9121-4cff-6bc5-08da5=
+c4dd689
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM12FT014.eop-nam12.prod.protecti=
+on.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000=
+-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4185
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.8741521
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.5395.018
+X-MS-Exchange-Inbox-Rules-Loop: isouthrain@outlook.com
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-71ea3.templateTenant
+
+
+--396b7741-a2b9-446b-bcf4-1ec64b2e20bc
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<Head></head><body>
+<p><b><font color=3D"#000066" size=3D"3" face=3D"Arial">Delivery has failed=
+ to these recipients or groups:</font></b></p>
+<font color=3D"#000000" size=3D"2" face=3D"Tahoma"><p><a href=3D"mailto:874=
+424374@qq.com">874424374@qq.com</a><br>
+</font>
+<font color=3D"#000000" size=3D"3" face=3D"Arial"><p>Your message couldn't =
+be delivered because the recipient's email system wasn't able to confirm th=
+at your message came from a trusted location.</p><p><b>For Email Administra=
+tors</b><br>This error is related to the Sender Policy Framework (SPF). The=
+ destination email system's evaluation of the SPF record for the message re=
+sulted in an error. Please work with your domain registrar to ensure your S=
+PF records are correctly configured.</p><br>
+</font>
+<font color=3D"#000000" size=3D"2" face=3D"Tahoma"><br>
+</p>
+</font>
+<br><br><br><br><br><br>
+<font color=3D"#808080" size=3D"2" face=3D"Tahoma"><p><b>Diagnostic informa=
+tion for administrators:</b></p>
+<p>Generating server: BL0PR12MB4690.namprd12.prod.outlook.com<br>
+</p>
+<p>874424374@qq.com<br>
+Remote Server  returned '550 5.7.23 The message was rejected because of Sen=
+der Policy Framework violation -&gt; 550 SPF check failed. http://service.m=
+ail.qq.com/cgi-bin/help?subtype=3D1&amp;&amp;id=3D20022&amp;&amp;no=3D10014=
+45 [MBPDSnpRZ290fR2iuJEzD69ikF2pyeTonzD5Ahktex/Zy+eayPqG4y7sQO89kmPBvA=3D=
+=3D IP: 104.47.58.106]'<br>
+</p>
+<p>Original message headers:</p>
+<pre>Received: from IA1PR12MB6139.namprd12.prod.outlook.com (2603:10b6:208:=
+3e9::16)
+ by BL0PR12MB4690.namprd12.prod.outlook.com (2603:10b6:208:8e::22) with
+ Microsoft SMTP Server (version=3DTLS1_2,
+ cipher=3DTLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.15; Sat, 2 J=
+ul
+ 2022 17:11:02 +0000
+Resent-From: &lt;isouthrain@outlook.com&gt;
+Received: from IA1PR12MB6139.namprd12.prod.outlook.com ([::1]) by
+ IA1PR12MB6139.namprd12.prod.outlook.com ([fe80::5c6f:798f:5178:455b%9]) wi=
+th
+ Microsoft SMTP Server id 15.20.5395.018; Sat, 2 Jul 2022 17:11:02 +0000
+Authentication-Results: spf=3Dpass (sender IP is 203.205.221.249)
+ smtp.mailfrom=3Dqq.com; dkim=3Dpass (signature was verified)
+ header.d=3Dqq.com;dmarc=3Dpass action=3Dnone header.from=3Dqq.com;compauth=
+=3Dpass
+ reason=3D100
+Received-SPF: Pass (protection.outlook.com: domain of qq.com designates
+ 203.205.221.249 as permitted sender) receiver=3Dprotection.outlook.com;
+ client-ip=3D203.205.221.249; helo=3Dout203-205-221-249.mail.qq.com; pr=3DC
+X-IncomingTopHeaderMarker: OriginalChecksum:EDF439F2DF9E28A55B564EC2D94DC68=
+FB7944B88C527C3D437BA37751968C5B3;UpperCasedChecksum:458274D73B2F6B58E0E0CF=
+C90CA0548054A7B4DC1CF308820920A715FAF1823D;SizeAsReceived:1932;Count:14
+DKIM-Signature: v=3D1; a=3Drsa-sha256; c=3Drelaxed/relaxed; d=3Dqq.com; s=
+=3Ds201512;
+	t=3D1656781858; bh=3D9mQO8s/NpaWVNN4Qj280zjhzmu1L3v0MtxSWNskylCA=3D;
+	h=3DDate:From:To:Subject;
+	b=3DWb1evIlJwHMITKf1Kc1gd5Ync+ts2Rra3xGONMo/MBOGGOyu0eml8UfB28a5ImfFX
+	 XAOKpAxQLgxp8rlD9JENNOLnRIQeqXAGKEnJyNbWBlxDjYfEzvP4t1K4EagOe3mBy+
+	 aThCXi7Fm0YWkXHEoy+PlpyeFU4jQKxQvc7tKDaQ=3D
+X-QQ-mid: xmsmtpt1656781795t2glfxlwj
+Message-ID: &lt;tencent_1D69198CB9EA3BE8306F2C2FD947B4418A05@qq.com&gt;
+X-QQ-XMAILINFO: NafziRg7Bx69IQ2827w+FP+zvW+JVba3SVSHFF5pZKqhVhoqCqULnq4l/we=
+1sM
+	 ph4+lkHtef7s67qYlV86N992RzLWpNP6S9nmiH/l+AZWanqMfoKClCHX/1FsV+EGiZh3Nrj0d=
+O7I
+	 77rnvUeqb15KYFr6eRPv5Rio91oMGOLr/u1bQD+P3bIpcM6hK7cQYvk0OJbHNyaXmUyII8MLR=
+Drx
+	 5Oo8eOxK0XB3Bcm0ip2yBTyoFADjgp8plfmTVrU7zAaCT+6K1i18OnPEwrKQjf6Hy2giCKMm6=
+I39
+	 m6dODZEV50d25CzINQIAVcccNxDIRPv3onoy1nPLMP1yLFevtva6V/ug1lVCDsZ6TD00VumsF=
+jS5
+	 SfTQYaG+Coi4HPPrlfbVPjSjOp8BqPE8u8fChHxxCcMJeQW97MrIm5s3ovL8UAYXBZIgBKUaq=
+RG3
+	 sO7x0hFuFBA82bhk5zLJWCiZo3BRX6xGcqnzUt9/P2Zl2wZXVsievzu4xoGF0R7SBq0NiEqyx=
+STf
+	 U3zOi8uZdXoewu0uIVxs3j/hgZmGoh88iqOR/mGZNSEpk4ROY4R4jwRpC7uyIb+SXNmIFvRMs=
+6Ku
+	 Zhu5h12hX/EsweAt2jgKEblnhF8MwzyJ5DDPy7I6A+r+bUhTbeHTMelqsEv/VYhR7cPl9efCs=
+Soo
+	 +w5XJ8fLsq7Th6NcSQr+o+upn0FF2KHvB+O17JCCfI3ui2UmdEjjvK5sUpfBaxG+7zkvjd878=
+Ck1
+	 rr9mHVugSDNUBWo9L1+sdlRndYTXe7hJqVoZuGoX8lyLjP3g80L6zZRE6G1rqfvhZeGr3UQsb=
+qjG
+	 P8g7iUWEgs+kgwc0vwDFSX3aBrwhk3BSNIw9j1EFXvQM2MnQk2b8dux1sxRQz7Eu7EBBNK7VV=
+s63
+	 XuENlZ0Y/A
+X-QQ-SPAM: true
+Date: Sat, 02 Jul 2022 17:10:23 +0000
+From: ISouthRain &lt;isouthrain@qq.com&gt;
+To: Myself Outlook &lt;isouthrain@outlook.com&gt;
+Subject: Test
+X-OQ-MSGID: &lt;B39A4CAA-F7F3-4C08-A913-910581C70551@qq.com&gt;
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary=3D----Y8TPWO78NX1XM1AHYXH8X6JY6HY821
+Content-Transfer-Encoding: 7bit
+X-IncomingHeaderCount: 14
+Return-Path: isouthrain@qq.com
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-PublicTrafficType: Email
+X-MS-UserLastLogonTime: 7/2/2022 5:10:12 PM
+X-MS-Office365-Filtering-Correlation-Id: 532324d9-9121-4cff-6bc5-08da5c4dd6=
+89
+X-MS-TrafficTypeDiagnostic:
+	DM6PR12MB4185:EE_|IA1PR12MB6139:EE_|BL0PR12MB4690:EE_
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 203.205.221.249
+X-SID-PRA: ISOUTHRAIN@QQ.COM
+X-SID-Result: PASS
+X-Microsoft-Antispam: BCL:0;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2022 17:11:00.1351
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 532324d9-9121-4cff-6bc5-08da5=
+c4dd689
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM12FT014.eop-nam12.prod.protecti=
+on.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000=
+-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4185
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.8741521
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.5395.018
+X-MS-Exchange-Inbox-Rules-Loop: isouthrain@outlook.com
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-71ea3.templateTenant
+</pre>
+</font>
+</body>
+</html>=
+
+--396b7741-a2b9-446b-bcf4-1ec64b2e20bc--
+
+--05f89156-1830-4877-8028-f962cee65d4f
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns;BL0PR12MB4690.namprd12.prod.outlook.com
+Received-From-MTA: dns;IA1PR12MB6139.namprd12.prod.outlook.com
+Arrival-Date: Sat, 2 Jul 2022 17:11:02 +0000
+
+Final-Recipient: rfc822;874424374@qq.com
+Action: failed
+Status: 5.7.23
+Diagnostic-Code: smtp;550 5.7.23 The message was rejected because of Sender Policy Framework violation -> 550 SPF check failed. http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1001445 [MBPDSnpRZ290fR2iuJEzD69ikF2pyeTonzD5Ahktex/Zy+eayPqG4y7sQO89kmPBvA== IP: 104.47.58.106]
+
+
+--05f89156-1830-4877-8028-f962cee65d4f
+Content-Type: message/rfc822
+
+Received: from IA1PR12MB6139.namprd12.prod.outlook.com (2603:10b6:208:3e9::16)
+ by BL0PR12MB4690.namprd12.prod.outlook.com (2603:10b6:208:8e::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.15; Sat, 2 Jul
+ 2022 17:11:02 +0000
+Resent-From: <isouthrain@outlook.com>
+Received: from IA1PR12MB6139.namprd12.prod.outlook.com ([::1]) by
+ IA1PR12MB6139.namprd12.prod.outlook.com ([fe80::5c6f:798f:5178:455b%9]) with
+ Microsoft SMTP Server id 15.20.5395.018; Sat, 2 Jul 2022 17:11:02 +0000
+Authentication-Results: spf=pass (sender IP is 203.205.221.249)
+ smtp.mailfrom=qq.com; dkim=pass (signature was verified)
+ header.d=qq.com;dmarc=pass action=none header.from=qq.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of qq.com designates
+ 203.205.221.249 as permitted sender) receiver=protection.outlook.com;
+ client-ip=203.205.221.249; helo=out203-205-221-249.mail.qq.com; pr=C
+X-IncomingTopHeaderMarker: OriginalChecksum:EDF439F2DF9E28A55B564EC2D94DC68FB7944B88C527C3D437BA37751968C5B3;UpperCasedChecksum:458274D73B2F6B58E0E0CFC90CA0548054A7B4DC1CF308820920A715FAF1823D;SizeAsReceived:1932;Count:14
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1656781858; bh=9mQO8s/NpaWVNN4Qj280zjhzmu1L3v0MtxSWNskylCA=;
+	h=Date:From:To:Subject;
+	b=Wb1evIlJwHMITKf1Kc1gd5Ync+ts2Rra3xGONMo/MBOGGOyu0eml8UfB28a5ImfFX
+	 XAOKpAxQLgxp8rlD9JENNOLnRIQeqXAGKEnJyNbWBlxDjYfEzvP4t1K4EagOe3mBy+
+	 aThCXi7Fm0YWkXHEoy+PlpyeFU4jQKxQvc7tKDaQ=
+X-QQ-mid: xmsmtpt1656781795t2glfxlwj
+Message-ID: <tencent_1D69198CB9EA3BE8306F2C2FD947B4418A05@qq.com>
+X-QQ-XMAILINFO: NafziRg7Bx69IQ2827w+FP+zvW+JVba3SVSHFF5pZKqhVhoqCqULnq4l/we1sM
+	 ph4+lkHtef7s67qYlV86N992RzLWpNP6S9nmiH/l+AZWanqMfoKClCHX/1FsV+EGiZh3Nrj0dO7I
+	 77rnvUeqb15KYFr6eRPv5Rio91oMGOLr/u1bQD+P3bIpcM6hK7cQYvk0OJbHNyaXmUyII8MLRDrx
+	 5Oo8eOxK0XB3Bcm0ip2yBTyoFADjgp8plfmTVrU7zAaCT+6K1i18OnPEwrKQjf6Hy2giCKMm6I39
+	 m6dODZEV50d25CzINQIAVcccNxDIRPv3onoy1nPLMP1yLFevtva6V/ug1lVCDsZ6TD00VumsFjS5
+	 SfTQYaG+Coi4HPPrlfbVPjSjOp8BqPE8u8fChHxxCcMJeQW97MrIm5s3ovL8UAYXBZIgBKUaqRG3
+	 sO7x0hFuFBA82bhk5zLJWCiZo3BRX6xGcqnzUt9/P2Zl2wZXVsievzu4xoGF0R7SBq0NiEqyxSTf
+	 U3zOi8uZdXoewu0uIVxs3j/hgZmGoh88iqOR/mGZNSEpk4ROY4R4jwRpC7uyIb+SXNmIFvRMs6Ku
+	 Zhu5h12hX/EsweAt2jgKEblnhF8MwzyJ5DDPy7I6A+r+bUhTbeHTMelqsEv/VYhR7cPl9efCsSoo
+	 +w5XJ8fLsq7Th6NcSQr+o+upn0FF2KHvB+O17JCCfI3ui2UmdEjjvK5sUpfBaxG+7zkvjd878Ck1
+	 rr9mHVugSDNUBWo9L1+sdlRndYTXe7hJqVoZuGoX8lyLjP3g80L6zZRE6G1rqfvhZeGr3UQsbqjG
+	 P8g7iUWEgs+kgwc0vwDFSX3aBrwhk3BSNIw9j1EFXvQM2MnQk2b8dux1sxRQz7Eu7EBBNK7VVs63
+	 XuENlZ0Y/A
+X-QQ-SPAM: true
+Date: Sat, 02 Jul 2022 17:10:23 +0000
+From: ISouthRain <isouthrain@qq.com>
+To: Myself Outlook <isouthrain@outlook.com>
+Subject: Test
+X-OQ-MSGID: <B39A4CAA-F7F3-4C08-A913-910581C70551@qq.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary=----Y8TPWO78NX1XM1AHYXH8X6JY6HY821
+Content-Transfer-Encoding: 7bit
+X-IncomingHeaderCount: 14
+Return-Path: isouthrain@qq.com
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-PublicTrafficType: Email
+X-MS-UserLastLogonTime: 7/2/2022 5:10:12 PM
+X-MS-Office365-Filtering-Correlation-Id: 532324d9-9121-4cff-6bc5-08da5c4dd689
+X-MS-TrafficTypeDiagnostic: 
+ DM6PR12MB4185:EE_|IA1PR12MB6139:EE_|BL0PR12MB4690:EE_
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 203.205.221.249
+X-SID-PRA: ISOUTHRAIN@QQ.COM
+X-SID-Result: PASS
+X-Microsoft-Antispam: BCL:0;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jul 2022 17:11:00.1351
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 532324d9-9121-4cff-6bc5-08da5c4dd689
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM12FT014.eop-nam12.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4185
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.8741521
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.5395.018
+X-MS-Exchange-Inbox-Rules-Loop: isouthrain@outlook.com
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-71ea3.templateTenant
+
+------Y8TPWO78NX1XM1AHYXH8X6JY6HY821
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+
+------Y8TPWO78NX1XM1AHYXH8X6JY6HY821
+Content-Type: text/html;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html><body></body></html>
+------Y8TPWO78NX1XM1AHYXH8X6JY6HY821--
+
+--05f89156-1830-4877-8028-f962cee65d4f--
+ 
+

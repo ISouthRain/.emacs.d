@@ -41,6 +41,7 @@
   (setq org-modern-star '("◉""○""◈""◇""✿""✤""✸""⁕""⚙""▷")
         org-agenda-current "⭠ now ─────────────────────────────────────────────────")
   )
+  (setq org-modern-table nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-fancy-priorities 设置事件优先级
 (use-package org-fancy-priorities
