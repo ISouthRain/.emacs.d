@@ -1,6 +1,7 @@
 network-security.data
 .stfolder/
 auto-save-list/
+elpa/
 emacs/
 emojis/
 .authinfo
@@ -18,3 +19,4 @@ recentf
 smex-items
 *.asc
 eln-cache/
+emacsql-sqlite

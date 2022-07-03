@@ -52,7 +52,7 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (tooltip-mode 0) 
-(message "Hello Iam , 外交健康将我爱你们 ")
+(set-face-attribute 'default nil :height 150)
     ))
 (when (string= "windows-nt" system-type)
 (tool-bar-mode 0)

@@ -1,2 +1,0 @@
-;; Generated package description from pyim-basedict.el  -*- no-byte-compile: t -*-
-(define-package "pyim-basedict" "0.5.3" "The default pinyin dict of pyim" 'nil :commit "4aa30ff9f83cf6435230a987d323e48230f1f40e" :authors '(("Feng Shu" . "tumashu@163.com")) :maintainer '("Feng Shu" . "tumashu@163.com") :keywords '("convenience" "chinese" "pinyin" "input-method" "complete") :url "https://github.com/tumashu/pyim-basedict")

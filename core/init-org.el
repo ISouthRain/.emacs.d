@@ -89,7 +89,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-roam
-(when (executable-find "gcc")
+(when (executable-find "clang")
 (use-package org-roam
   :defer 3
   :ensure t

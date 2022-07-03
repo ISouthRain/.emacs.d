@@ -19,9 +19,9 @@
 
 (when (string= "gnu/linux" system-type)
   (setq url-proxy-services '(
-  ("http" . "127.0.0.1:7890")
-  ("https" . "127.0.0.1:7890")
-  ("socks5" . "127.0.0.1:7891")))
+  ("http" . "172.29.224.1:7890")
+  ("https" . "172.29.224.1:7890")
+  ("socks5" . "172.29.224.1:7891")))
 )
 
 (when (string= "darwin" system-type)

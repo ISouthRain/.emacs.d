@@ -224,8 +224,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mu4e
-(when freedom/is-termux
-  (add-to-list 'load-path "/data/data/com.termux/files/usr/share/emacs/site-lisp/mu4e")
+(when freedom/is-linux
+   (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+  (when freedom/is-termux
+   (add-to-list 'load-path "/data/data/com.termux/files/usr/share/emacs/site-lisp/mu4e"))
   (require 'mu4e)
   (setq mu4e-maildir (expand-file-name "~/Maildir/QQ"))
   (setq mu4e-change-filenames-when-moving t)
@@ -263,7 +265,8 @@
 
   ;; ;; (setq message-signature-file "~/.emacs.d/.signature") ; put your signature in this file
   ;; ;; get mail
-  (setq mu4e-get-mail-command "mbsync -a -c ~/.emacs.d/.mbsyncrc;mu init -m ~/Maildir/QQ --my-address=isouthrain@gmail.com;mu index"
+  ;; (setq mu4e-get-mail-command "mbsync -a -c ~/.emacs.d/.mbsyncrc;mu init -m ~/Maildir/QQ --my-address=isouthrain@gmail.com;mu index"
+  (setq mu4e-get-mail-command "offlineimap -c ~/.emacs.d/.offlineimaprc"
         mu4e-html2text-command "w3m -T text/html"
         mu4e-update-interval 120
         mu4e-headers-auto-update t
