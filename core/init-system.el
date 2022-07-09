@@ -22,16 +22,13 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; 系统区分
-(use-package subr-x
-:ensure nil
-:config
+(require 'subr-x)
 (setq freedom/is-termux
       (string-suffix-p "Android" (string-trim (shell-command-to-string "uname -a"))))
 (setq freedom/is-linux (and (eq system-type 'gnu/linux)))
 (setq freedom/is-darwin (and (eq system-type 'darwin)))
 (setq freedom/is-windows (and (eq system-type 'windows-nt)))
-)
+
 ;; 关闭 native-comp 错误警告
 ;; Silence compiler warnings as they can be pretty disruptive
 (setq comp-async-report-warnings-errors nil)

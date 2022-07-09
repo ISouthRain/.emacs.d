@@ -1,5 +1,4 @@
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package monokai-theme
   :ensure nil
@@ -12,12 +11,12 @@
   :config
   ;; (load-theme 'solarized-light t)
   )
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; popup
 (use-package popup
   :ensure t
   :defer 2)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emojify
 (when (not freedom/is-termux)
 (use-package emojify
@@ -67,7 +66,17 @@
   (popper-echo-mode +1)
   )                ; For echo area hints
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; awesome-tray
+;; (use-package awesome-tray
+;;   :defer 1
+;;   :ensure nil
+;;   :load-path "~/.emacs.d/core/plugins"
+;;   :config
+;;   (awesome-tray-mode 1)
+;;   (setq awesome-tray-mode-line-height 0)
+;;   (setq awesome-tray-active-modules '("evil" "location" "belong" "buffer-name" "mode-name" "input-method" "awesome-tab" "battery" "date"))
+;;   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modeline
 (use-package doom-modeline
@@ -245,6 +254,7 @@
 (setq doom-modeline-env-load-string "...")
 
 ;; Hooks that run before/after the modeline version string is updated
+
 (setq doom-modeline-before-update-env-hook nil)
 (setq doom-modeline-after-update-env-hook nil)
 )

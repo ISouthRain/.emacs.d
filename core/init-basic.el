@@ -52,7 +52,7 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (tooltip-mode 0) 
-(set-face-attribute 'default nil :height 150)
+(set-face-attribute 'default nil :height 155)
     ))
 (when (string= "windows-nt" system-type)
 (tool-bar-mode 0)
@@ -61,7 +61,7 @@
 (tooltip-mode 0) 
 )
 (when (string= "darwin" system-type)
-(tool-bar-mode 1)
+(tool-bar-mode 0)
 (menu-bar-mode 1)
 )
 

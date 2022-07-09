@@ -1,4 +1,4 @@
-;;; avy-autoloads.el --- automatically extracted autoloads
+;;; avy-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -243,7 +243,7 @@ The window scope is determined by `avy-all-windows' (ARG negates it).
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "avy" '("avy-")))
+(register-definition-prefixes "avy" '("avy-"))
 
 ;;;***
 

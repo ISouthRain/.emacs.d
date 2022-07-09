@@ -1,4 +1,4 @@
-;;; org-download-autoloads.el --- automatically extracted autoloads
+;;; org-download-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -12,7 +12,7 @@
 (autoload 'org-download-enable "org-download" "\
 Enable org-download." nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-download" '("org-download-")))
+(register-definition-prefixes "org-download" '("org-download-"))
 
 ;;;***
 

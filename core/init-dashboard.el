@@ -2,7 +2,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; restart emacs 重新启动 Emacs
 (use-package restart-emacs
-:ensure t
+:ensure nil
+:load-path "~/.emacs.d/core/plugins"
 :defer 4)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,4 +1,4 @@
-;;; general-autoloads.el --- automatically extracted autoloads
+;;; general-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -406,7 +406,7 @@ aliases such as `nmap' for `general-nmap'.
 
 \(fn &optional SHORT-NAMES _)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "general" '("general-")))
+(register-definition-prefixes "general" '("general-"))
 
 ;;;***
 

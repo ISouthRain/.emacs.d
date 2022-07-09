@@ -6,8 +6,6 @@
             ("q" . freedom/elfeed-quit))
 :init (setq url-queue-timeout 30
             elfeed-db-directory (expand-file-name "emacs/.elfeed" user-emacs-directory)
-	    ;; elfeed-show-entry-switch #'pop-to-buffer
-	    ;; elfeed-show-entry-delete #'delete-window
       )
 :config
 (when recentf-mode
@@ -61,10 +59,9 @@
 (setq mml-default-directory "~/.emacs.d/Gnus/.gnus/")                            ;附件的存储位置
 
 ;; Set personal information and password
-(setq epg-gpg-program "gpg2")
 (require 'auth-source);; probably not necessary
 (setq auth-sources '("~/.emacs.d/.authinfo.gpg"))
-(setq user-mail-address (format "%s" freedom-email-address)
+(setq user-mail-address (format "%s" freedom-user-email-address)
       user-full-name "ISouthRain")
 
 ;; ;; 收取首要邮件来源
@@ -142,7 +139,7 @@
 ;; 概要显示设置
 (setq gnus-summary-gather-subject-limit 'fuzzy) ;聚集题目用模糊算法
 (setq gnus-summary-line-format "%4P %U%R%z%O %{%5k%} %{%14&user-date;%}   %{%-20,20n%} %{%ua%} %B %(%I%-60,60s%)\n")
-(setq my-mail "isouthrain@qq.com")
+(setq my-mail (format "%s" freedom-user-email-address))
 (defun gnus-user-format-function-a (header) ;用户的格式函数 `%ua'
   (let ((myself (concat "<" my-mail ">"))
         (references (mail-header-references header))
@@ -281,8 +278,8 @@
 
 ;; general emacs mail settings; used when composing e-mail
 ;; the non-mu4e-* stuff is inherited from emacs/message-mode
-(setq mu4e-reply-to-address (format "%s" freedom-email-address)
-      user-mail-address (format "%s" freedom-email-address)
+(setq mu4e-reply-to-address (format "%s" freedom-reply-email-address)
+      user-mail-address (format "%s" freedom-user-email-address)
       ;; user-mail-address "8744243@qq.com"
       user-full-name "ISouthRain")
 

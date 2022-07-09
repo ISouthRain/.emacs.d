@@ -1,4 +1,4 @@
-;;; bm-autoloads.el --- automatically extracted autoloads
+;;; bm-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
 ;;
 ;;; Code:
 
@@ -48,14 +48,14 @@ EV is the mouse event.
 
 \(fn EV)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bm" '("bm-" "temporary-bookmark-p")))
+(register-definition-prefixes "bm" '("bm-" "temporary-bookmark-p"))
 
 ;;;***
 
 ;;;### (autoloads nil "bm-sync" "bm-sync.el" (0 0 0 0))
 ;;; Generated autoloads from bm-sync.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bm-sync" '("bm-bookmark-")))
+(register-definition-prefixes "bm-sync" '("bm-bookmark-"))
 
 ;;;***
 

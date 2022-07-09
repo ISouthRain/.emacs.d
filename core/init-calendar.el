@@ -1,6 +1,7 @@
 (when freedom-calendar-chinese
   (use-package cal-china-x
-    :ensure t
+    :ensure nil
+    :load-path "~/.emacs.d/core/plugins"
     :after calendar
     :commands cal-china-x-setup
     :init (cal-china-x-setup)

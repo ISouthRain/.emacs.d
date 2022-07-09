@@ -20,8 +20,12 @@
   "Set Socks Proxy"
   :group 'freedom
   :type 'string)
-(defcustom freedom-email-address "isouthrain@qq.com"
-  "Email address"
+(defcustom freedom-user-email-address "isouthrain@qq.com"
+  "User Email address"
+  :group 'freedom
+  :type 'string)
+(defcustom freedom-reply-email-address "isouthrain@qq.com"
+  "Reply Email address"
   :group 'freedom
   :type 'string)
 

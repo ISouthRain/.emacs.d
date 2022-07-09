@@ -3,7 +3,7 @@
 (use-package company
 :ensure t
 :defer 3
-:hook (after-init . global-company-mode)
+;; :hook (after-init . global-company-mode)
 :config
   :bind (
        ;;  :map company-mode-map

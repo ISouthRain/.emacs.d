@@ -1,3 +1,4 @@
+(setq epg-gpg-program "gpg2")
 (defun freedom/encrypt-open-file ()
   (interactive)
   ;; (shell-command (format "gpg -e -r Epiphany %s.%s" (file-name-base (buffer-file-name))))

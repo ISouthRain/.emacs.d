@@ -1,37 +1,4 @@
-;; init-highlight.el --- Initialize highlighting configurations.	-*- lexical-binding: t -*-
-
-;; Copyright (C) 2006-2022 Vincent Zhang
-
-;; Author: Vincent Zhang <seagle0128@gmail.com>
-;; URL: https://github.com/seagle0128/.emacs.d
-
-;; This file is not part of GNU Emacs.
-;;
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation; either version 3, or
-;; (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
-;;
-;; You should have received a copy of the GNU General Public License
-;; along with this program; see the file COPYING.  If not, write to
-;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
-;; Floor, Boston, MA 02110-1301, USA.
-;;
-
-;;; Commentary:
-;;
-;; Highlighting configurations.
-;;
-
-;;; Code:
-
-;; (require 'init-const)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Highlight the current line
 (use-package hl-line
   :defer 3
@@ -96,7 +63,8 @@ FACE defaults to inheriting from default and highlight."
 ;; Highlight symbols
   :defer 3
 (use-package symbol-overlay
-  :ensure t
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
   :diminish
   :functions (turn-off-symbol-overlay turn-on-symbol-overlay)
   :custom-face (symbol-overlay-default-face ((t (:inherit (region bold)))))
@@ -129,7 +97,8 @@ FACE defaults to inheriting from default and highlight."
 ;; Highlight indentions
 (use-package highlight-indent-guides
   :defer 3
-  :ensure t
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
   :diminish
   :hook ((prog-mode yaml-mode) . highlight-indent-guides-mode)
   :init (setq highlight-indent-guides-method 'character
@@ -175,7 +144,8 @@ FACE defaults to inheriting from default and highlight."
 ;; Colorize color names in buffers
 (use-package rainbow-mode
   :defer 3
-  :ensure t
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
   :diminish
   :defines helpful-mode-map
   :bind (:map help-mode-map
@@ -204,13 +174,15 @@ FACE defaults to inheriting from default and highlight."
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters
   :defer 3
-  :ensure t
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Highlight TODO and similar keywords in comments and strings
 (use-package hl-todo
   :defer 3
-  :ensure t
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
   :custom-face
   (hl-todo ((t (:inherit default :height 0.9 :width condensed :weight bold :underline nil :inverse-video t))))
   :bind (:map hl-todo-mode-map
@@ -241,6 +213,7 @@ FACE defaults to inheriting from default and highlight."
   :config
   ;; Highlight on-the-fly
   (diff-hl-flydiff-mode 1)
+  (diff-hl-margin-mode 1)
 
   ;; Set fringe style
   (setq-default fringes-outside-margins t)
@@ -251,16 +224,9 @@ FACE defaults to inheriting from default and highlight."
      `(diff-hl-change ((t (:foreground ,(face-background 'highlight) :background nil))))
      '(diff-hl-insert ((t (:inherit diff-added :background nil))))
      '(diff-hl-delete ((t (:inherit diff-removed :background nil))))))
-
   (with-no-warnings
     (defun my-diff-hl-fringe-bmp-function (_type _pos)
       "Fringe bitmap function for use as `diff-hl-fringe-bmp-function'."
-      (define-fringe-bitmap 'my-diff-hl-bmp
-        (vector (if sys/macp #b11100000 #b11111100))
-        1 8
-        '(center t)))
-    (setq diff-hl-fringe-bmp-function #'my-diff-hl-fringe-bmp-function)
-
     (unless (display-graphic-p)
       ;; Fall back to the display margin since the fringe is unavailable in tty
       (diff-hl-margin-mode 1)
@@ -268,16 +234,18 @@ FACE defaults to inheriting from default and highlight."
       (with-eval-after-load 'desktop
         (add-to-list 'desktop-minor-mode-table
                      '(diff-hl-margin-mode nil))))
-
+   
     ;; Integration with magit
     (with-eval-after-load 'magit
       (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
       (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))))
+)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Highlight some operations
 (use-package volatile-highlights
   :defer 3
-  :ensure t
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
   :diminish
   :hook (after-init . volatile-highlights-mode)
   :config

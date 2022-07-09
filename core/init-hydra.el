@@ -1,13 +1,11 @@
 (use-package general
   :ensure t
   :defer 2
-  :config
-  (require 'general)
   )
 
 (use-package hydra
-;; :defer 2
 :ensure t
+;:load-path "~/.emacs.d/core/plugins"
 :config
 (general-define-key
  ;; :keymaps 'meow-normal-state-keymap
@@ -174,6 +172,7 @@ _j_: 下5行         _k_: 上5行
 (use-package pretty-hydra
   :defer 2
   :ensure t
+;  :load-path "~/.emacs.d/core/plugins"
   :bind ("<f6>" . toggles-hydra/body)
   :init
   (pretty-hydra-define toggles-hydra (:title "Toggles" :color amaranth :foreign-keys warn)

@@ -9,8 +9,7 @@
 (setq sdcv-say-word-p nil)
 ;; sdcv 字典目录
 (setq sdcv-dictionary-data-dir (expand-file-name "emacs/sdcv/.stardict/dic" user-emacs-directory))
-(when freedom/is-windows
-(setq sdcv-dictionary-data-dir "C:\\Users\\Jack\\AppData\\Roaming\\.emacs.d\\sdcv\\.stardict\\dic"))
+
 (setq sdcv-dictionary-simple-list    ;setup dictionary list for simple search
       '(
         "懒虫简明英汉词典"

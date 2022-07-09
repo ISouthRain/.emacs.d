@@ -8,37 +8,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 包开始
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
-;; setting basic
-;; 不同系统的配置
-(when (string= "windows-nt" system-type)
-  (setq url-proxy-services '(
-  ("http" . "127.0.0.1:7890")
-  ("https" . "127.0.0.1:7890")
-  ("socks5" . "127.0.0.1:7890")))
-)
-
-(when (string= "gnu/linux" system-type)
-  (setq url-proxy-services '(
-  ("http" . "127.0.0.1:7890")
-  ("https" . "127.0.0.1:7890")
-  ("socks5" . "127.0.0.1:7891")))
-)
-
-(when (string= "darwin" system-type)
-  (setq url-proxy-services '(
-  ("http" . "127.0.0.1:7890")
-  ("https" . "127.0.0.1:7890")
-  ("socks5" . "127.0.0.1:7890")))
-)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; basic
 (require 'init-custom)
+(require 'init-system)
+;; Proxy for init-sysytem
+(setq url-proxy-services '(
+("http" . "127.0.0.1:7890")
+("https" . "127.0.0.1:7890")))
+(when freedom/is-linux
+  (when (not freedom/is-termux)
+    (setq url-proxy-services '(
+    ("http" . "172.19.32.1:7890")
+    ("https" . "172.19.32.1:7890")))
+  )
+)
 (require 'init-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Your configuration
 (require 'init-basic)
-(require 'init-system)
 (require 'init-calendar)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hl-line paren symbol-overlay highlight-indent-guides rainbow-mode diff-hl hl-todo volatile-highlights pulse
@@ -77,11 +64,13 @@
 ;; lsp origami
 (require 'init-lsp)
 ;; lsp-pyright 
-(require 'init-python)
+;;(require 'init-python)
 ;; bongo emms
 ;; (require 'init-player)
 ;; EAF
 ;; (require 'init-eaf)
+;;  
 (require 'init-epg)
 (load-file custom-file)
 );; Cache Max End, Also the end of the package.
+

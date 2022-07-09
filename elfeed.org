@@ -1,5 +1,5 @@
 * blogs         :elfeed:
-** bilibili      :bilibili:
+** bilibili      :Bilibili:
 *** https://rsshub.app/bilibili/user/video/31012715
     是老胡没错
 *** https://rsshub.app/bilibili/user/video/19642758
@@ -8,16 +8,14 @@
     动漫作业本
 *** https://rsshub.app/bilibili/user/video/517327498
     罗翔说刑法
-** reader  :reader:
+** reader  :Reader:
 *** https://www.zhihu.com/rss
     知乎每日精选
 *** https://rsshub.app/novel/ptwxz/13/13191
     万相之王
 *** https://emacstalk.github.io/podcast/index.xml
     Emacs Talk
-*** http://www.ruanyifeng.com/blog/atom.xml
-   阮一峰的网络日记
-** Twitter
+** Twitter :Twitter:
 *** https://rsshub.app/twitter/user/PiCoreTeam
     PiNetwork
 *** https://rsshub.app/twitter/user/checkra1n

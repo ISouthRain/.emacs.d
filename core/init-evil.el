@@ -101,11 +101,6 @@ _p_: 段落注释         _c_: 复制并注释
   (when freedom/is-linux
     (sdcv-search-pointer+))
   )
-(defun freedom-evil-word-translate ()
-  (interactive)
-  (run-at-time 0 nil 'freedom-evil-translate-word))
-(define-key evil-normal-state-map "w" 'freedom-evil-word-translate)
-(define-key evil-motion-state-map "w" 'freedom-evil-word-translate)
 
 ;;=============================================
 ;; evil-window 模板
@@ -150,7 +145,7 @@ _d_: 删除当前窗口
   :config
   (setq evil-collection-mode-list
         (remove 'lispy evil-collection-mode-list))
-  (evil-collection-init '(calendar dashboard markdown-mode popup neotree bm)))
+  (evil-collection-init '(calendar dashboard markdown-mode popup neotree bm mu4e)))
   ;; (evil-collection-init))
 
 
