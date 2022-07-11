@@ -19,6 +19,7 @@
 ;; ;; Optionally use the `orderless' completion style.
 (use-package orderless
   :defer 3
+  :ensure t
   :init
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
@@ -85,68 +86,16 @@ This only works with orderless and for the first component of the search."
   )
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; Enable richer annotations using the Marginalia package
-;; ;; minibuffer 提示内容
-;; (use-package marginalia
-;;   :defer 3
-;;   :ensure t
-;;   ;; Either bind `marginalia-cycle` globally or only in the minibuffer
-;;   :bind (("M-A" . marginalia-cycle)
-;;          :map minibuffer-local-map
-;;          ("M-A" . marginalia-cycle))
-
-;;   ;; The :init configuration is always executed (Not lazy!)
-;;   :init
-
-;;   ;; Must be in the :init section of use-package such that the mode gets
-;;   ;; enabled right away. Note that this forces loading the package.
-;;   (marginalia-mode))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; orderless 无序搜索
-;; (use-package orderless
-;;   :defer 2
-;;   :ensure t
-;;   :custom
-;;   (completion-styles '(orderless basic))
-;;   (completion-category-overrides '((file (styles basic partial-completion))))
-;;   ;; 添加对 ivy 包支持
-;;   (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-;;   (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
-;;   ;; counsel
-;;   (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-;;   ;; 添加 company 支持
-;;   (setq orderless-component-separator "[ &]") ;; 暂时不会去进行触发, 不知道是那个按钮
-;;   (defun just-one-face (fn &rest args)
-;;   (let ((orderless-match-faces [completions-common-part]))
-;;     (apply fn args)))
-
-;;   (advice-add 'company-capf--candidates :around #'just-one-face)
-    
-;;   )
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; 为 counsel-M-x 提供历史搜索
-;; (use-package smex
-;; :ensure t
-;; :defer 1
-;; :config
-;; (setq smex-save-file (expand-file-name "emacs/smex-items" user-emacs-directory))
-;; )
-
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;; counsel 搜索
 ;; (use-package counsel
 ;; :defer 1
 ;; :ensure t
 ;; :bind (("C-s" . swiper)
-;;        ("M-x" . counsel-M-x)
 ;;       )
 ;; :config
 ;; (ivy-mode)
 ;; (setq ivy-use-virtual-buffers t)
 ;; (setq enable-recursive-minibuffers t)
-;; ;; enable this if you want `swiper' to use it
-;; ;; (setq search-default-mode #'char-fold-to-regexp)
 
 ;; ;; 去掉^前缀
 ;; ;; delete M-x ^
@@ -160,7 +109,6 @@ This only works with orderless and for the first component of the search."
 ;;  (t . ivy--regex-ignore-order)))
 
 ;; )
-
 
 
 (provide 'init-search)

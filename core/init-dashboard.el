@@ -35,7 +35,7 @@
                             (bookmarks . 5)
                             ;; (agenda . 5)
                             ;;(projects . 5)
-                            (registers . 5)
+                            ;; (registers . 5)
                             ))
     ;; 使用图标
     (setq dashboard-set-heading-icons t)

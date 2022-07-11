@@ -15,6 +15,9 @@
 (setq prescient-save-file (expand-file-name "emacs/var/prescient-save.el" user-emacs-directory))
 (setq bookmark-file (expand-file-name "emacs/bookmarks" user-emacs-directory))
 (setq org-id-locations-file (expand-file-name "emacs/.org-id-locations" user-emacs-directory))
+(setq eww-bookmarks-directory (expand-file-name "emacs/" user-emacs-directory))
+(setq eww-download-directory (expand-file-name "emacs/Eww-Download" user-emacs-directory))
+(setq url-history-file (expand-file-name "emacs/url/history" user-emacs-directory))
 
 
 (custom-set-faces
@@ -33,5 +36,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(pyim-basedict pyim zoom workgroups2 which-key vertico use-package solarized-theme rainbow-delimiters pretty-hydra posframe popper ox-hugo origami org-roam-ui org-download org-cliplink orderless neotree markdown-toc lsp-mode htmlize go-translate general evil-nerd-commenter evil-escape evil-collection emojify elfeed-org doom-modeline diff-hl dashboard consult company-prescient cnfonts bm avy all-the-icons))
-)
+   '(pyim-basedict pyim zoom workgroups2 which-key vertico use-package solarized-theme rainbow-delimiters pretty-hydra posframe popper ox-hugo origami org-roam-ui org-download org-cliplink orderless neotree markdown-toc lsp-mode htmlize go-translate general evil-nerd-commenter evil-escape evil-collection emojify elfeed-org doom-modeline diff-hl dashboard consult company-prescient cnfonts bm avy all-the-icons)))

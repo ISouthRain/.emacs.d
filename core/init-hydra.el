@@ -5,7 +5,6 @@
 
 (use-package hydra
 :ensure t
-;:load-path "~/.emacs.d/core/plugins"
 :config
 (general-define-key
  ;; :keymaps 'meow-normal-state-keymap
@@ -31,7 +30,7 @@
 			    )
 "
 _nc_: commenter         _fy_: translate       _nn_: neotree
-_SPC_: word-motion      _ib_: Ibuffer         _xf_: counsel-find
+_SPC_: word-motion      _xf_: counsel-find
 _oc_: Org-capture       _od_: Org-download    _b_: to-buffer
 _oa_: Org-Agenda        _mdf_: Markdown File
 _pya_: add-pyim         _pyd_: remove-pyim    
@@ -44,11 +43,11 @@ _ol_: 居中模式          _wg_: workgroups2     _we_: LSP
   ("b" hydra-awesome-tab/body :exit t) ;; awesome-tab
   ("mm" hydra-bm/body :exit t)
   ("fy" gts-do-translate-my :exit t)
-  ("ib" hydra-ibuffer/body :exit t)
   ("nc" hydra-evil-nerd-commenter/body :exit t)
   ("nn" hydra-neotree/body :exit t)
   ("SPC" avy-goto-char :exit t) ;; 单词跳跃
   ("xf" find-file :exit t) ;; Helm find file
+  ;; ("xf" counsel-find-file :exit t) ;; Helm find file
   ("oc" org-capture :exit t)  ;; org capture 捕获
   ("od" hydra-org-download/body :exit t) ;; Org-download
   ("oa" org-agenda :exit t)
@@ -167,8 +166,8 @@ _j_: 下5行         _k_: 上5行
 );; hydra 包结尾
 
 
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; pretty-hydra
 (use-package pretty-hydra
   :defer 2
   :ensure t

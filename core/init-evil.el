@@ -20,7 +20,6 @@ _p_: 段落注释         _c_: 复制并注释
   ("q" nil "cancel")
   ("<escape>" nil "cancel")
 )
-;;==============================
 )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; evil-escape
@@ -85,7 +84,7 @@ _p_: 段落注释         _c_: 复制并注释
         evil-insert-state-cursor  '("chartreuse3" (bar . 2))
         evil-emacs-state-cursor   '("SkyBlue2" box)
         evil-replace-state-cursor '("chocolate" (hbar . 2))
-        evil-visual-state-cursor  '("gray" (hbar . 2))
+        evil-visual-state-cursor  '("red" (hbar . 2))
         evil-motion-state-cursor  '("plum3" box)) 
 ;; 粘贴不复制
 (defun evil-paste-after-from-0 ()

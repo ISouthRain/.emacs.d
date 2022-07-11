@@ -11,6 +11,7 @@
           cal-china-x-important-holidays cal-china-x-chinese-holidays
           cal-china-x-general-holidays '((holiday-lunar 1 15 "元宵节")
                                          (holiday-lunar 7 7 "七夕节")
+                                         (holiday-lunar 8 15 "中秋节")
                                          (holiday-fixed 3 8 "妇女节")
                                          (holiday-fixed 3 12 "植树节")
                                          (holiday-fixed 5 4 "青年节")
@@ -24,8 +25,10 @@
                                    (holiday-float 5 0 2 "母亲节")
                                    (holiday-float 6 0 3 "父亲节")
                                    (holiday-float 11 4 4 "感恩节"))
+          holiday-custom-holidays '((holiday-lunar 7 29 "生日快乐"))
           calendar-holidays (append cal-china-x-important-holidays
                                     cal-china-x-general-holidays
-                                    holiday-other-holidays)))
+                                    holiday-other-holidays
+                                    holiday-custom-holidays)))
 )
 (provide 'init-calendar)

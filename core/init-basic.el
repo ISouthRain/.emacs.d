@@ -88,5 +88,7 @@
   (interactive) ; 如果不需要定义成命令，这句可以不要。
   (find-file (expand-file-name "init.el" user-emacs-directory))
   )
-
+(defun freedom/wttrin ()
+  (interactive)
+  (eww "wttr.in/香洲"))
 (provide 'init-basic)

@@ -6,10 +6,14 @@
   :config
 (load-theme 'monokai t)
 )
-(use-package solarized-theme
-  :ensure t
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 通知
+(use-package alert
+  :defer 2
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
   :config
-  ;; (load-theme 'solarized-light t)
+  (setq alert-default-style 'notifications)
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; popup

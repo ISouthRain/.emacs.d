@@ -22,22 +22,6 @@
         "懒虫简明汉英词典"
         "牛津高阶英汉双解"
 	))
-
-
-;; 翻译插件 go-translate
-(defhydra hydra-go-translate (:color pink
-                              :hint nil
-                              :foreign-keys warn ;; 不要使用hydra以外的键
-			      )
-  ("y" gts-do-translate-my "翻译")
-  ("x" delete-window "关闭翻译窗口":exit t)
-  ("t" beginner-translate-main "状态栏翻译":exit t)
-  ("s" sdcv-search-pointer-my "sdcv翻译" :exit t)
-  ("q" nil "cancel")
-  ("<escape>" nil "cancel")
-)
-;;==============================
-
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -57,18 +41,12 @@
 :defer 6
 :load-path "~/.emacs.d/core/plugins/"
 )
-
-
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; go-translate 翻译
 (use-package go-translate
 :ensure t
 :defer 3
 :config
-(require 'go-translate)
 ;; 配置多个翻译语言对
 (setq gts-translate-list '(("en" "zh") ("fr" "zh")))
 ;; 设置为 t 光标自动跳转到buffer
@@ -144,8 +122,8 @@
            ;;(gts-kill-ring-render)
            ;;(your-render)
 	   ))
-)
-(gts-do-translate)
+    )
+  (gts-do-translate)
 )
 )
 

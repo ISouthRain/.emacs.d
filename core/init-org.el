@@ -1,4 +1,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-pomodoro 番茄工作法
+(use-package org-pomodoro
+  :defer 2
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org 标题加密， 只需添加 :crypt:
 (use-package org-crypt
   :defer 4
@@ -745,7 +751,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 "* [[%:link][%:description]] \n %U \n %:initial \n" :kill-buffer t :immediate-finish t)
 
 	("b" "Bookmarks" plain (file+headline "F:\\MyFile\\Org\\Bookmarks.org" "New-Bookmarks")
-	 "+  %?" :kill-buffer t)
+	 "+   %?" :kill-buffer t)
 	))
 )
 

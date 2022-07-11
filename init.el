@@ -4,7 +4,6 @@
       ;; 清空避免加载远程文件的时候分析文件。
       (file-name-handler-alist nil))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 包开始
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
@@ -69,7 +68,7 @@
 ;; (require 'init-player)
 ;; EAF
 ;; (require 'init-eaf)
-;;  
+;; Gpg 加密相关
 (require 'init-epg)
 (load-file custom-file)
 );; Cache Max End, Also the end of the package.

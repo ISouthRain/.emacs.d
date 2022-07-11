@@ -1,5 +1,5 @@
 (defun my-config-pyim()
-(interactive)
+  (interactive)
 (setq pyim-dcache-directory (expand-file-name "emacs/pyim/dcache" user-emacs-directory))
 (use-package pyim
 ;;:defer 2
