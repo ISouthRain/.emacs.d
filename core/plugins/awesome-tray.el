@@ -1139,7 +1139,7 @@ If right is non nil, replace to the right"
   "Set the text displayed by the awesome-tray to TEXT."
   (let* ((wid (+ (string-width text) awesome-tray-info-padding-right))
          (spc (propertize " " 'cursor 1 'display
-                          `(space :align-to (- light-fringe ,wid)))))
+                          `(space :align-to (- right-fringe ,wid)))))
 
     (setq awesome-tray-text (concat spc text))
 

@@ -9,10 +9,22 @@
          (newalpha (+ incr oldalpha)))
     (when (and (<= frame-alpha-lower-limit newalpha) (>= 100 newalpha))
       (modify-frame-parameters frame (list (cons 'alpha newalpha))))))
-
 ;; (global-set-key (kbd "M-8") (lambda () (interactive) (sanityinc/adjust-opacity nil -2)))
 ;; (global-set-key (kbd "M-9") (lambda () (interactive) (sanityinc/adjust-opacity nil 2)))
 ;; (global-set-key (kbd "M-7") (lambda () (interactive) (modify-frame-parameters nil `((alpha . 100)))))
+(defhydra hydra-AdjustOpacity(:color pink
+                  :hint nil
+                  :foreign-keys warn ;; 不要使用hydra以外的键
+				     )
+"
+_j_: 增加 _k_: 减少 _g_: 重置
+"
+  ("j"  (sanityinc/adjust-opacity nil 2) :exit nil)
+  ("k"  (sanityinc/adjust-opacity nil -2) :exit nil)
+  ("g"  (modify-frame-parameters nil `((alpha . 100))) :exit nil)
+  ("q" nil "cancel")
+  ("<escape>" nil "cancel")
+)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; which-key 按键提示
 (use-package which-key
@@ -91,12 +103,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
                              :foreign-keys warn
 )
   "
- ^^^^Fast Move             ^^^^Tab                  
+ ^^^^Fast Move             ^^^^Tab
 -^^^^--------------------+-^^^^---------------------
-   ^_k_^   prev group    | _C-a_^^     select first 
- _h_   _l_  switch tab   | _C-e_^^     select last  
-   ^_j_^   next group    | _C-j_^^     ace jump     
- ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current 
+   ^_k_^   prev group    | _C-a_^^     select first
+ _h_   _l_  switch tab   | _C-e_^^     select last
+   ^_j_^   next group    | _C-j_^^     ace jump
+ ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current
  _R_  remove window    | _C-w_ evil-window
  _s_  split window     | _v_ vsplit window
 -^^^^--------------------+-^^^^---------------------

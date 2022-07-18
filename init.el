@@ -46,7 +46,7 @@
 (require 'init-company)
 ;; ivy smex orderless
 (require 'init-search)
-;; websocket org-roam simple-httpd org-roam-ui org-download org-appear org-cliplink htmlize org-protocol-capture-html deft org-modern org-superstarp org-fancy-priorities 
+;; websocket org-roam simple-httpd org-roam-ui org-download org-appear org-cliplink htmlize org-protocol-capture-html deft org-modern org-superstarp org-fancy-priorities
 (require 'init-org)
 ;; markdown-mode markdown-toc
 (require 'init-markdown)
@@ -61,8 +61,8 @@
 ;; elfeed elfeed-org gnus mu4e writeroom-mode olivetti
 (require 'init-reader)
 ;; lsp origami
-;(require 'init-lsp)
-;; lsp-pyright 
+;; (require 'init-lsp)
+;; lsp-pyright
 ;;(require 'init-python)
 ;; bongo emms
 ;; (require 'init-player)
@@ -71,4 +71,8 @@
 ;; Gpg 加密相关
 (require 'init-epg)
 (load-file custom-file)
+(use-package rime
+  :custom
+  (default-input-method "rime"))
+
 );; Cache Max End, Also the end of the package.

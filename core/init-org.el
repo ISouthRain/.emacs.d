@@ -66,7 +66,7 @@
                                   (?2 . "⮬")
                                   (?3 . "⮮")
                                   (?4 . "☕")
-                                  (?I . "Important"))) 
+                                  (?I . "Important")))
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-superstar 美化标题，表格，列表 之类的
@@ -139,8 +139,8 @@
 (setq org-roam-completion-everywhere t)
 
 ;;一个也可以设置org-roam-db-node-include-function。例如，ATTACH要从 Org-roam 数据库中排除所有带有标签的标题，可以设置：
-(setq org-roam-db-node-include-function 
-      (lambda () 
+(setq org-roam-db-node-include-function
+      (lambda ()
         (not (member "ATTACH" (org-get-tags)))))
 
 (setq org-roam-db-update-on-save t)
@@ -398,14 +398,6 @@ _i_: 选择路径图片  _d_: 删除  _s_: 截图
                              (?B . warning)
                              (?C . success))
       )
-;; 设置任务样式
-;; (setq org-todo-keyword-faces
-;;    '(("未开始" .   (:foreground "red" :weight bold))
-;;     ("阻塞中" .   (:foreground "red" :weight bold))
-;;     ("进行中" .      (:foreground "orange" :weight bold))
-;;     ("已完成" .      (:foreground "green" :weight bold))
-;;     ("已取消" .     (:background "gray" :foreground "#72DBB8"))
-;; ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Agenda Soure File
 (when (string= "gnu/linux" system-type)
@@ -426,29 +418,28 @@ _i_: 选择路径图片  _d_: 删除  _s_: 截图
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org 通知设置
-;; ;; 让Emacs通知
-;; (require 'appt)
-;; ;; 每小时同步一次appt,并且现在就开始同步
-;; (run-at-time nil 3600 'org-agenda-to-appt)
-;; ;; 更新agenda时，同步appt
-;; (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
-;; ;; 激活提醒
-;; (appt-activate 1)
-;; ;; 提前半小时提醒
-;; (setq appt-message-warning-time 1)
-;; (setq appt-audible t)
-;; ;;提醒间隔
-;; (setq appt-display-interval 30)
-;; (require 'notifications)
-;; (defun appt-disp-window-and-notification (min-to-appt current-time appt-msg)
-;;   (let ((title (format "%s分钟内有新的任务" min-to-appt)))
-;;     (notifications-notify :timeout (* appt-display-interval 60000) ;一直持续到下一次提醒
-;;                           :title title
-;;                           :body appt-msg
-;;                           )
-;;     (appt-disp-window min-to-appt current-time appt-msg))) ;同时也调用原有的提醒函数
-;; (setq appt-display-format 'window) ;; 只有这样才能使用自定义的通知函数
-;; (setq appt-disp-window-function #'appt-disp-window-and-notification)
+(require 'appt)
+;; 每小时同步一次appt,并且现在就开始同步
+(run-at-time nil 3600 'org-agenda-to-appt)
+;; 更新agenda时，同步appt
+(add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt)
+;; 激活提醒
+(appt-activate 1)
+;; 提前半小时提醒
+(setq appt-message-warning-time 1)
+(setq appt-audible t)
+;;提醒间隔
+(setq appt-display-interval 30)
+(require 'notifications)
+(defun appt-disp-window-and-notification (min-to-appt current-time appt-msg)
+  (let ((title (format "%s分钟内有新的任务" min-to-appt)))
+    (notifications-notify :timeout (* appt-display-interval 60000) ;一直持续到下一次提醒
+                          :title title
+                          :body appt-msg
+                          )
+    (appt-disp-window min-to-appt current-time appt-msg))) ;同时也调用原有的提醒函数
+(setq appt-display-format 'window) ;; 只有这样才能使用自定义的通知函数
+(setq appt-disp-window-function #'appt-disp-window-and-notification)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hydra-my-config-org-syntax
@@ -618,7 +609,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
          ;;(insert &rest ARGS)
          (insert " :- "))
 	:exit t)
-  ("id" org-id-get-create :exit t)	
+  ("id" org-id-get-create :exit t)
   ("q" nil "cancel")
   ("<escape>" nil "cancel")
   )
@@ -647,24 +638,24 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	;; ("t" "Todo" entry (file+headline "~/MyFile/Org/GTD/Todo.org" "2022年6月")
 	("t" "Todo" plain (file+function "~/MyFile/Org/GTD/Todo.org" find-month-tree)
          "*** TODO %^{想做什么？}\n  :时间: %^T\n  %?\n  %i\n"  :kill-buffer t :immediate-finish t)
-	 
+
 	;;日志
         ("j" "Journal" entry (file+datetree "~/MyFile/Org/Journal.org")
          "* %^{记些什么} %?\n  %i\n" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;日程安排
 	("a" "日程安排" plain (file+function "~/MyFile/Org/GTD/Agenda.org" find-month-tree)
 	 "*** [#%^{优先级}] %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;笔记
         ;; ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "2022年6月")
         ("n" "笔记" entry (file+headline "~/MyFile/Org/Note.org" "Note.org")
 	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
-	 
+
 	 ;;消费
 	("zd" "账单" plain (file+function "~/MyFile/Org/Bill.org" find-month-tree)
          " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|水果|宵夜|购物|交通出行|其它} | %^{金额} |" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;英语单词
         ("e" "英语单词" entry (file+datetree "~/MyFile/Org/EnglishWord.org")
          "*  %^{英语单词} ----> %^{中文翻译}\n"  :kill-buffer t :immediate-finish t)
@@ -685,23 +676,23 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	;;TODO
 	("t" "Todo" plain (file+function "~/Desktop/MyFile/Org/GTD/Todo.org" find-month-tree)
          "*** TODO %^{想做什么？}\n  :时间: %^T\n  %?\n  %i\n"  :kill-buffer t :immediate-finish t)
-	 
+
 	;;日志
         ("j" "Journal" entry (file+datetree "~/Desktop/MyFile/Org/Journal.org" )
          "* %^{记些什么} %?\n  %i\n" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;日程安排
 	("a" "日程安排" plain (file+function "~/Destop/MyFile/Org/GTD/Agenda.org" find-month-tree)
 	 "*** [#%^{优先级}] %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;笔记
         ("n" "笔记" entry (file+headline "~/Desktop/MyFile/Org/Note.org" "Note")
 	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
-	 
+
 	 ;;消费
 	("zd" "账单" plain (file+function "~/Desktop/MyFile/Org/Bill.org" find-month-tree)
          " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|水果|宵夜|购物|交通出行|其它} | %^{金额} |" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;英语单词
         ("e" "英语单词" entry (file+datetree "~/Desktop/MyFile/Org/EnglishWord.org")
          "*  %^{英语单词} ----> %^{中文翻译}\n" :kill-buffer t :immediate-finish t)
@@ -721,16 +712,16 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	;;TODO
 	("t" "Todo" plain (file+function "F:\\MyFile\\Org\\GTD\\Todo.org" find-month-tree)
          "*** TODO %^{想做什么？}\n  :时间: %^T\n  %?\n  %i\n"  :kill-buffer t :immediate-finish t)
-	 
+
 	;;日志
         ("j" "Journal" entry (file+datetree "F:\\MyFile\\Org\\Journal.org")
          "* %^{记些什么} %?\n  %i\n" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;日程安排
 	;; ("a" "日程安排" entry (file+headline "F:\\MyFile\\Org\\GTD\\Agenda.org" "2022年6月")
 	("a" "日程安排" plain (file+function "F:\\MyFile\\Org\\GTD\\Agenda.org" find-month-tree)
 	 "*** [#%^{优先级}] %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;笔记
         ("n" "笔记" entry (file+headline "F:\\MyFile\\Org\\Note.org" "Note")
 	 "* %^{你想要记录的笔记} \n :时间: %T \n %?")
@@ -741,7 +732,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 	 ;;消费
 	("zd" "账单" plain (file+function "F:\\MyFile\\Org\\Bill.org" find-month-tree)
          " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|水果|宵夜|购物|交通出行|其它} | %^{金额} |" :kill-buffer t :immediate-finish t)
-	 
+
 	 ;;英语单词
         ("e" "英语单词" entry (file+datetree "F:\\MyFile\\Org\\EnglishWord.org")
          "*  %^{英语单词} ----> %^{中文翻译}\n" :kill-buffer t :immediate-finish t)

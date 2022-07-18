@@ -18,7 +18,7 @@
 ;; 自动下载，不需要 :straight t
 (setq use-package-always-ensure t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 添加 straight 与 use-package 同时通用
+;; ;; 添加 straight 与 use-package 同时通用
 ;; (defvar bootstrap-version)
 ;; (let ((bootstrap-file
 ;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))

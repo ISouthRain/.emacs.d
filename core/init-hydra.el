@@ -33,11 +33,13 @@ _nc_: commenter         _fy_: translate       _nn_: neotree
 _SPC_: word-motion      _xf_: counsel-find
 _oc_: Org-capture       _od_: Org-download    _b_: to-buffer
 _oa_: Org-Agenda        _mdf_: Markdown File
-_pya_: add-pyim         _pyd_: remove-pyim    
+_pya_: add-pyim         _pyd_: remove-pyim
 _xk_: kill buffer       _eww_: eww            _mm_: bm-mark
 _mb_: m-buffer-window   _or_: org roam
 _ol_: 居中模式          _wg_: workgroups2     _we_: LSP
+_ad_: 窗口透明度
 "
+  ("ad" hydra-AdjustOpacity/body :exit t)
   ;; ("bb" hydra-centaur-tabs/body :exit t) ;; centaur-tabs
   ;; ("bb" hydra-to-buffer/body :exit t) ;; centaur-tabs
   ("b" hydra-awesome-tab/body :exit t) ;; awesome-tab
@@ -53,7 +55,7 @@ _ol_: 居中模式          _wg_: workgroups2     _we_: LSP
   ("oa" org-agenda :exit t)
   ("or" hydra-org-roam/body :exit t)
   ("pya" pyim-create-word-from-selection :exit t)
-  ("pyd" pyim-delete-word :exit t) 
+  ("pyd" pyim-delete-word :exit t)
   ("mb" hydra-buffer-move/body :exit t)
   ("mdf" markdown-file-start-myself :exit t) ;; Markdown 启动文件
   ("ol" hydra-olivetti-mode/body :exit t)
@@ -62,6 +64,7 @@ _ol_: 居中模式          _wg_: workgroups2     _we_: LSP
   ("eww" hydra-eww/body :exit t)
   ("wg" hydra-workgroups2/body :exit t)
   ("we" hydra-lsp-mode/body :exit t)
+  ("ad" hydra-AdjustOpacity/body :exit t)
   ;; (""  :exit t)
   ;; (""  :exit t)
   ;; (""  :exit t)
@@ -69,7 +72,7 @@ _ol_: 居中模式          _wg_: workgroups2     _we_: LSP
   ;; (""  :exit t)
   ;; (""  :exit t)
   ;; (""  :exit t)
-  ("q" nil "cancel") 
+  ("q" nil "cancel")
   ("<escape>" nil "cancel")
 )
 

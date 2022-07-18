@@ -1,7 +1,7 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 中国日历
 (setq freedom-calendar-chinese t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Network proxy
 (setq freedom-proxy-enable t)
 (setq freedom-proxy "127.0.0.1:7890")
@@ -36,4 +36,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(pyim-basedict pyim zoom workgroups2 which-key vertico use-package solarized-theme rainbow-delimiters pretty-hydra posframe popper ox-hugo origami org-roam-ui org-download org-cliplink orderless neotree markdown-toc lsp-mode htmlize go-translate general evil-nerd-commenter evil-escape evil-collection emojify elfeed-org doom-modeline diff-hl dashboard consult company-prescient cnfonts bm avy all-the-icons)))
+   '(rime quelpa-use-package ement pyim-basedict pyim zoom workgroups2 which-key vertico use-package solarized-theme rainbow-delimiters pretty-hydra posframe popper ox-hugo origami org-roam-ui org-download org-cliplink orderless neotree markdown-toc lsp-mode htmlize go-translate general evil-nerd-commenter evil-escape evil-collection emojify elfeed-org doom-modeline diff-hl dashboard consult company-prescient cnfonts bm avy all-the-icons)))

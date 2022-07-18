@@ -1,6 +1,0 @@
-;; -*- emacs-lisp -*- <22/07/10 17:57:40 c:/Users/Jack/AppData/Roaming/.emacs.d/tramp>
-;; Tramp connection history.  Don't change this file.
-;; Run `M-x tramp-cleanup-all-connections' instead.
-
-(((tramp-file-name "sudo" "root" nil "localhost" nil nil nil)
-  nil))

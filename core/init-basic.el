@@ -7,10 +7,6 @@
 ;; 显示电池
 (if (display-graphic-p)
     (display-battery-mode 1))
-;;显示行号
-;; (global-linum-mode 1)
-;; 相对行号
-;; (linum-relative-global-mode t)
 ;; 空格代替制表符缩进
 (setq-default indent-tabs-mode nil)
 ;;高亮当前行
@@ -18,7 +14,6 @@
 ;;关闭启动画面
 (setq inhibit-startup-message t)
 ;;自动换行
-;;(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 (setq toggle-truncate-lines t)
 
 ;;显示时间
@@ -36,9 +31,6 @@
 ;; 自动加载外部修改的文件
 (global-auto-revert-mode 1)
 
-;; 关闭自动保存文件
-(setq auto-save-default nil)
-
 ;; 关闭警告声
 (setq ring-bell-function 'ignore)
 
@@ -51,14 +43,14 @@
   (when (not freedom/is-termux)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
-(tooltip-mode 0) 
+(tooltip-mode 0)
 (set-face-attribute 'default nil :height 155)
     ))
 (when (string= "windows-nt" system-type)
 (tool-bar-mode 0)
 ;; 滚动条
 (scroll-bar-mode 0)
-(tooltip-mode 0) 
+(tooltip-mode 0)
 )
 (when (string= "darwin" system-type)
 (tool-bar-mode 0)
@@ -81,7 +73,25 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 195 :width normal)))))
 )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 自动保存文件
+(use-package auto-save
+  :defer 2
+  :ensure nil
+  :load-path "~/.emacs.d/core/plugins"
+  :config
+  (auto-save-enable)
+  (setq auto-save-silent t)   ; quietly save
+  (setq auto-save-delete-trailing-whitespace t)  ; automatically delete spaces at the end of the line when saving
 
+;;; custom predicates if you don't want auto save.
+;;; disable auto save mode when current filetype is an gpg file.
+  (setq auto-save-disable-predicates
+        '((lambda ()
+        (string-suffix-p
+        "gpg"
+        (file-name-extension (buffer-name)) t))))
+)
 
 ;; 自己的配置文件
 (defun myconfig ()

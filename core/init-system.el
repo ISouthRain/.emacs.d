@@ -1,34 +1,23 @@
-;; ;; 不同用户使用不同的配置
-;; (when (string= system-name "Jack")
-;; )
-
-;; ;; 区分 tui 还是 gui
-;; (when (string= "w32" window-system) ;; w32 ns pc x nil
-;; ;; (message "这是GUI方法")
-;; )
-
-;; ;; 上面方法可能不太好用
-;; (if (display-graphic-p)
-;;     ;; GUI 代码放置，多行代码的话用 (progn) 包一下
-;;     (progn (message "这是GUI方法1")
-;;            (message "这是GUI方法2")
-;; 	   )
-;;     ;; TUI 代码放置
-;;     (message "这是TUI 1")
-;;     (message "这是TUI 2")
-;;     )
-
 ;; 设置编码
 (setq default-buffer-file-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 设置 deamon 乱码
+(when (eq system-type 'windows-nt)
+  (setq locale-coding-system 'gb18030)  ;此句保证中文字体设置有效
+  (setq w32-unicode-filenames 'nil)       ; 确保file-name-coding-system变量的设置不会无效
+  (setq file-name-coding-system 'gb18030) ; 设置文件名的编码为gb18030
+  )
 (require 'subr-x)
 (setq freedom/is-termux
       (string-suffix-p "Android" (string-trim (shell-command-to-string "uname -a"))))
 (setq freedom/is-linux (and (eq system-type 'gnu/linux)))
 (setq freedom/is-darwin (and (eq system-type 'darwin)))
 (setq freedom/is-windows (and (eq system-type 'windows-nt)))
+(setq freedom/is-gui (if (display-graphic-p) t))
+(setq freedom/is-tui (not (display-graphic-p)))
+
 
 ;; 关闭 native-comp 错误警告
 ;; Silence compiler warnings as they can be pretty disruptive
