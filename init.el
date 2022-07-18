@@ -71,8 +71,5 @@
 ;; Gpg 加密相关
 (require 'init-epg)
 (load-file custom-file)
-(use-package rime
-  :custom
-  (default-input-method "rime"))
 
 );; Cache Max End, Also the end of the package.

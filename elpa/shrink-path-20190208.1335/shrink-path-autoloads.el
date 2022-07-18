@@ -1,4 +1,4 @@
-;;; shrink-path-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; shrink-path-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -9,7 +9,7 @@
 ;;;### (autoloads nil "shrink-path" "shrink-path.el" (0 0 0 0))
 ;;; Generated autoloads from shrink-path.el
 
-(register-definition-prefixes "shrink-path" '("shrink-path-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "shrink-path" '("shrink-path-")))
 
 ;;;***
 

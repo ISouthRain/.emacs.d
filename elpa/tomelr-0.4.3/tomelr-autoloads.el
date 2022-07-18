@@ -1,4 +1,4 @@
-;;; tomelr-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; tomelr-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -9,7 +9,7 @@
 ;;;### (autoloads nil "tomelr" "tomelr.el" (0 0 0 0))
 ;;; Generated autoloads from tomelr.el
 
-(register-definition-prefixes "tomelr" '("tomelr-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tomelr" '("tomelr-")))
 
 ;;;***
 

@@ -1,4 +1,4 @@
-;;; org-cliplink-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; org-cliplink-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -37,7 +37,7 @@ Makes synchronous request. Returns the link instead of inserting
 it to the current buffer. Doesn't support Basic Auth. Doesn't
 support cURL transport." t nil)
 
-(register-definition-prefixes "org-cliplink" '("org-cliplink-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-cliplink" '("org-cliplink-")))
 
 ;;;***
 
@@ -45,7 +45,7 @@ support cURL transport." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from org-cliplink-string.el
 
-(register-definition-prefixes "org-cliplink-string" '("org-cliplink-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-cliplink-string" '("org-cliplink-")))
 
 ;;;***
 
@@ -53,7 +53,7 @@ support cURL transport." t nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from org-cliplink-transport.el
 
-(register-definition-prefixes "org-cliplink-transport" '("org-cliplink-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-cliplink-transport" '("org-cliplink-")))
 
 ;;;***
 

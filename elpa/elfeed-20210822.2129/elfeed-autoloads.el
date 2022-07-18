@@ -1,4 +1,4 @@
-;;; elfeed-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; elfeed-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -27,35 +27,35 @@ Export the current feed listing to OPML-formatted FILE.
 
 \(fn FILE)" t nil)
 
-(register-definition-prefixes "elfeed" '("elfeed-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed" '("elfeed-")))
 
 ;;;***
 
 ;;;### (autoloads nil "elfeed-csv" "elfeed-csv.el" (0 0 0 0))
 ;;; Generated autoloads from elfeed-csv.el
 
-(register-definition-prefixes "elfeed-csv" '("elfeed-csv-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-csv" '("elfeed-csv-")))
 
 ;;;***
 
 ;;;### (autoloads nil "elfeed-curl" "elfeed-curl.el" (0 0 0 0))
 ;;; Generated autoloads from elfeed-curl.el
 
-(register-definition-prefixes "elfeed-curl" '("elfeed-curl-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-curl" '("elfeed-curl-")))
 
 ;;;***
 
 ;;;### (autoloads nil "elfeed-db" "elfeed-db.el" (0 0 0 0))
 ;;; Generated autoloads from elfeed-db.el
 
-(register-definition-prefixes "elfeed-db" '("elfeed-" "with-elfeed-db-visit"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-db" '("elfeed-" "with-elfeed-db-visit")))
 
 ;;;***
 
 ;;;### (autoloads nil "elfeed-lib" "elfeed-lib.el" (0 0 0 0))
 ;;; Generated autoloads from elfeed-lib.el
 
-(register-definition-prefixes "elfeed-lib" '("elfeed-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-lib" '("elfeed-")))
 
 ;;;***
 
@@ -85,7 +85,7 @@ search buffer or show a concrete entry.
 ;;;### (autoloads nil "elfeed-log" "elfeed-log.el" (0 0 0 0))
 ;;; Generated autoloads from elfeed-log.el
 
-(register-definition-prefixes "elfeed-log" '("elfeed-log"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-log" '("elfeed-log")))
 
 ;;;***
 
@@ -104,7 +104,7 @@ Restore the state of an elfeed-search buffer on desktop restore.
 
 (add-to-list 'desktop-buffer-mode-handlers '(elfeed-search-mode . elfeed-search-desktop-restore))
 
-(register-definition-prefixes "elfeed-search" '("elfeed-s"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-search" '("elfeed-s")))
 
 ;;;***
 
@@ -116,14 +116,14 @@ Show the bookmarked entry saved in the `RECORD'.
 
 \(fn RECORD)" nil nil)
 
-(register-definition-prefixes "elfeed-show" '("elfeed-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-show" '("elfeed-")))
 
 ;;;***
 
 ;;;### (autoloads nil "xml-query" "xml-query.el" (0 0 0 0))
 ;;; Generated autoloads from xml-query.el
 
-(register-definition-prefixes "xml-query" '("xml-query"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xml-query" '("xml-query")))
 
 ;;;***
 

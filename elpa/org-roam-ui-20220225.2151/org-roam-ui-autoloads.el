@@ -1,4 +1,4 @@
-;;; org-roam-ui-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; org-roam-ui-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -10,7 +10,7 @@
 ;;; Generated autoloads from org-roam-ui.el
 
 (defvar org-roam-ui-mode nil "\
-Non-nil if org-roam-ui mode is enabled.
+Non-nil if Org-Roam-Ui mode is enabled.
 See the `org-roam-ui-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
@@ -23,19 +23,10 @@ or call the function `org-roam-ui-mode'.")
 Enable org-roam-ui.
 This serves the web-build and API over HTTP.
 
-This is a minor mode.  If called interactively, toggle the
-`org-roam-ui mode' mode.  If the prefix argument is positive,
-enable the mode, and if it is zero or negative, disable the mode.
-
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
-
-To check whether the minor mode is enabled in the current buffer,
-evaluate `(default-value \\='org-roam-ui-mode)'.
-
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+If called interactively, enable Org-Roam-Ui mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -62,7 +53,7 @@ Optionally with ID (string), SPEED (number, ms) and PADDING (number, px).
 Sync your current Emacs theme with org-roam-ui." t nil)
 
 (defvar org-roam-ui-follow-mode nil "\
-Non-nil if org-roam-ui-Follow mode is enabled.
+Non-nil if Org-Roam-Ui-Follow mode is enabled.
 See the `org-roam-ui-follow-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
@@ -74,24 +65,14 @@ or call the function `org-roam-ui-follow-mode'.")
 (autoload 'org-roam-ui-follow-mode "org-roam-ui" "\
 Set whether ORUI should follow your every move in Emacs.
 
-This is a minor mode.  If called interactively, toggle the
-`org-roam-ui-Follow mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
-
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
-
-To check whether the minor mode is enabled in the current buffer,
-evaluate `(default-value \\='org-roam-ui-follow-mode)'.
-
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+If called interactively, enable Org-Roam-Ui-Follow mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
-(register-definition-prefixes "org-roam-ui" '("img/:file" "node/:id" "org-roam-ui-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-roam-ui" '("img/:file" "node/:id" "org-roam-ui-")))
 
 ;;;***
 

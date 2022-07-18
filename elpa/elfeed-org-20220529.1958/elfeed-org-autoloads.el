@@ -1,4 +1,4 @@
-;;; elfeed-org-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; elfeed-org-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -12,7 +12,7 @@
 (autoload 'elfeed-org "elfeed-org" "\
 Hook up rmh-elfeed-org to read the `org-mode' configuration when elfeed is run." t nil)
 
-(register-definition-prefixes "elfeed-org" '("elfeed-org-" "rmh-elfeed-org-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elfeed-org" '("elfeed-org-" "rmh-elfeed-org-")))
 
 ;;;***
 

@@ -1,4 +1,4 @@
-;;; xr-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; xr-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -71,7 +71,7 @@ See `xr' for a description of the DIALECT argument.
 
 \(fn SKIP-SET-STRING &optional DIALECT)" nil nil)
 
-(register-definition-prefixes "xr" '("xr-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xr" '("xr-")))
 
 ;;;***
 

@@ -1,4 +1,4 @@
-;;; origami-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; origami-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -38,20 +38,16 @@ or call the function `global-origami-mode'.")
 (autoload 'global-origami-mode "origami" "\
 Toggle Origami mode in all buffers.
 With prefix ARG, enable Global Origami mode if ARG is positive;
-otherwise, disable it.
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
-
-Origami mode is enabled in all buffers where `(lambda nil
-\(origami-mode 1))' would do it.
-
+Origami mode is enabled in all buffers where
+`(lambda nil (origami-mode 1))' would do it.
 See `origami-mode' for more information on Origami mode.
 
 \(fn &optional ARG)" t nil)
 
-(register-definition-prefixes "origami" '("origami-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "origami" '("origami-")))
 
 ;;;***
 
@@ -59,7 +55,7 @@ See `origami-mode' for more information on Origami mode.
 ;;;;;;  0 0))
 ;;; Generated autoloads from origami-parsers.el
 
-(register-definition-prefixes "origami-parsers" '("origami-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "origami-parsers" '("origami-")))
 
 ;;;***
 
