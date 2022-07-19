@@ -2,7 +2,6 @@ network-security.data
 .stfolder/
 auto-save-list/
 emacs/
-elpa/
 elpa-wt/
 Maildir/
 emojis/
@@ -21,3 +20,4 @@ recentf
 smex-items
 *.asc
 eln-cache/
+elpa/
