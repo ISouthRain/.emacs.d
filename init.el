@@ -70,6 +70,8 @@
 ;; (require 'init-eaf)
 ;; Gpg 加密相关
 (require 'init-epg)
+;; vim 语法高亮 vimrc-mode
+(require 'init-vim)
 (load-file custom-file)
 
 );; Cache Max End, Also the end of the package.
