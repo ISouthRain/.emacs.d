@@ -116,15 +116,6 @@ _r_: Restore
 )
 ;; =============================================
 )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; sessions 启动时自动回到上一次的编辑状态
-;; (use-package init-benchmarking
-;;      :ensure nil
-;;      :load-path "~/.emacs.d/core/plugins")
-;; (use-package init-sessions
-;;      :ensure nil
-;;      :load-path "~/.emacs.d/core/plugins")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rainbow-delimiters 彩虹括号
 (use-package rainbow-delimiters
