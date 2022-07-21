@@ -1,3 +1,10 @@
+(use-package switch-window
+  :defer 6
+  :ensure t
+  :hook (after-init . winner-mode)
+  :config
+  (setq-default switch-window-shortcut-style 'alphabet)
+  (setq-default switch-window-timeout nil))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 窗口透明
 (defun sanityinc/adjust-opacity (frame incr)
