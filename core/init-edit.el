@@ -3,6 +3,7 @@
 (use-package projectile
   :defer 4
   :ensure t
+  :config
   (setq projectile-cache-file (expand-file-name "emacs/projectile.cache" user-emacs-directory))
   (setq projectile-known-projects-file (expand-file-name "emacs/projectile-bookmarks.eld" user-emacs-directory))
   )
