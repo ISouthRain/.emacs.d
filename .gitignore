@@ -6,6 +6,7 @@ elpa-wt/
 Maildir/
 emojis/
 .authinfo
+.authinfo.gpg
 url/
 var/
 straight/
@@ -21,3 +22,4 @@ smex-items
 *.asc
 eln-cache/
 elpa/
+
