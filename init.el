@@ -50,7 +50,7 @@
 (require 'init-org)
 ;; markdown-mode markdown-toc
 (require 'init-markdown)
-;; indent-guide undo-fu workgroups2 init-sessions init-benchmarking linum-relative bm elec-pair yasnippet
+;; indent-guide undo-fu workgroups2 init-sessions init-benchmarking linum-relative bm elec-pair yasnippet projectile
 (require 'init-edit)
 ;; pyim
 (require 'init-pyim)

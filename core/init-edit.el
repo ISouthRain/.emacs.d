@@ -2,7 +2,10 @@
 ;; projectile 项目交互
 (use-package projectile
   :defer 4
-  :ensure t)
+  :ensure t
+  (setq projectile-cache-file (expand-file-name "emacs/projectile.cache" user-emacs-directory))
+  (setq projectile-known-projects-file (expand-file-name "emacs/projectile-bookmarks.eld" user-emacs-directory))
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;; flyspell 拼写检查
 ;; ;; On-the-fly spell checker
@@ -39,7 +42,7 @@
 ;; (add-hook 'prog-mode-hook #'yas-minor-mode)
 (setq yas-snippet-dirs
       '(
-        ;; (expand-file-name "snippets" user-emacs-directory)                 ;; personal 
+        ;; (expand-file-name "snippets" user-emacs-directory)                 ;; personal
        "~/.emacs.d/snippets"
         ))
 )
@@ -139,7 +142,7 @@ _r_: Restore
 ;; 加载时恢复（甚至在您需要 bm 之前）
 (setq-default bm-buffer-persistence t)
 :config
-;; 在哪里存储持久文件 
+;; 在哪里存储持久文件
 (setq bm-repository-file "~/.emacs.d/emacs/bm-repository")
 ;; save bookmarks
 (setq-default bm-buffer-persistence t)
@@ -158,7 +161,7 @@ _r_: Restore
 ;; 但它使存储库中的书签数据与文件更加同步
 ;; 状态。
 (add-hook 'after-save-hook #'bm-buffer-save)
-;; 恢复书签 
+;; 恢复书签
 (add-hook 'find-file-hooks   #'bm-buffer-restore)
 (add-hook 'after-revert-hook #'bm-buffer-restore)
 (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
@@ -172,7 +175,7 @@ _r_: Restore
 				     )
 "
 _j_: 下一个  _k_: 上一个        _m_: 标记
-_s_: 查看当前文件的标记       _v_: 查看所有文件的标记     
+_s_: 查看当前文件的标记       _v_: 查看所有文件的标记
 _r_: 重载当前文件的标记
 "
   ("j" bm-next  :exit nil)
