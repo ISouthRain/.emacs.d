@@ -6,6 +6,7 @@ elpa-wt/
 Maildir/
 emojis/
 .authinfo
+.authinfo.gpg
 url/
 var/
 straight/
