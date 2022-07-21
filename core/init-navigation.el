@@ -1,10 +1,3 @@
-(use-package switch-window
-  :defer 6
-  :ensure t
-  :hook (after-init . winner-mode)
-  :config
-  (setq-default switch-window-shortcut-style 'alphabet)
-  (setq-default switch-window-timeout nil))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 窗口透明
 (defun sanityinc/adjust-opacity (frame incr)
@@ -143,6 +136,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   ("9" winum-select-window-9)
   ("C-w" hydra-evil-window/body :exit t)
   ("R" evil-window-delete :exit nil)
+  ("w" ace-window :exit t)
   ("C-a" awesome-tab-select-beg-tab)
   ("C-e" awesome-tab-select-end-tab)
   ("C-j" awesome-tab-ace-jump)
@@ -169,13 +163,13 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; winum 窗口管理
-(use-package winum
-  :ensure nil
-  :defer 2
-  :load-path "~/.emacs.d/core/plugins"
-  :config
-  (winum-mode)
-)
+;; (use-package winum
+;;   :ensure nil
+;;   :defer 2
+;;   :load-path "~/.emacs.d/core/plugins"
+;;   :config
+;;   (winum-mode)
+;; )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ace-window 窗口跳跃
 (use-package ace-window
@@ -183,7 +177,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 :defer 2
 :load-path "~/.emacs.d/core/plugins"
 :config
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?r ?i ?t ?o ?u))
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?r ?i ?t ?o ?u ?t ?v ?n))
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
