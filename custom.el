@@ -8,6 +8,8 @@
 (setq freedom-socks-proxy "127.0.0.1:7891")
 (setq freedom-user-email-address "874424374@qq.com")
 (setq freedom-reply-email-address "isouthrain@gmail.com")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org
 (when freedom/is-linux
   (setq freedom-agenda-dir "~/MyFile/Org/GTD"))
 (when freedom/is-windows
