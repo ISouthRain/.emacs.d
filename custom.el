@@ -8,9 +8,8 @@
 (setq freedom-socks-proxy "127.0.0.1:7891")
 (setq freedom-user-email-address "874424374@qq.com")
 (setq freedom-reply-email-address "isouthrain@gmail.com")
-(when freedom/is-windows
-  (message "Windows"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 自定义目录
 (setq recentf-save-file (expand-file-name "emacs/recentf" user-emacs-directory))
 (setq prescient-save-file (expand-file-name "emacs/var/prescient-save.el" user-emacs-directory))
