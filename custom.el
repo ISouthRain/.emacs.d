@@ -13,14 +13,17 @@
 (when freedom/is-linux
   (setq freedom-agenda-dir "~/MyFile/Org/GTD")
   (setq freedom-deft-directory "~/MyFile/Org")
+  (setq freedom-org-capture-Agenda "~/MyFile/Org/GTD/Agenda.org")
   )
 (when freedom/is-windows
   (setq freedom-agenda-dir "F:\\MyFile\\Org\\GTD")
   (setq freedom-deft-directory "F:\\MyFile\\Org")
+  (setq freedom-org-capture-Agenda "F:\\MyFile\\Org\\GTD\\Agenda.org")
   )
 (when freedom/is-darwin
   (setq freedom-agenda-dir "~/Desktop/MyFile/Org/GTD")
   (setq freedom-deft-directory "~/Desktop/MyFile/Org")
+  (setq freedom-org-capture-Agenda "~/Desktop/MyFile/Org/GTD/Agenda.org")
   )
 
 

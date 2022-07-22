@@ -38,8 +38,8 @@
   "Org deft dir"
   :group 'freedom
   :type 'string)
-(defcustom freedom-org-capture-bill "~/MyFile/Org"
-  "Org deft dir"
+(defcustom freedom-org-capture-Agenda "~/MyFile/Org/GTD/Agenda.org"
+  "Org Capture Agenda"
   :group 'freedom
   :type 'string)
 
