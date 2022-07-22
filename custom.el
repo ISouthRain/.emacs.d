@@ -8,7 +8,12 @@
 (setq freedom-socks-proxy "127.0.0.1:7891")
 (setq freedom-user-email-address "874424374@qq.com")
 (setq freedom-reply-email-address "isouthrain@gmail.com")
-
+(when freedom/is-linux
+  (setq freedom-agenda-dir "~/MyFile/Org/GTD"))
+(when freedom/is-winodws
+  (setq freedom-agenda-dir "F:\\MyFile\\Orf\\GTD"))
+(when freedom/is-darwin
+  (setq freedom-agenda-dir "~/Desktop/MyFile/Org/GTD"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 自定义目录
 (setq recentf-save-file (expand-file-name "emacs/recentf" user-emacs-directory))

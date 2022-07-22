@@ -400,21 +400,22 @@ _i_: 选择路径图片  _d_: 删除  _s_: 截图
       )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Agenda Soure File
-(when (string= "gnu/linux" system-type)
-(setq org-agenda-files (list
-       		             "~/MyFile/Org/GTD"
-			     ))
-)
-(when (string= "darwin" system-type)
-(setq org-agenda-files (list
-       		             "~/Desktop/MyFile/Org/GTD"
-			     ))
-)
-(when (string= "windows-nt" system-type)
-(setq org-agenda-files (list
-       		             "F:\\MyFile\\Org\\GTD"
-			     ))
-)
+;; (when (string= "gnu/linux" system-type)
+;; (setq org-agenda-files (list
+;;        		             "~/MyFile/Org/GTD"
+;; 			     ))
+;; )
+;; (when (string= "darwin" system-type)
+;; (setq org-agenda-files (list
+;;        		             "~/Desktop/MyFile/Org/GTD"
+;; 			     ))
+;; )
+;; (when (string= "windows-nt" system-type)
+;; (setq org-agenda-files (list
+;;        		             "F:\\MyFile\\Org\\GTD"
+;; 			     ))
+;; )
+(setq org-agenda-files (format "%s" freedom-agenda-dir))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org 通知设置
