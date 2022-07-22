@@ -10,7 +10,7 @@
 (setq freedom-reply-email-address "isouthrain@gmail.com")
 (when freedom/is-linux
   (setq freedom-agenda-dir "~/MyFile/Org/GTD"))
-(when freedom/is-winodws
+(when freedom/is-windows
   (setq freedom-agenda-dir "F:\\MyFile\\Orf\\GTD"))
 (when freedom/is-darwin
   (setq freedom-agenda-dir "~/Desktop/MyFile/Org/GTD"))
