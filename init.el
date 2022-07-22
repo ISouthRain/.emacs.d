@@ -73,5 +73,4 @@
 ;; vim 语法高亮 vimrc-mode
 (require 'init-vim)
 (load-file custom-file)
-
 );; Cache Max End, Also the end of the package.
