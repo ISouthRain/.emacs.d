@@ -38,6 +38,11 @@
   "Org deft dir"
   :group 'freedom
   :type 'string)
+(defcustom freedom-org-capture-bill "~/MyFile/Org"
+  "Org deft dir"
+  :group 'freedom
+  :type 'string)
+
 
 
 (provide 'init-custom)
