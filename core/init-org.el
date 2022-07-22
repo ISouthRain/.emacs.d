@@ -415,7 +415,9 @@ _i_: 选择路径图片  _d_: 删除  _s_: 截图
 ;;        		             "F:\\MyFile\\Org\\GTD"
 ;; 			     ))
 ;; )
-(setq org-agenda-files (format "%s" freedom-agenda-dir))
+(setq org-agenda-files (list 
+                        (format "%s" freedom-agenda-dir)
+                        ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org 通知设置
