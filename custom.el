@@ -11,11 +11,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
 (when freedom/is-linux
-  (setq freedom-agenda-dir "~/MyFile/Org/GTD"))
+  (setq freedom-agenda-dir "~/MyFile/Org/GTD")
+  (setq freedom-deft-directory "~/MyFile/Org")
+  )
 (when freedom/is-windows
-  (setq freedom-agenda-dir "F:\\MyFile\\Orf\\GTD"))
+  (setq freedom-agenda-dir "F:\\MyFile\\Org\\GTD")
+  (setq freedom-deft-directory "F:\\MyFile\\Org")
+  )
 (when freedom/is-darwin
-  (setq freedom-agenda-dir "~/Desktop/MyFile/Org/GTD"))
+  (setq freedom-agenda-dir "~/Desktop/MyFile/Org/GTD")
+  (setq freedom-deft-directory "~/Desktop/MyFile/Org")
+  )
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 自定义目录
 (setq recentf-save-file (expand-file-name "emacs/recentf" user-emacs-directory))

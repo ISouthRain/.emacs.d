@@ -86,12 +86,13 @@
   (setq deft-recursive t)
   (setq deft-use-filename-as-title t)
   (setq deft-extensions '("txt" "tex" "org" "gpg"))
-  (when freedom/is-windows
-  (setq deft-directory "F:\\MyFile\\Org"))
-  (when freedom/is-darwin
-  (setq deft-directory "~/Desktop/MyFile/Org"))
-  (when freedom/is-linux
-  (setq deft-directory "~/MyFile/Org"))
+  ;; (when freedom/is-windows
+  ;; (setq deft-directory "F:\\MyFile\\Org"))
+  ;; (when freedom/is-darwin
+  ;; (setq deft-directory "~/Desktop/MyFile/Org"))
+  ;; (when freedom/is-linux
+  ;; (setq deft-directory "~/MyFile/Org"))
+  (setq deft-directory (format "%s" freedom-deft-directory))
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

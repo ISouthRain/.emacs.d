@@ -28,11 +28,16 @@
   "Reply Email address"
   :group 'freedom
   :type 'string)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org
 (defcustom freedom-agenda-dir "~/MyFile/Org/GTD"
   "Org GTD dir"
   :group 'freedom
   :type 'string)
-
+(defcustom freedom-deft-directory "~/MyFile/Org"
+  "Org deft dir"
+  :group 'freedom
+  :type 'string)
 
 
 (provide 'init-custom)
