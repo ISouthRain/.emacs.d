@@ -28,9 +28,11 @@
   "Reply Email address"
   :group 'freedom
   :type 'string)
+(defcustom freedom-agenda-dir "~/MyFile/Org/GTD"
+  "Org GTD dir"
+  :group 'freedom
+  :type 'string)
 
 
 
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(load-file custom-file)
 (provide 'init-custom)

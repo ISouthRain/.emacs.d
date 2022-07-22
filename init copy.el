@@ -4,7 +4,6 @@
       ;; 清空避免加载远程文件的时候分析文件。
       (file-name-handler-alist nil))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 包开始
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
@@ -47,11 +46,11 @@
 (require 'init-company)
 ;; ivy smex orderless
 (require 'init-search)
-;; websocket org-roam simple-httpd org-roam-ui org-download org-appear org-cliplink htmlize org-protocol-capture-html deft org-modern org-superstarp org-fancy-priorities 
+;; websocket org-roam simple-httpd org-roam-ui org-download org-appear org-cliplink htmlize org-protocol-capture-html deft org-modern org-superstarp org-fancy-priorities
 (require 'init-org)
 ;; markdown-mode markdown-toc
 (require 'init-markdown)
-;; indent-guide undo-fu workgroups2 init-sessions init-benchmarking linum-relative bm elec-pair yasnippet
+;; indent-guide undo-fu workgroups2 init-sessions init-benchmarking linum-relative bm elec-pair yasnippet projectile
 (require 'init-edit)
 ;; pyim
 (require 'init-pyim)
@@ -62,15 +61,16 @@
 ;; elfeed elfeed-org gnus mu4e writeroom-mode olivetti
 (require 'init-reader)
 ;; lsp origami
-(require 'init-lsp)
-;; lsp-pyright 
+;; (require 'init-lsp)
+;; lsp-pyright
 ;;(require 'init-python)
 ;; bongo emms
 ;; (require 'init-player)
 ;; EAF
 ;; (require 'init-eaf)
-;;  
+;; Gpg 加密相关
 (require 'init-epg)
+;; vim 语法高亮 vimrc-mode
+(require 'init-vim)
 (load-file custom-file)
 );; Cache Max End, Also the end of the package.
-

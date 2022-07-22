@@ -9,6 +9,8 @@
   (setq w32-unicode-filenames 'nil)       ; 确保file-name-coding-system变量的设置不会无效
   (setq file-name-coding-system 'gb18030) ; 设置文件名的编码为gb18030
   )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 区分系统配置
 (require 'subr-x)
 (setq freedom/is-termux
       (string-suffix-p "Android" (string-trim (shell-command-to-string "uname -a"))))
@@ -42,5 +44,8 @@
             "sudo:root@" host
             ":" (or (file-remote-p file 'localname)
                     file))))
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 加载 dustom.el 文件
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load-file custom-file)
 (provide 'init-system)
