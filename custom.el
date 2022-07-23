@@ -33,6 +33,7 @@
 (setq eww-bookmarks-directory (expand-file-name "emacs/" user-emacs-directory))
 (setq eww-download-directory (expand-file-name "emacs/Eww-Download" user-emacs-directory))
 (setq url-history-file (expand-file-name "emacs/url/history" user-emacs-directory))
+(setq server-auth-dir (expand-file-name "emacs/server" user-emacs-directory))
 
 
 (custom-set-faces
