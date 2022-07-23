@@ -17,8 +17,8 @@
 (when freedom/is-linux
   (when (not freedom/is-termux)
     (setq url-proxy-services '(
-    ("http" . "172.19.32.1:7890")
-    ("https" . "172.19.32.1:7890")))
+    ("http" . "172.24.144.1:7890")
+    ("https" . "172.24.144.1:7890")))
   )
 )
 (require 'init-package)

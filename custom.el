@@ -13,17 +13,14 @@
 (when freedom/is-linux
   (setq freedom-agenda-dir "~/MyFile/Org/GTD")
   (setq freedom-deft-directory "~/MyFile/Org")
-  (setq freedom-org-capture-Agenda "~/MyFile/Org/GTD/Agenda.org")
   )
 (when freedom/is-windows
   (setq freedom-agenda-dir "F:\\MyFile\\Org\\GTD")
   (setq freedom-deft-directory "F:\\MyFile\\Org")
-  (setq freedom-org-capture-Agenda "F:\\MyFile\\Org\\GTD\\Agenda.org")
   )
 (when freedom/is-darwin
   (setq freedom-agenda-dir "~/Desktop/MyFile/Org/GTD")
   (setq freedom-deft-directory "~/Desktop/MyFile/Org")
-  (setq freedom-org-capture-Agenda "~/Desktop/MyFile/Org/GTD/Agenda.org")
   )
 
 
@@ -43,15 +40,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 129 :width normal))))
  '(hl-todo ((t (:inherit default :height 0.9 :width condensed :weight bold :underline nil :inverse-video t))))
  '(pulse-highlight-face ((t (:inherit region))))
  '(pulse-highlight-start-face ((t (:inherit region))))
  '(symbol-overlay-default-face ((t (:inherit (region bold))))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(rime quelpa-use-package ement pyim-basedict pyim zoom workgroups2 which-key vertico use-package solarized-theme rainbow-delimiters pretty-hydra posframe popper ox-hugo origami org-roam-ui org-download org-cliplink orderless neotree markdown-toc lsp-mode htmlize go-translate general evil-nerd-commenter evil-escape evil-collection emojify elfeed-org doom-modeline diff-hl dashboard consult company-prescient cnfonts bm avy all-the-icons)))

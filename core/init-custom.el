@@ -38,11 +38,6 @@
   "Org deft dir"
   :group 'freedom
   :type 'string)
-(defcustom freedom-org-capture-Agenda "~/MyFile/Org/GTD/Agenda.org"
-  "Org Capture Agenda"
-  :group 'freedom
-  :type 'string)
-
 
 
 (provide 'init-custom)

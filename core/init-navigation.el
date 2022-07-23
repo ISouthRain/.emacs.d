@@ -143,6 +143,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   ("C-h" awesome-tab-move-current-tab-to-left)
   ("C-l" awesome-tab-move-current-tab-to-right)
   ("b" ivy-switch-buffer :exit t)
+  ("b" switch-to-buffer :exit t)
   ("g" awesome-tab-counsel-switch-group)
   ("s" split-window-below)
   ("v" split-window-right)

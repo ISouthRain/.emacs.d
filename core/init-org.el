@@ -395,7 +395,7 @@ _i_: 选择路径图片  _d_: 删除  _s_: 截图
       )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Agenda Soure File
-(setq org-agenda-files (list 
+(setq org-agenda-files (list
                         (format "%s" freedom-agenda-dir)
                         ))
 
@@ -637,7 +637,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
 
 	 ;;消费
 	("zd" "账单" plain (file+function "~/MyFile/Org/Bill.org" find-month-tree)
-         " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|水果|宵夜|购物|交通出行|其它} | %^{金额} |" :kill-buffer t :immediate-finish t)
+         " | %<%Y-%m-%d %a %H:%M:%S> | %^{prompt|Breakfast|Lunch|Dinner|Shopping|Night Snack|Fruit|Transportation|Other} | %^{金额} |" :kill-buffer t :immediate-finish t)
 
 	 ;;英语单词
         ("e" "英语单词" entry (file+datetree "~/MyFile/Org/EnglishWord.org")
@@ -701,7 +701,6 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
          "* %^{记些什么} %?\n  %i\n" :kill-buffer t :immediate-finish t)
 
 	 ;;日程安排
-	;; ("a" "日程安排" entry (file+headline "F:\\MyFile\\Org\\GTD\\Agenda.org" "2022年6月")
 	("a" "日程安排" plain (file+function "F:\\MyFile\\Org\\GTD\\Agenda.org" find-month-tree)
 	 "*** [#%^{优先级}] %^{安排} \n SCHEDULED: %^T \n  :地点: %^{地点}\n" :kill-buffer t :immediate-finish t)
 
