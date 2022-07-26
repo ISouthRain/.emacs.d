@@ -1,4 +1,53 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; rime 输入法
+;; (when freedom/is-linux
+;;   (when (not freedom/is-termux)
+;; (use-package rime
+;;   :ensure t
+;;   :defer 3
+;;   :custom
+;;   (default-input-method "rime")
+;;   :config
+;;   (setq rime-librime-root "/data/data/com.termux/files/usr/lib")
+;;   (setq rime-share-data-dir "/data/data/com.termux/files/home/.emasc.d/emacs/rime-data")
+;;   ;; 默认值
+;;   (setq rime-translate-keybindings
+;;     '("C-f" "C-b" "C-n" "C-p" "C-g" "<left>" "<right>" "<up>" "<down>" "<prior>" "<next>" "<delete>"))
+;;   (setq rime-show-candidate 'popup)
+;;   ;; (setq rime-share-data-dir (expand-file-name "emacs/Rime-data" user-emacs-directory))
+;;   (setq rime-user-data-dir (expand-file-name "emacs/Rime" user-emacs-directory))
+
+;;  (defun rime-evil-escape-advice (orig-fun key)
+;;    "advice for `rime-input-method' to make it work together with `evil-escape'.
+;;         Mainly modified from `evil-escape-pre-command-hook'"
+;;    (if rime--preedit-overlay
+;;         ;; if `rime--preedit-overlay' is non-nil, then we are editing something, do not abort
+;;         (apply orig-fun (list key))
+;;      (when (featurep 'evil-escape)
+;;         (let* (
+;;                (fkey (elt evil-escape-key-sequence 0))
+;;                (skey (elt evil-escape-key-sequence 1))
+;;                (evt (read-event nil nil evil-escape-delay))
+;;                )
+;;           (cond
+;;            ((and (characterp evt)
+;;         	 (or (and (char-equal key fkey) (char-equal evt skey))
+;;         	     (and evil-escape-unordered-key-sequence
+;;         		  (char-equal key skey) (char-equal evt fkey))))
+;;             (evil-repeat-stop)
+;;             (evil-normal-state))
+;;            ((null evt) (apply orig-fun (list key)))
+;;            (t
+;;             (apply orig-fun (list key))
+;;             (if (numberp evt)
+;;         	(apply orig-fun (list evt))
+;;               (setq unread-command-events (append unread-command-events (list evt))))))))))
+
+;;  (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
+;;   )
+;; ))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile 项目交互
 (use-package projectile
   :defer 4

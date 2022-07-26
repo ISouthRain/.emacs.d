@@ -111,6 +111,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
  ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current
  _R_  remove window    | _C-w_ evil-window
  _s_  split window     | _v_ vsplit window
+ _w_  ace window
 -^^^^--------------------+-^^^^---------------------
 
   ^^Search            ^^Misc

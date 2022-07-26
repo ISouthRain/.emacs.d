@@ -33,7 +33,7 @@
 (setq eww-bookmarks-directory (expand-file-name "emacs/" user-emacs-directory))
 (setq eww-download-directory (expand-file-name "emacs/Eww-Download" user-emacs-directory))
 (setq url-history-file (expand-file-name "emacs/url/history" user-emacs-directory))
-(setq server-auth-dir (expand-file-name "emacs/server" user-emacs-directory))
+;; (setq server-auth-dir (expand-file-name "emacs/server" user-emacs-directory))
 
 
 (custom-set-faces
@@ -45,3 +45,10 @@
  '(pulse-highlight-face ((t (:inherit region))))
  '(pulse-highlight-start-face ((t (:inherit region))))
  '(symbol-overlay-default-face ((t (:inherit (region bold))))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(rime cmake-mode zoom workgroups2 which-key vertico use-package rainbow-delimiters pyim-basedict pyim projectile pretty-hydra posframe popup popper ox-hugo org-roam-ui org-download org-cliplink orderless neotree markdown-toc htmlize go-translate general evil-nerd-commenter evil-escape evil-collection emojify elfeed-org doom-modeline diff-hl dashboard consult company-prescient cnfonts bm avy all-the-icons)))

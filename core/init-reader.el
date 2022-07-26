@@ -1,17 +1,19 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; elfeed
 (use-package elfeed
 :ensure t
 :bind (:map elfeed-search-mode-map
-            ("q" . freedom/elfeed-quit))
+            ("q" . freedom/elfeed-quit)
+            ("j" . next-line)
+            ("k" . previous-line))
 :init (setq url-queue-timeout 30
-            elfeed-db-directory (expand-file-name "emacs/.elfeed" user-emacs-directory)
+            elfeed-db-directory (expand-file-name ".elfeed" user-emacs-directory)
       )
 :config
 (when recentf-mode
 ;; recentf 排除
 (push elfeed-db-directory recentf-exclude)))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; elfeed-org
 (use-package elfeed-org
 :ensure t

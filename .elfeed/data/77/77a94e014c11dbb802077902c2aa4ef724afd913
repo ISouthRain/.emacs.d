@@ -1,0 +1,175 @@
+
+<h4 id="如果-emacstalk-对您有所帮助">如果 EmacsTalk 对您有所帮助</h4>
+<ul>
+<li>欢迎在各大<a href="https://xyzfm.link/aak9y">播客平台</a>留言、打分、转发</li>
+<li>也欢迎您为本节目进行<a href="https://liujiacai.net/donate/">打赏支持</a> ❤️</li>
+</ul>
+<img src='https://emacstalk.github.io/guests/joyer.jpg'>
+<p>
+本期节目请来了一位使用 Emacs 15 年之久的编辑器专家领蜂，在高中竞赛时获奖后，父母送给他一台个人电脑，这打开了他的 Emacs 之旅。</p>
+<p>
+由于其工作领域正好与编辑器相关，领蜂走上了一条专家型的 Emacs 学习路线，接触 Emacs 三天即开始上手 ELisp，他是怎么做的到？更令人想不到的是嘉宾的配置仅仅 200 来行，可谓精简至极，典型的“手动挡”车用户，这背后有什么样的理念？</p>
+<p>
+另一方面，嘉宾十分关心开源社区的“八卦”，对早期 Emacs Hacker 的事迹信手拈来，嘉宾在节目里分享的先驱者的言论，至今来看，仍然十分超前，这些言论对我们的启发是什么？
+近一个半小时的内容，不容错过。</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+时间线
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<ul>
+<li>
+<p>00:00:54 嘉宾自我介绍</p>
+</li>
+<li>
+<p>00:03:16 Emacs 初印象</p>
+</li>
+<li>
+<p>00:12:15 开源社区内前辈们对嘉宾的影响</p>
+</li>
+<li>
+<p>00:20:23 谈 UE/Vim/NeoVim</p>
+</li>
+<li>
+<p>00:30:05 浏览器内核发展之路与浏览器之战</p>
+</li>
+<li>
+<p>00:38:30 在 Emacs 社区的活动</p>
+</li>
+<li>
+<p>00:44:44 ELisp 解释器为什么选用动态作用域</p>
+</li>
+<li>
+<p>00:52:28 学习 ELisp 的经历</p>
+</li>
+<li>
+<p>01:00:12 Emacs 两种学习方式：专家模式与务实模式</p>
+</li>
+<li>
+<p>01:08:57 极简风格的配置</p>
+</li>
+<li>
+<p>01:16:36 推荐</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Show Notes
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<ul>
+<li>
+<p>嘉宾自我介绍</p>
+<ul>
+<li>
+<p>姓名：领蜂</p>
+</li>
+<li>
+<p>网络 ID: Joyer, DelphiNew/uppet</p>
+</li>
+<li>
+<p>社交信息: <a href="https://blog.csdn.net/delphinew/">CSDN</a>, <a href="HTTPS://github.com/uppet">GitHub</a></p>
+</li>
+<li>
+<p>工作经历：06 年开始工作；竞赛型程序员，IDE 开发，浏览器引擎开发，开发者工具开发</p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/DelphiNew/article/details/6732295">目前的配置</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Emacs 初印象</p>
+<ul>
+<li>
+<p><a href="https://zh.wikipedia.org/wiki/Mandriva_Linux">Mandriva Linux</a></p>
+</li>
+<li>
+<p><a href="http://web.mit.edu/~yandros/doc/craft-text-editing/index.html">The Craft of Text Editing</a></p>
+</li>
+<li>
+<p><a href="https://sites.google.com/site/steveyegge2/effective-emacs">effective-emacs </a>，嘉宾的<a href="https://blog.csdn.net/DelphiNew/article/details/2053676">中文翻译</a></p>
+</li>
+<li>
+<p><a href="https://www.oreilly.com/openbook/opensources/book/tiemans.html">Open Sources: Voices from the Open Source Revolution</a> by Michael Tiemann， Cygnus 作者</p>
+</li>
+<li>
+<p><a href="https://www.jwz.org/">JWZ</a></p>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20110723033542/http://www.burlingtontelecom.net/~ashawley/gnu/emacs/doc/emacs-1978.html">An Introduction to the Emacs Editor</a></p>
+</li>
+<li>
+<p>UE 为什么会逐渐消失</p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.binpress.com/vim-creator-bram-moolenaar-interview/">10 Questions with Vim’s creator, Bram Moolenaar</a> 第八个问题</p>
+<ul>
+<li>
+<p>提问：如何确保 Vim 在可遇见的将来继续成功？</p>
+</li>
+<li>
+<p>回答：Keep me alive</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Netscape 创始人 Marc Andreessen 金句：<a href="https://en.wikiquote.org/wiki/Marc_Andreessen">Netscape would reduce Windows to a “poorly debugged set of device drivers”</a></p>
+<ul>
+<li>
+<p>其他金句：<a href="https://www.wsj.com/articles/SB10001424053111903480904576512250915629460">Software is eating the world</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Emacs 28 引入的 JIT</p>
+</li>
+<li>
+<p>2018 年，嘉宾对 Effective Emacs 的回顾文章：<a href="https://blog.csdn.net/DelphiNew/article/details/80112823">到了2018年，还有学习Emacs的必要吗？</a></p>
+<ul>
+<li>
+<p>如何防止小指痛：上机械键盘，用手掌边沿去按 Ctrl 比用小指按更容易更舒服</p>
+</li>
+</ul>
+</li>
+<li>
+<p>嘉宾推荐</p>
+<ul>
+<li>
+<p><a href="https://detail.tmall.com/item.htm?id=617001703512">NIZ宁芝 普拉姆 X87 X108 静电容蓝牙键盘</a></p>
+</li>
+<li>
+<p><a href="https://coq.inria.fr/">Coq</a></p>
+</li>
+<li>
+<p>Dart + Flutter</p>
+</li>
+</ul>
+</li>
+<li>
+<p>主播推荐</p>
+<ul>
+<li>
+<p>EmacsTalk 听友群</p>
+<ul>
+<li>
+<p>QQ 听友群：<a href="https://jq.qq.com/?_wv=1027&amp;k=9tAXJ8gG">530146104</a></p>
+</li>
+<li>
+<p>TG 听友群：<a href="https://t.me/emacstalk">https://t.me/emacstalk</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://emacstalk.github.io/post/002">elisp-demos</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<h2> 反馈 ✉️ </h2><ul><li>发现内容错误或链接失效？欢迎<a href='https://github.com/EmacsTalk/emacstalk.github.io/blob/master/content/podcast/007.org'>提交 PR</a></li><li>对节目有想法或建议？欢迎来信交流：<a href='mailto:emacstalk@liujiacai.net'>emacstalk@liujiacai.net</a></li></ul>

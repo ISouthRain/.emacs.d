@@ -1,4 +1,3 @@
-
 ;; 设置Emacs标题
 (setq frame-title-format '("Happy Emacs - %b")
       icon-title-format frame-title-format)
@@ -44,7 +43,13 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (tooltip-mode 0)
+;; 调整启动时窗口大小/最大化/全屏
 (set-face-attribute 'default nil :height 155)
+(setq initial-frame-alist
+       '((top . 60) (left . 400) (width . 85) (height . 38)))
+;; (add-hook 'window-setup-hook #'toggle-frame-maximized t)
+;; (add-hook 'window-setup-hook #'toggle-frame-fullscreen t)
+;; )
     ))
 (when (string= "windows-nt" system-type)
 (tool-bar-mode 0)
@@ -58,12 +63,18 @@
 )
 
 (when (string= "windows-nt" system-type)
-(custom-set-faces
+;; (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 129 :width normal)))))
+ ;; '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 129 :width normal))))
+;; 调整启动时窗口大小/最大化/全屏
+(setq initial-frame-alist
+       '((top . 20) (left . 450) (width . 110) (height . 48)))
+;; (add-hook 'window-setup-hook #'toggle-frame-maximized t)
+;; (add-hook 'window-setup-hook #'toggle-frame-fullscreen t)
+;; )
 )
 (when (string= "darwin" system-type)
 (custom-set-faces

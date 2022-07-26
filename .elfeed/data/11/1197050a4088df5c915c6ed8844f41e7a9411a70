@@ -1,0 +1,91 @@
+
+<h4 id="如果-emacstalk-对您有所帮助">如果 EmacsTalk 对您有所帮助</h4>
+<ul>
+<li>欢迎在各大<a href="https://xyzfm.link/aak9y">播客平台</a>留言、打分、转发</li>
+<li>也欢迎您为本节目进行<a href="https://liujiacai.net/donate/">打赏支持</a> ❤️</li>
+</ul>
+<img src='https://emacstalk.github.io/guests/redraiment.jpg'>
+<p>
+本期嘉宾是使用十二年的 Emacs 资深用户张泽鹏（网络ID：redraiment）。得益于 Emacs 其无与伦比的“开放性”，嘉宾使用它打造出符合自己理念的高效开发环境。Emacs 对于嘉宾来说，即使生产力工具，也是“玩具”，在“玩”的过程中，来学习新技能。使用 Emacs 多年后，万物可编辑的思维给嘉宾的日常工作带来很多启发，总结出一篇与系统设计的文章：<a href="https://my.oschina.net/u/1464083/blog/4809459">编辑器思维与系统设计思想</a>，这其中的精华都会在节目中聊到，近一个小时的节目，精彩不容错过。</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+时间线
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<ul>
+<li>
+<p>00:00:42 嘉宾自我介绍</p>
+</li>
+<li>
+<p>00:04:18 为什么选择 Emacs</p>
+</li>
+<li>
+<p>00:11:11 ELisp 学习经历</p>
+</li>
+<li>
+<p>00:21:34 Emacs 对嘉宾思维的影响</p>
+</li>
+<li>
+<p>00:33:56 使用 ELisp 开发微信小程序的经历</p>
+</li>
+<li>
+<p>00:43:20 函数式编程的优势</p>
+</li>
+<li>
+<p>00:58:06 推荐</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Show Notes
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<ul>
+<li>
+<p>嘉宾介绍</p>
+<ul>
+<li>
+<p>姓名：张泽鹏</p>
+</li>
+<li>
+<p>邮件：redraiment@gmail.com</p>
+</li>
+<li>
+<p>工作：外企（道富）⇒ 创业 ⇒ 互金（51） ⇒ 制造（阿里）</p>
+</li>
+<li>
+<p>2010 开始用 Emacs</p>
+</li>
+</ul>
+</li>
+<li>
+<p>用 Emacs Lisp 开发的微信小程序：<a href="https://github.com/redraiment/wechat.el">redraiment/wechat.el</a></p>
+</li>
+<li>
+<p>Emacs 是二维的命令行工具</p>
+<ul>
+<li>
+<p>相关文章：<a href="https://hongchao.me/cli-and-emacs/">Emacs is the 2D Command-line Interface</a></p>
+</li>
+<li>
+<p><a href="https://emacs-china.org/t/emacs-is-the-2d-command-line-interface/16711">Emacs China 上的讨论</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>推荐</p>
+<ul>
+<li>
+<p><a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Keyboard-Macros.html">Emacs Keyboard Macros</a></p>
+</li>
+<li>
+<p><a href="https://book.douban.com/subject/1148282/">《计算机程序的构造和解释》（SICP）</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<h2> 反馈 ✉️ </h2><ul><li>发现内容错误或链接失效？欢迎<a href='https://github.com/EmacsTalk/emacstalk.github.io/blob/master/content/podcast/011.org'>提交 PR</a></li><li>对节目有想法或建议？欢迎来信交流：<a href='mailto:emacstalk@liujiacai.net'>emacstalk@liujiacai.net</a></li></ul>

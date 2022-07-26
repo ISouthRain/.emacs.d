@@ -38,7 +38,12 @@
 :ensure t
 :defer 2
 :init
-(setq cnfonts-directory (expand-file-name "emacs/cnfonts" user-emacs-directory))
+(when freedom/is-windows
+(setq cnfonts-directory (expand-file-name "emacs/cnfonts/windows" user-emacs-directory)))
+(when freedom/is-linux
+(setq cnfonts-directory (expand-file-name "emacs/cnfonts/linux" user-emacs-directory)))
+(when freedom/is-darwin
+(setq cnfonts-directory (expand-file-name "emacs/cnfonts/darwin" user-emacs-directory)))
 :config
 (setq cnfonts-profiles
     '("program" "org-mode" "read-book"))

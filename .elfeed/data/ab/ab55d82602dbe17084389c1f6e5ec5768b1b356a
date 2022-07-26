@@ -1,0 +1,164 @@
+
+<h4 id="如果-emacstalk-对您有所帮助">如果 EmacsTalk 对您有所帮助</h4>
+<ul>
+<li>欢迎在各大<a href="https://xyzfm.link/aak9y">播客平台</a>留言、打分、转发</li>
+<li>也欢迎您为本节目进行<a href="https://liujiacai.net/donate/">打赏支持</a> ❤️</li>
+</ul>
+<img src='https://emacstalk.github.io/guests/tumashu.png'>
+<p>
+本期节目请来了一位非科班的 Emacs 资深用户冯书（aka tumashu），Emacs 中文输入法 <a href="https://github.com/tumashu/pyim">pyim</a> 的作者。作为一位卫健委信息中心的办事人员，他是如何接触到 Emacs 的？又是什么原因让他接手、维护 pyim？pyim 的工作原理是怎么样的，与 <a href="https://github.com/DogLooksGood/emacs-rime">emacs-rime</a> 有什么区别？</p>
+<p>
+接触 Emacs 十余年后，嘉宾总结出一套<a href="https://github.com/EmacsTalk/joinus/blob/master/podcasts/2021-09-24-tumashu.org#%E6%8E%A8%E8%8D%90%E7%9A%84%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F">五个阶段 Emacs 学习境界</a>，每个境界需要的技能是什么？如何去突破？相信通过嘉宾的经历，可以给更多非科班听众打开 Emacs 源码的神秘面纱，近一个半小时的分享，精彩不容错过。</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+时间线
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<ul>
+<li>
+<p>00:00:39 嘉宾自我介绍</p>
+</li>
+<li>
+<p>00:01:12 Emacs 初印象</p>
+</li>
+<li>
+<p>00:06:32 Emacs 为什么能吸取各行各业的人进来</p>
+</li>
+<li>
+<p>00:12:04 ELisp 学习经历</p>
+</li>
+<li>
+<p>00:15:13 pyim 接手、维护经历</p>
+</li>
+<li>
+<p>00:43:19 使用前缀树来做输入法的词库搜索</p>
+</li>
+<li>
+<p>00:46:24 pyim 与 emacs-rime 实现方式的区别</p>
+</li>
+<li>
+<p>01:03:42 是否会向周边人推销 emacs</p>
+</li>
+<li>
+<p>01:07:46 是否考虑过转成全职程序员</p>
+</li>
+<li>
+<p>01:09:47 Emacs 学习的五种境界</p>
+</li>
+<li>
+<p>01:17:02 八卦</p>
+</li>
+<li>
+<p>01:18:19 分享</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Show Notes
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<ul>
+<li>
+<p>嘉宾自我介绍</p>
+<ul>
+<li>
+<p>网络 ID: <a href="https://github.com/tumashu">tumashu</a></p>
+</li>
+<li>
+<p>03 年大学，专业化工；07 年研究生，专业管理</p>
+</li>
+<li>
+<p>目前 Emacs 的配置：<a href="https://github.com/tumashu/emacs-helper">emacs-helper</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>GNU Emacs 自 23.1 版本开始支持 <a href="https://www.emacswiki.org/emacs/XftGnuEmacs">XFT</a></p>
+</li>
+<li>
+<p>使用 Emacs 内置输入法优势</p>
+<ol>
+<li>
+<p>输入中文与敲 Emacs 命令自动切换</p>
+</li>
+<li>
+<p>直接使用拼音搜中文内容</p>
+</li>
+</ol>
+</li>
+<li>
+<p>拼音搜中文实现方案主要有两个</p>
+<ol>
+<li>
+<p>把输入的拼音正则，利用 pyim 转化为对于的汉字正则，然后直接去搜</p>
+</li>
+<li>
+<p>把搜索的目标中的汉字转为拼音，然后再用输入的正则去匹配</p>
+</li>
+</ol>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Child-Frames.html">Child Frames</a></p>
+</li>
+<li>
+<p>弹出框三种方式</p>
+<ol>
+<li>
+<p><a href="https://github.com/tumashu/posframe">posframe</a></p>
+</li>
+<li>
+<p><a href="https://github.com/auto-complete/popup-el">popup</a></p>
+</li>
+<li>
+<p><a href="https://www.emacswiki.org/emacs/PosTip">PosTip</a></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Emacs 学习的五种境界</p>
+<ol>
+<li>
+<p>初学攒配置</p>
+</li>
+<li>
+<p>入门写扩展</p>
+</li>
+<li>
+<p>一入 <a href="https://github.com/emacs-mirror/emacs">emacs 源码</a>深似海</p>
+</li>
+<li>
+<p>你不入 C 狱谁入 C 狱</p>
+</li>
+<li>
+<p>千万里挑一 emacs 的武学奇才</p>
+</li>
+</ol>
+</li>
+<li>
+<p>嘉宾的分享</p>
+<ul>
+<li>
+<p><a href="https://github.com/protesilaos/modus-themes">modus-themes</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>主播的分享</p>
+<ul>
+<li>
+<p><a href="https://liujiacai.net/blog/2021/03/05/emacs-love-mail-feed/#headline-13">elfeed</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jiacai2050/dotfiles/blob/137c4b716ca16a5a2d5fd0bc4723297b09ff33d4/.config/emacs/i-misc.el#L157-L385">相关配置</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://music.163.com/#/song?id=1380302523">片尾音乐</a></p>
+</li>
+</ul>
+</div>
+</div>
+<h2> 反馈 ✉️ </h2><ul><li>发现内容错误或链接失效？欢迎<a href='https://github.com/EmacsTalk/emacstalk.github.io/blob/master/content/podcast/009.org'>提交 PR</a></li><li>对节目有想法或建议？欢迎来信交流：<a href='mailto:emacstalk@liujiacai.net'>emacstalk@liujiacai.net</a></li></ul>
