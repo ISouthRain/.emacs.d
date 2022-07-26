@@ -7,7 +7,7 @@
             ("j" . next-line)
             ("k" . previous-line))
 :init (setq url-queue-timeout 30
-            elfeed-db-directory (expand-file-name ".elfeed" user-emacs-directory)
+            elfeed-db-directory (expand-file-name "emacs/.elfeed" user-emacs-directory)
       )
 :config
 (when recentf-mode
