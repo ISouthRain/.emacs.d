@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Github_Org_折叠
+# key: file
+# --
+#+begin_html
+<details>
+#+end_html
+#+begin_html
+<summary>{$1}
+#+end_html
+#+begin_html
+</summary>
+#+end_html
+{$2}
+#+begin_html
+</details>
+#+end_html

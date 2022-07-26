@@ -613,6 +613,7 @@ _bgz_: 表格居中     _bgy_: 表格居右   _bgt_: 表格居左
   "Extend =org-web-tools-inster-link-for-url= to take URL from clipboard or kill-ring"
   (interactive)
   (org-web-tools--org-link-for-url (org-web-tools--get-first-url)))
+(setq org-capture-bookmark nil)
 (when (string= "gnu/linux" system-type)
 (setq org-capture-templates
       '(
